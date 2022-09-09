@@ -6,9 +6,20 @@ const results = ref([]);
 const ready = ref(false);
 const tableExpression = ref(expression.value);
 
+function texify(expr: string): string {
+  return (
+    "\\( " +
+    expr
+      .replaceAll("!", "\\neg ")
+      .replaceAll("&", "\\land")
+      .replaceAll("|", "\\lor") +
+    " \\)"
+  );
+}
+
 function loadTable(expr: string) {
   ready.value = false;
-  tableExpression.value = expression.value;
+  tableExpression.value = texify(expression.value);
   variables.value = new Array(
     ...new Set(new Array(...expr.matchAll(/[A-Za-z]/g)).map((arr) => arr[0]))
   );
@@ -22,6 +33,7 @@ function loadTable(expr: string) {
     return eval(literal);
   });
   ready.value = true;
+  nextTick(reloadMathjax);
 }
 
 function genAllInputs(n: number) {
@@ -38,29 +50,33 @@ function genAllInputs(n: number) {
 </script>
 
 <template>
-  <h1>Truth tabler</h1>
-  <input v-model="expression" @keydown.enter="loadTable(expression)" />
-  <button @click="loadTable(expression)">Load table</button>
-  <table v-if="ready">
-    <thead>
-      <tr>
-        <th></th>
-        <th v-for="v in variables" :style="{ background: 'gray' }">{{ v }}</th>
-        <th class="result">
-          {{ tableExpression }}
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr v-for="(input, i) in inputs">
-        <td :style="{ background: 'gray' }">{{ input.join("") }}</td>
-        <td v-for="i in input">{{ i }}</td>
-        <td class="result">
-          {{ results[i] }}
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <div>
+    <h1>Truth tabler</h1>
+    <input v-model="expression" @keydown.enter="loadTable(expression)" />
+    <button @click="loadTable(expression)">Load table</button>
+    <table v-if="ready">
+      <thead>
+        <tr>
+          <th></th>
+          <th v-for="v in variables" :style="{ background: 'gray' }">
+            {{ v }}
+          </th>
+          <th class="result">
+            {{ tableExpression }}
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="(input, i) in inputs">
+          <td :style="{ background: 'gray' }">{{ input.join("") }}</td>
+          <td v-for="i in input">{{ i }}</td>
+          <td class="result">
+            {{ results[i] }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </template>
 
 <style lang="sass">

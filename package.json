@@ -5,10 +5,13 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "start": "nuxt start",
-    "preview": "nuxt preview"
+    "preview": "nuxt preview",
+    "push": "./scripts/push"
   },
   "devDependencies": {
     "nuxt": "npm:nuxt3@latest",
-    "sass": "^1.54.9"
-  }
+    "sass": "^1.54.9",
+    "serve": "^14.0.1"
+  },
+  "dependencies": {}
 }
