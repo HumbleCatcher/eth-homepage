@@ -57,10 +57,7 @@ function genAllInputs(n: number) {
     <table v-if="ready">
       <thead>
         <tr>
-          <th></th>
-          <th v-for="v in variables" :style="{ background: 'gray' }">
-            {{ v }}
-          </th>
+          <th v-for="v in variables">\( {{ v }} \)</th>
           <th class="result">
             {{ tableExpression }}
           </th>
@@ -68,7 +65,6 @@ function genAllInputs(n: number) {
       </thead>
       <tbody>
         <tr v-for="(input, i) in inputs">
-          <td :style="{ background: 'gray' }">{{ input.join("") }}</td>
           <td v-for="i in input">{{ i }}</td>
           <td class="result">
             {{ results[i] }}
