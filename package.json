@@ -9,9 +9,13 @@
     "push": "./scripts/push"
   },
   "devDependencies": {
-    "nuxt": "npm:nuxt3@latest",
+    "@nuxt/types": "^2.15.8",
+    "@nuxt/typescript-build": "^2.1.0",
+    "bootstrap-vue": "^2.22.0",
     "sass": "^1.54.9",
     "serve": "^14.0.1"
   },
-  "dependencies": {}
+  "dependencies": {
+    "nuxt": "^2.15.8"
+  }
 }

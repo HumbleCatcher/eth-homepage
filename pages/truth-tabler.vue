@@ -1,40 +1,34 @@
-<script lang="ts" setup>
-const expression = ref("a & b");
-const variables = ref([]);
-const inputs = ref([]);
-const results = ref([]);
-const ready = ref(false);
-const tableExpression = ref(expression.value);
+<template>
+  <div>
+    <h1>Truth tabler</h1>
+    <input v-model="expression" @keydown.enter="loadTable(expression)" />
+    <b-button variant="primary" @click="loadTable(expression)"
+      >Load table
+    </b-button>
+    <table v-if="ready">
+      <thead>
+        <tr>
+          <th v-for="v in variables" :key="v">\( {{ v }} \)</th>
+          <th class="result">
+            {{ tableExpression }}
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="(input, i) in inputs" :key="i">
+          <td v-for="(i, j) in input" :key="j">{{ i }}</td>
+          <td class="result">
+            {{ results[i] }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</template>
 
-function texify(expr: string): string {
-  return (
-    "\\( " +
-    expr
-      .replaceAll("!", "\\neg ")
-      .replaceAll("&", "\\land")
-      .replaceAll("|", "\\lor") +
-    " \\)"
-  );
-}
-
-function loadTable(expr: string) {
-  ready.value = false;
-  tableExpression.value = texify(expression.value);
-  variables.value = new Array(
-    ...new Set(new Array(...expr.matchAll(/[A-Za-z]/g)).map((arr) => arr[0]))
-  );
-  variables.value.sort();
-  inputs.value = genAllInputs(variables.value.length);
-  results.value = inputs.value.map((input) => {
-    let literal = expr;
-    variables.value.forEach((v, i) => {
-      literal = literal.replaceAll(v, input[i]);
-    });
-    return eval(literal);
-  });
-  ready.value = true;
-  nextTick(reloadMathjax);
-}
+<script lang="ts">
+import Vue from "vue";
+import MathjaxVue from "~/mixins/Mathjax.vue";
 
 function genAllInputs(n: number) {
   const inputs = [];
@@ -47,33 +41,53 @@ function genAllInputs(n: number) {
   }
   return inputs;
 }
-</script>
 
-<template>
-  <div>
-    <h1>Truth tabler</h1>
-    <input v-model="expression" @keydown.enter="loadTable(expression)" />
-    <button @click="loadTable(expression)">Load table</button>
-    <table v-if="ready">
-      <thead>
-        <tr>
-          <th v-for="v in variables">\( {{ v }} \)</th>
-          <th class="result">
-            {{ tableExpression }}
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(input, i) in inputs">
-          <td v-for="i in input">{{ i }}</td>
-          <td class="result">
-            {{ results[i] }}
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</template>
+export default Vue.extend({
+  mixins: [MathjaxVue],
+  data() {
+    return {
+      expression: "a & b",
+      tableExpression: "a & b",
+      variables: new Array<string>(),
+      inputs: new Array<Array<number>>(),
+      results: new Array<number | string>(),
+      ready: false,
+    };
+  },
+  methods: {
+    loadTable(expr: string): void {
+      this.ready = false;
+      this.tableExpression = this.texify(this.expression);
+      this.variables = new Array(
+        ...new Set(
+          new Array(...expr.matchAll(/[A-Za-z]/g)).map((arr) => arr[0])
+        )
+      );
+      this.variables.sort();
+      this.inputs = genAllInputs(this.variables.length);
+      this.results = this.inputs.map((input) => {
+        let literal = expr;
+        this.variables.forEach((v, i) => {
+          literal = literal.replaceAll(v, input[i].toString());
+        });
+        return eval(literal);
+      });
+      this.ready = true;
+      this.$nextTick(this.reloadMathjax);
+    },
+    texify(expr: string): string {
+      return (
+        "\\( " +
+        expr
+          .replaceAll("!", "\\neg ")
+          .replaceAll("&", "\\land")
+          .replaceAll("|", "\\lor") +
+        " \\)"
+      );
+    },
+  },
+});
+</script>
 
 <style lang="sass">
 table, td, th
