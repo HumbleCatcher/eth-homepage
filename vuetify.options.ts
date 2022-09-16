@@ -6,5 +6,8 @@ export default {
         primary: "#772cf9",
       },
     },
+    options: {
+      customProperties: true,
+    },
   },
 };

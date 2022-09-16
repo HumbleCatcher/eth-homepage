@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>Truth tabler</h2>
+    <h3>Truth tabler</h3>
     <v-row class="d-flex" align="center">
       <v-col cols="8">
         <v-text-field
@@ -12,33 +12,60 @@
         />
       </v-col>
       <v-col>
-        <v-btn height="40" color="primary" @click="loadTable(expression)"
+        <v-btn block height="40" color="primary" @click="loadTable(expression)"
           >Load table</v-btn
         >
       </v-col>
     </v-row>
-    <v-row>
-      <v-col>
-        <v-fade-transition>
-          <table v-if="ready">
-            <thead>
-              <tr>
-                <th v-for="v in variables" :key="v">\( {{ v }} \)</th>
-                <th class="result" :key="tableExpression">
-                  {{ texify(tableExpression) }}
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="(input, i) in inputs" :key="i">
-                <td v-for="(i, j) in input" :key="j">{{ i }}</td>
-                <td class="result">
-                  {{ results[i] }}
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </v-fade-transition>
+    <v-fade-transition>
+      <table v-if="ready" class="my-6">
+        <thead>
+          <tr>
+            <th v-for="v in variables" :key="v">\( {{ v }} \)</th>
+            <th class="result" :key="tableExpression">
+              {{ texify(tableExpression) }}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(input, i) in inputs" :key="i">
+            <td v-for="(i, j) in input" :key="j">{{ i }}</td>
+            <td class="result">
+              {{ results[i] }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </v-fade-transition>
+    <h3>Equivalence tester</h3>
+    <v-row justify="space-between">
+      <v-col cols="5">
+        <v-text-field
+          outlined
+          dense
+          hide-details
+          v-model="expressionLeft"
+          @keydown.enter="compareExpressions"
+        />
+      </v-col>
+      <v-col cols="2">
+        <v-btn
+          height="40"
+          block
+          class="animated"
+          :class="[`animated--${prevResult}-to-${comparisonResult}`]"
+          @click="compareExpressions"
+          >\( \equiv \) ?</v-btn
+        >
+      </v-col>
+      <v-col cols="5">
+        <v-text-field
+          outlined
+          dense
+          hide-details
+          v-model="expressionRight"
+          @keydown.enter="compareExpressions"
+        />
       </v-col>
     </v-row>
   </div>
@@ -60,35 +87,131 @@ function genAllInputs(n: number) {
   return inputs;
 }
 
+function extractVariables(expr: string): Array<string> {
+  const variables = new Array(
+    ...new Set(new Array(...expr.matchAll(/[A-Za-z]/g)).map((arr) => arr[0]))
+  );
+  variables.sort();
+  return variables;
+}
+
+function evaluateExpression(
+  expr: string,
+  variables: Array<string>,
+  input: Array<number>
+): any {
+  variables.forEach((v, i) => {
+    expr = expr.replaceAll(v, input[i].toString());
+  });
+  try {
+    return Number(eval(expr));
+  } catch {
+    return null;
+  }
+}
+
+enum ExpressionType {
+  Tautology,
+  Unsatisfiable,
+  Other,
+}
+
+function compareExpressionsWithDifferentVariables(
+  expr1: string,
+  variables1: Array<string>,
+  expr2: string,
+  variables2: Array<string>,
+  intersection: Array<string>
+): boolean {
+  const constantTypes = [
+    ExpressionType.Tautology,
+    ExpressionType.Unsatisfiable,
+  ];
+  const sameConstantType = (e1: string, e2: string) => {
+    const t1 = expressionTypeOf(
+      e1,
+      variables1.filter((v) => !intersection.includes(v))
+    );
+    const t2 = expressionTypeOf(
+      e2,
+      variables2.filter((v) => !intersection.includes(v))
+    );
+    return constantTypes.includes(t1) && constantTypes.includes(t2) && t1 == t2;
+  };
+  if (intersection.length == 0) {
+    // equivalent if both formulas are tautologies or both are unsatisfiable
+    return sameConstantType(expr1, expr2);
+  } else {
+    return genAllInputs(intersection.length).every((input) => {
+      let literal1 = expr1;
+      let literal2 = expr2;
+      intersection.forEach((v, i) => {
+        literal1 = literal1.replaceAll(v, input[i].toString());
+        literal2 = literal2.replaceAll(v, input[i].toString());
+      });
+      return sameConstantType(literal1, literal2);
+    });
+  }
+}
+
+function expressionTypeOf(expr: string, variables: Array<string>) {
+  let expected;
+  if (variables.length == 0) {
+    expected = evaluateExpression(expr, [], []);
+  } else {
+    for (let input of genAllInputs(variables.length)) {
+      let result = evaluateExpression(expr, variables, input);
+      if (expected == null) {
+        expected = result;
+      } else if (result !== expected) {
+        return ExpressionType.Other;
+      }
+    }
+  }
+  return expected == 1
+    ? ExpressionType.Tautology
+    : ExpressionType.Unsatisfiable;
+}
+
+function compareExpressionsWithSameVariables(
+  expr1: string,
+  expr2: string,
+  variables: Array<string>
+): boolean {
+  return genAllInputs(variables.length).every((input) => {
+    return (
+      evaluateExpression(expr1, variables, input) ===
+      evaluateExpression(expr2, variables, input)
+    );
+  });
+}
+
 export default Vue.extend({
   mixins: [MathjaxVue],
   data() {
     return {
-      expression: "a & b",
+      // truth table
+      expression: "A & B",
       tableExpression: "",
       variables: new Array<string>(),
       inputs: new Array<Array<number>>(),
       results: new Array<number | string>(),
       ready: false,
+      // compare expressions
+      expressionLeft: "!(A | B)",
+      expressionRight: "!A & !B",
+      prevResult: "primary",
+      comparisonResult: "primary",
     };
   },
   methods: {
     loadTable(expr: string): void {
       this.ready = false;
       this.tableExpression = this.expression;
-      this.variables = new Array(
-        ...new Set(
-          new Array(...expr.matchAll(/[A-Za-z]/g)).map((arr) => arr[0])
-        )
-      );
-      this.variables.sort();
+      this.variables = extractVariables(expr);
       this.inputs = genAllInputs(this.variables.length);
       this.results = this.inputs.map((input) => {
-        let literal = expr;
-        this.variables.forEach((v, i) => {
-          literal = literal.replaceAll(v, input[i].toString());
-        });
-        return eval(literal);
+        return evaluateExpression(expr, this.variables, input);
       });
       this.ready = true;
       this.$nextTick(this.reloadMathjax);
@@ -103,11 +226,41 @@ export default Vue.extend({
         " \\)"
       );
     },
+    compareExpressions() {
+      const expressionLeft = this.expressionLeft;
+      const expressionRight = this.expressionRight;
+      const variablesLeft = extractVariables(expressionLeft);
+      const variablesRight = extractVariables(expressionRight);
+      const intersection = variablesLeft.filter((el) =>
+        variablesRight.includes(el)
+      );
+      let equivalent;
+      if (
+        intersection.length == variablesLeft.length &&
+        intersection.length == variablesRight.length
+      ) {
+        equivalent = compareExpressionsWithSameVariables(
+          expressionLeft,
+          expressionRight,
+          intersection
+        );
+      } else {
+        equivalent = compareExpressionsWithDifferentVariables(
+          expressionLeft,
+          variablesLeft,
+          expressionRight,
+          variablesRight,
+          intersection
+        );
+      }
+      this.prevResult = this.comparisonResult;
+      this.comparisonResult = equivalent ? "success" : "error";
+    },
   },
 });
 </script>
 
-<style lang="sass">
+<style lang="sass" scoped>
 table, td, th
   border: 1px solid black
 table
@@ -117,17 +270,101 @@ table
   width: 100%
 
   tr:nth-child(2n)
+    background-color: #212121
+
+  tr:nth-child(2n + 1)
     background-color: #2b2b2b
 
   th
-    background-color: #2b2b2b
+    background-color: #212121
     font-weight: 700
 
   td, th
     padding: .5rem
     text-align: center
 
-.result
-  font-weight: bold
-  border-left: 5px solid black
+  .result
+    font-weight: bold
+    border-left: 5px solid black
+
+@keyframes primary-to-error
+  0%
+    background-color: var(--v-primary-base)
+    border-color: var(--v-primary-base)
+  100%
+    background-color: var(--v-error-base)
+    border-color: var(--v-error-base)
+
+@keyframes primary-to-success
+  0%
+    background-color: var(--v-primary-base)
+    border-color: var(--v-primary-base)
+  100%
+    background-color: var(--v-success-base)
+    border-color: var(--v-success-base)
+
+@keyframes success-to-success
+  0%
+    background-color: var(--v-success-base)
+    border-color: var(--v-success-base)
+  100%
+    background-color: var(--v-success-base)
+    border-color: var(--v-success-base)
+
+@keyframes success-to-primary
+  0%
+    background-color: var(--v-success-base)
+    border-color: var(--v-success-base)
+  100%
+    background-color: var(--v-primary-base)
+    border-color: var(--v-primary-base)
+
+@keyframes success-to-error
+  0%
+    background-color: var(--v-success-base)
+    border-color: var(--v-success-base)
+  100%
+    background-color: var(--v-error-base)
+    border-color: var(--v-error-base)
+
+@keyframes error-to-error
+  0%
+    background-color: var(--v-error-base)
+    border-color: var(--v-error-base)
+  100%
+    background-color: var(--v-error-base)
+    border-color: var(--v-error-base)
+
+@keyframes error-to-primary
+  0%
+    background-color: var(--v-error-base)
+    border-color: var(--v-error-base)
+  100%
+    background-color: var(--v-primary-base)
+    border-color: var(--v-primary-base)
+
+@keyframes error-to-success
+  0%
+    background-color: var(--v-error-base)
+    border-color: var(--v-error-base)
+  100%
+    background-color: var(--v-success-base)
+    border-color: var(--v-success-base)
+
+$from: primary, success, error
+$to: primary, success, error
+
+.v-application .v-btn.v-btn--has-bg
+  &.animated
+    animation-duration: 0.75s
+    animation-timing-function: ease-out
+    animation-fill-mode: forwards
+    animation-play-state: running
+    background: var(--v-primary-base)
+    border-color: var(--v-primary-base)
+
+    @each $f in $from
+      @each $t in $to
+        &--#{$f}-to-#{$t}
+          animation-name: #{$f}-to-#{$t}
 </style>
