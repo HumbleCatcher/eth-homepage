@@ -16,6 +16,7 @@ export default {
     ],
   },
   buildModules: ["@nuxt/typescript-build", "@nuxtjs/vuetify"],
+  target: "static",
   vuetify: {
     customVariables: ["~/assets/styles/vuetify.scss"],
     optionsPath: "~/vuetify.options.ts",
