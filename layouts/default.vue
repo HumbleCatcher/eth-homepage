@@ -1,11 +1,13 @@
 <template>
-  <b-container fluid>
-    <b-row class="justify-content-center">
-      <b-col cols="8">
-        <nuxt />
-      </b-col>
-    </b-row>
-  </b-container>
+  <v-app>
+    <v-container fluid>
+      <v-row justify="center">
+        <v-col cols="6">
+          <nuxt />
+        </v-col>
+      </v-row>
+    </v-container>
+  </v-app>
 </template>
 
 <script lang="ts">

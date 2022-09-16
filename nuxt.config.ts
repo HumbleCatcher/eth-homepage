@@ -18,11 +18,11 @@ export default {
       },
     ],
   },
-  buildModules: ["@nuxt/typescript-build"],
-  modules: ["bootstrap-vue/nuxt"],
-  bootstrapVue: {
-    bootstrapCSS: false,
-    bootstrapVueCSS: false,
+  buildModules: ["@nuxt/typescript-build", "@nuxtjs/vuetify"],
+  vuetify: {
+    customVariables: ["~/assets/styles/vuetify.scss"],
+    optionsPath: "~/vuetify.options.ts",
+    treeShake: true,
   },
-  css: ["~/assets/styles/bootstrap.scss"],
+  css: ["~/assets/styles/main.sass"],
 };
