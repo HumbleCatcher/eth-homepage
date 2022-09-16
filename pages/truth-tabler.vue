@@ -17,24 +17,30 @@
         >
       </v-col>
     </v-row>
-    <table v-if="ready" class="my-8">
-      <thead>
-        <tr>
-          <th v-for="v in variables" :key="v">\( {{ v }} \)</th>
-          <th class="result" :key="tableExpression">
-            {{ tableExpression }}
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(input, i) in inputs" :key="i">
-          <td v-for="(i, j) in input" :key="j">{{ i }}</td>
-          <td class="result">
-            {{ results[i] }}
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <v-row>
+      <v-col>
+        <v-fade-transition>
+          <table v-if="ready">
+            <thead>
+              <tr>
+                <th v-for="v in variables" :key="v">\( {{ v }} \)</th>
+                <th class="result" :key="tableExpression">
+                  {{ texify(tableExpression) }}
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="(input, i) in inputs" :key="i">
+                <td v-for="(i, j) in input" :key="j">{{ i }}</td>
+                <td class="result">
+                  {{ results[i] }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </v-fade-transition>
+      </v-col>
+    </v-row>
   </div>
 </template>
 
@@ -59,7 +65,7 @@ export default Vue.extend({
   data() {
     return {
       expression: "a & b",
-      tableExpression: "a & b",
+      tableExpression: "",
       variables: new Array<string>(),
       inputs: new Array<Array<number>>(),
       results: new Array<number | string>(),
@@ -69,7 +75,7 @@ export default Vue.extend({
   methods: {
     loadTable(expr: string): void {
       this.ready = false;
-      this.tableExpression = this.texify(this.expression);
+      this.tableExpression = this.expression;
       this.variables = new Array(
         ...new Set(
           new Array(...expr.matchAll(/[A-Za-z]/g)).map((arr) => arr[0])
