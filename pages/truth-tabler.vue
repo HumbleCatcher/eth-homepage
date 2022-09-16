@@ -1,15 +1,27 @@
 <template>
   <div>
-    <h1>Truth tabler</h1>
-    <input v-model="expression" @keydown.enter="loadTable(expression)" />
-    <b-button variant="primary" @click="loadTable(expression)"
-      >Load table
-    </b-button>
-    <table v-if="ready">
+    <h2>Truth tabler</h2>
+    <v-row class="d-flex" align="center">
+      <v-col cols="8">
+        <v-text-field
+          outlined
+          dense
+          hide-details
+          v-model="expression"
+          @keydown.enter="loadTable(expression)"
+        />
+      </v-col>
+      <v-col>
+        <v-btn height="40" color="primary" @click="loadTable(expression)"
+          >Load table</v-btn
+        >
+      </v-col>
+    </v-row>
+    <table v-if="ready" class="my-8">
       <thead>
         <tr>
           <th v-for="v in variables" :key="v">\( {{ v }} \)</th>
-          <th class="result">
+          <th class="result" :key="tableExpression">
             {{ tableExpression }}
           </th>
         </tr>
@@ -95,8 +107,18 @@ table, td, th
 table
   display: table
   border-collapse: collapse
+  overflow: auto
+  width: 100%
+
+  tr:nth-child(2n)
+    background-color: #2b2b2b
+
+  th
+    background-color: #2b2b2b
+    font-weight: 700
 
   td, th
+    padding: .5rem
     text-align: center
 
 .result

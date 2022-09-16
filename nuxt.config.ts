@@ -3,9 +3,6 @@ export default {
     base: process.env.NODE_ENV === "production" ? "/~aellison" : "/",
   },
   head: {
-    link: [
-      // { rel: "stylesheet", href: "https://cdn.simplecss.org/simple.min.css" },
-    ],
     script: [
       {
         src: "https://polyfill.io/v3/polyfill.min.js?features=es6",

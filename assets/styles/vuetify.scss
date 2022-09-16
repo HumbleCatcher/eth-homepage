@@ -1,0 +1,27 @@
+$headings: (
+  "h1": (
+    "weight": 500,
+  ),
+  "h2": (
+    "weight": 500,
+  ),
+  "h3": (
+    "weight": 500,
+  ),
+  "h4": (
+    "weight": 500,
+  ),
+  "h5": (
+    "weight": 500,
+  ),
+  "h6": (
+    "weight": 500,
+  ),
+);
+
+$font-size-root: 18px;
+
+$btn-text-transform: none;
+$btn-font-weight: 700;
+
+@import "~vuetify/src/styles/styles.sass";
