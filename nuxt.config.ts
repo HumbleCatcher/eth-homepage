@@ -1,19 +1,11 @@
-export default {
+import { NuxtConfig } from "@nuxt/types";
+
+const config: NuxtConfig = {
   router: {
     base: process.env.NODE_ENV === "production" ? "/~aellison" : "/",
   },
   head: {
-    script: [
-      {
-        src: "https://polyfill.io/v3/polyfill.min.js?features=es6",
-      },
-      {
-        type: "text/javascript",
-        id: "MathJax-script",
-        async: "",
-        src: "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js",
-      },
-    ],
+    script: [],
   },
   buildModules: ["@nuxt/typescript-build", "@nuxtjs/vuetify"],
   target: "static",
@@ -25,3 +17,5 @@ export default {
   css: ["~/assets/styles/main.sass", "katex/dist/katex.min.css"],
   plugins: ["~/plugins/Katex.ts"],
 };
+
+export default config;
