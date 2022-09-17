@@ -103,11 +103,7 @@ function evaluateExpression(
   variables.forEach((v, i) => {
     expr = expr.replaceAll(v, input[i].toString());
   });
-  try {
-    return Number(eval(expr));
-  } catch {
-    return null;
-  }
+  return Number(eval(expr));
 }
 
 enum ExpressionType {
@@ -235,23 +231,30 @@ export default Vue.extend({
         variablesRight.includes(el)
       );
       let equivalent;
-      if (
-        intersection.length == variablesLeft.length &&
-        intersection.length == variablesRight.length
-      ) {
-        equivalent = compareExpressionsWithSameVariables(
-          expressionLeft,
-          expressionRight,
-          intersection
-        );
-      } else {
-        equivalent = compareExpressionsWithDifferentVariables(
-          expressionLeft,
-          variablesLeft,
-          expressionRight,
-          variablesRight,
-          intersection
-        );
+      try {
+        if (
+          intersection.length == variablesLeft.length &&
+          intersection.length == variablesRight.length
+        ) {
+          equivalent = compareExpressionsWithSameVariables(
+            expressionLeft,
+            expressionRight,
+            intersection
+          );
+        } else {
+          equivalent = compareExpressionsWithDifferentVariables(
+            expressionLeft,
+            variablesLeft,
+            expressionRight,
+            variablesRight,
+            intersection
+          );
+        }
+      } catch (e) {
+        console.error("Error comparing expressions: " + e);
+        this.prevResult = this.comparisonResult;
+        this.comparisonResult = "primary";
+        return;
       }
       this.prevResult = this.comparisonResult;
       this.comparisonResult = equivalent ? "success" : "error";
