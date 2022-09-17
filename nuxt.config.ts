@@ -22,5 +22,6 @@ export default {
     optionsPath: "~/vuetify.options.ts",
     treeShake: true,
   },
-  css: ["~/assets/styles/main.sass"],
+  css: ["~/assets/styles/main.sass", "katex/dist/katex.min.css"],
+  plugins: ["~/plugins/Katex.ts"],
 };

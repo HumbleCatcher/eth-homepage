@@ -12,13 +12,8 @@
 
 <script lang="ts">
 import Vue from "vue";
-import MathjaxVue from "~/mixins/Mathjax.vue";
 
 export default Vue.extend({
-  mixins: [MathjaxVue],
-  mounted() {
-    // @ts-ignore
-    this.reloadMathjax();
-  },
+  mounted() {},
 });
 </script>

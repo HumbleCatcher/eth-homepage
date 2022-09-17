@@ -21,9 +21,9 @@
       <table v-if="ready" class="my-6">
         <thead>
           <tr>
-            <th v-for="v in variables" :key="v">\( {{ v }} \)</th>
+            <th v-for="v in variables" :key="v" v-html="$katex(v)"></th>
             <th class="result" :key="tableExpression">
-              {{ texify(tableExpression) }}
+              <div v-html="$katex(texify(tableExpression))"></div>
             </th>
           </tr>
         </thead>
@@ -55,8 +55,10 @@
           class="animated"
           :class="[`animated--${prevResult}-to-${comparisonResult}`]"
           @click="compareExpressions"
-          >\( \equiv \) ?</v-btn
         >
+          <div v-html="$katex('\\equiv')"></div>
+          ?
+        </v-btn>
       </v-col>
       <v-col cols="5">
         <v-text-field
@@ -73,7 +75,6 @@
 
 <script lang="ts">
 import Vue from "vue";
-import MathjaxVue from "~/mixins/Mathjax.vue";
 
 function genAllInputs(n: number) {
   const inputs = [];
@@ -183,7 +184,6 @@ function compareExpressionsWithSameVariables(
 }
 
 export default Vue.extend({
-  mixins: [MathjaxVue],
   data() {
     return {
       // truth table
@@ -210,17 +210,12 @@ export default Vue.extend({
         return evaluateExpression(expr, this.variables, input);
       });
       this.ready = true;
-      this.$nextTick(this.reloadMathjax);
     },
     texify(expr: string): string {
-      return (
-        "\\( " +
-        expr
-          .replaceAll("!", "\\neg ")
-          .replaceAll("&", "\\land")
-          .replaceAll("|", "\\lor") +
-        " \\)"
-      );
+      return expr
+        .replaceAll("!", "\\neg ")
+        .replaceAll("&", "\\land")
+        .replaceAll("|", "\\lor");
     },
     compareExpressions() {
       const expressionLeft = this.expressionLeft;
