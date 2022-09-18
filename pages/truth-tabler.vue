@@ -217,10 +217,10 @@ export default Vue.extend({
     },
     texify(expr: string): string {
       return expr
-        .replaceAll("!", "\\neg ")
-        .replaceAll("&", "\\land")
-        .replaceAll("|", "\\lor")
-        .replaceAll("^", "\\oplus");
+        .replaceAll("!", " \\neg ")
+        .replaceAll("&", " \\land ")
+        .replaceAll("|", " \\lor ")
+        .replaceAll("^", " \\oplus ");
     },
     compareExpressions() {
       const expressionLeft = this.expressionLeft;
