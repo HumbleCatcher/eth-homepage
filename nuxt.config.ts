@@ -5,6 +5,19 @@ const config: NuxtConfig = {
     base: process.env.NODE_ENV === "production" ? "/~aellison" : "/",
   },
   head: {
+    meta: [
+      {
+        charset: "utf-8",
+      },
+      {
+        name: "viewport",
+        content: "width=device-width, initial-scale=1",
+      },
+      {
+        name: "theme-color",
+        content: "#000",
+      },
+    ],
     script: [],
   },
   buildModules: ["@nuxt/typescript-build", "@nuxtjs/vuetify"],

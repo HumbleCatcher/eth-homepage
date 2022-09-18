@@ -38,8 +38,12 @@
       </table>
     </v-fade-transition>
     <h3>Equivalence tester</h3>
-    <v-row justify="space-between">
-      <v-col cols="5">
+    <v-row
+      class="flex-column flex-md-row"
+      justify-md="space-between"
+      align="center"
+    >
+      <v-col cols="12" sm="10" md="5">
         <v-text-field
           outlined
           dense
@@ -48,7 +52,7 @@
           @keydown.enter="compareExpressions"
         />
       </v-col>
-      <v-col cols="2">
+      <v-col cols="5" sm="4" md="2">
         <v-btn
           height="40"
           block
@@ -60,7 +64,7 @@
           ?
         </v-btn>
       </v-col>
-      <v-col cols="5">
+      <v-col cols="12" sm="10" md="5">
         <v-text-field
           outlined
           dense
