@@ -1,8 +1,8 @@
 <template>
   <div>
     <h3>Truth tabler</h3>
-    <v-row class="d-flex" align="center">
-      <v-col cols="8">
+    <v-row align="center">
+      <v-col cols="12" md="8">
         <v-text-field
           outlined
           dense
