@@ -219,7 +219,8 @@ export default Vue.extend({
       return expr
         .replaceAll("!", "\\neg ")
         .replaceAll("&", "\\land")
-        .replaceAll("|", "\\lor");
+        .replaceAll("|", "\\lor")
+        .replaceAll("^", "\\oplus");
     },
     compareExpressions() {
       const expressionLeft = this.expressionLeft;
