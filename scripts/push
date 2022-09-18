@@ -9,3 +9,4 @@ echo -e "\e[105m>>> Copying over static content\e[0m"
 cp -r .output/public/* /mnt/aellison/homepage/
 echo -e "\e[105m>>> Turning off VPN\e[0m"
 nmcli con down id ETH
+firefox https://n.ethz.ch/~aellison/truth-tabler/
