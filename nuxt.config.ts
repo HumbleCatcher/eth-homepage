@@ -4,6 +4,7 @@ const config: NuxtConfig = {
   components: true,
   router: {
     base: process.env.NODE_ENV === "production" ? "/~aellison" : "/",
+    middleware: ["redirects"],
   },
   head: {
     meta: [

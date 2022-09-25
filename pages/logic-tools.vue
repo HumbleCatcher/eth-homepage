@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <default-layout title="Logic tools" back="/">
     <h3>Truth tabler</h3>
     <v-row align="center">
       <v-col cols="12" md="8">
@@ -74,7 +74,7 @@
         />
       </v-col>
     </v-row>
-  </div>
+  </default-layout>
 </template>
 
 <script lang="ts">
