@@ -1,11 +1,13 @@
 <template>
-  <div>
-    <h1>Hello there!</h1>
-    You can check out
-    <ul>
-      <li>
-        <NuxtLink to="/truth-tabler">Truth tabler</NuxtLink>
-      </li>
-    </ul>
-  </div>
+  <default-layout title="Welcome, stranger">
+    For now, head over to
+    <NuxtLink to="/dm2022">Diskrete Mathematik HS22</NuxtLink> or
+    <NuxtLink to="/logic-tools">Logic tools</NuxtLink>
+  </default-layout>
 </template>
+
+<script lang="ts">
+import Vue from "vue";
+
+export default Vue.extend({});
+</script>

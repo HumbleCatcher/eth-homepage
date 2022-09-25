@@ -1,5 +1,9 @@
 <template>
   <default-layout title="Logic tools" back="/">
+    <v-alert type="error">
+      <strong>Warning:</strong> I do not guarentee that these tools are correct.
+      They were not tested extensively.
+    </v-alert>
     <h3>Truth tabler</h3>
     <v-row align="center">
       <v-col cols="12" md="8">
