@@ -13,7 +13,7 @@
         </li>
         <li>
           Since the symbol "<span v-html="$katex('\\rightarrow')" />" does not
-          exist in JavaScript, you should write
+          exist in JavaScript, you should use
           <span v-html="$katex('\\neg A \\lor B')" /> to express
           <span v-html="$katex('A \\rightarrow B')" />.
         </li>
