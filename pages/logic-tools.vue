@@ -4,6 +4,21 @@
       <strong>Warning:</strong> I do not guarentee that these tools are correct.
       They were not tested extensively.
     </v-alert>
+    <v-alert type="info">
+      <strong>Usage:</strong>
+      <ol>
+        <li>
+          Logical expressions must be written in JavaScript syntax (same as
+          Java/C/C++/...). See placeholders for examples.
+        </li>
+        <li>
+          Since the symbol "<span v-html="$katex('\\rightarrow')" />" does not
+          exist in JavaScript, you should write
+          <span v-html="$katex('\\neg A \\lor B')" /> to express
+          <span v-html="$katex('A \\rightarrow B')" />.
+        </li>
+      </ol>
+    </v-alert>
     <h3>Truth tabler</h3>
     <v-row align="center">
       <v-col cols="12" md="8">
