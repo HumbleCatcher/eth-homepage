@@ -7,14 +7,10 @@
       <li>Logik: Beispiele, Repetition und Aufgaben</li>
       <li>Hilbert's Hotel (falls Zeit übrig)</li>
     </ul>
-    <collapsible-header size="3" text="Notizen" class="ma-0">
-      <embed
-        :src="$static('/notes/dm2022/week1.pdf')"
-        type="application/pdf"
-        width="100%"
-        height="800px"
-      />
-    </collapsible-header>
+    <h3>Notizen</h3>
+    <ul>
+      <li><a :href="$static('/notes/dm2022/week1.pdf')">Voilà</a></li>
+    </ul>
     <h3>Ressourcen</h3>
     <ul>
       <li>
