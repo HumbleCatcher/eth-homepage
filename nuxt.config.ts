@@ -30,7 +30,7 @@ const config: NuxtConfig = {
     treeShake: true,
   },
   css: ["~/assets/styles/main.sass", "katex/dist/katex.min.css"],
-  plugins: ["~/plugins/Katex.ts"],
+  plugins: ["~/plugins/Injections.ts"],
 };
 
 export default config;

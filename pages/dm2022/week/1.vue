@@ -9,7 +9,7 @@
     </ul>
     <collapsible-header size="3" text="Notizen" class="ma-0">
       <embed
-        src="/notes/dm2022/week1.pdf"
+        :src="$static('/notes/dm2022/week1.pdf')"
         type="application/pdf"
         width="100%"
         height="800px"
