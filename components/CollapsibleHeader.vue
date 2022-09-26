@@ -6,17 +6,14 @@
       :class="`h${size}-margin`"
       style="cursor: pointer"
     >
-      <div
-        class="mt-2 d-flex justify-content-center align-center"
-        :class="{ active }"
-      >
+      <div class="mt-1 d-flex" :class="{ active }">
         <v-icon>mdi-menu-right</v-icon>
       </div>
-      <component :is="`h${size}`" style="display: inline">
+      <component :is="`h${size}`" style="display: inline" class="ma-0">
         {{ text }}
       </component>
     </div>
-    <div v-if="active">
+    <div v-show="active">
       <slot />
     </div>
   </div>
