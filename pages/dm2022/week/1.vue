@@ -7,11 +7,14 @@
       <li>Logik: Beispiele, Repetition und Aufgaben</li>
       <li>Hilbert's Hotel (falls Zeit übrig)</li>
     </ul>
-    <h3>Notizen</h3>
-    <i
-      >Ich werde (versuchen) meine Notizen aus der Übungsstunde spätestens am
-      26.9. abends da hochzuladen.</i
-    >
+    <collapsible-header size="3" text="Notizen" class="ma-0">
+      <embed
+        src="/notes/dm2022/week1.pdf"
+        type="application/pdf"
+        width="100%"
+        height="800px"
+      />
+    </collapsible-header>
     <h3>Ressourcen</h3>
     <ul>
       <li>
