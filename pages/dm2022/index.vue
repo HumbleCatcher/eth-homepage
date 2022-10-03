@@ -51,9 +51,32 @@
           >
         </li>
         <li>
-          <a target="_blank" href="https://dm.crypto.ethz.ch/">
-            Übungsaufgaben</a
+          <a target="_blank" href="https://dm.crypto.ethz.ch/"> Serien</a>
+        </li>
+        <li>
+          <a
+            href="https://polybox.ethz.ch/index.php/s/WXf1p3ODpDdpnRH?path=%2F1.%20Semester%2F2%20DiskMath%2F3%20Exercises"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Alte Serien</a
           >
+        </li>
+        <li>
+          <a
+            href="https://exams.vis.ethz.ch/category/DiskreteMathematik"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Alte Prüfungen</a
+          >
+        </li>
+        <li>
+          <a
+            href="https://cdn.vis.ethz.ch/luk/pvw_diskretemathematik.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            >PVW Skript</a
+          >
+          (Zusammenfassung aller Themen + Aufgaben)
         </li>
       </ul>
     </collapsible-header>
@@ -61,9 +84,10 @@
     <h3>Übungsstunden</h3>
     <ul>
       <li>
-        <span class="outer">
-          <NuxtLink to="/dm2022/week/1"> Woche 1 </NuxtLink>
-        </span>
+        <NuxtLink to="/dm2022/week/1"> Woche 1 </NuxtLink>
+      </li>
+      <li>
+        <NuxtLink to="/dm2022/week/2"> Woche 2 </NuxtLink>
       </li>
     </ul>
   </default-layout>
