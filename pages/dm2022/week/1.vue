@@ -9,7 +9,7 @@
     </ul>
     <h3>Notizen</h3>
     <ul>
-      <li><a :href="$static('/notes/dm2022/week1.pdf')">Voilà</a></li>
+      <li><a :href="$static('/dm2022/week1/notes.pdf')">Voilà</a></li>
     </ul>
     <h3>Ressourcen</h3>
     <ul>

@@ -5,12 +5,23 @@
       <li>Feedback zur letzten Serie</li>
       <li>Hinweise für den Bonus + Beispiele</li>
       <li>Tautologien, Erfüllbarkeit: Repetition</li>
-      <li>Logische Konsequenz: Repetition, Beweis, Wahr/Falsch Aufgaben</li>
+      <li>
+        Logische Konsequenz: Repetition, <s>Beweis</s>, Wahr/Falsch Aufgaben
+      </li>
       <li>Prädikatenlogik: unterschiedliche Aufgaben</li>
     </ul>
     <h3>Links</h3>
     <ul>
-      <li>Meine Notizen (lade ich bis 4.10. da hoch)</li>
+      <li>
+        <a :href="$static('/dm2022/week2/notes.pdf')">Meine Notizen</a> und
+        <a :href="$static('/dm2022/week2/slides.pdf')">die Slides</a>
+        (und der
+        <a
+          :href="$static('dm2022/week2/slides.tex')"
+          v-html="$katex('\\LaTeX')"
+        />
+        dafür, falls das euch interessiert)
+      </li>
       <li>
         <a
           target="_blank"

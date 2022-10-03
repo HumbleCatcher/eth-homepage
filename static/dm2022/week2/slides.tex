@@ -1,0 +1,228 @@
+\documentclass[t,dvipsnames]{beamer}
+%Information to be included in the title page:
+\title{Diskrete Mathematik - Woche 2}
+\author{Andreas Ellison}
+\usetheme{Madrid}
+
+
+
+\DeclareMathOperator{\isless}{less}
+\DeclareMathOperator{\isequal}{equal}
+\DeclareMathOperator{\isprime}{prime}
+\DeclareMathOperator{\isodd}{odd}
+\DeclareMathOperator{\knows}{knows}
+
+\begin{document}
+
+\begin{frame}
+	\frametitle{Äquivalenzumformungen - Wahr/Falsch Fragen}
+	Welche der folgenden Umformungen entsprechen der Anforderungen der Bonusaufgabe?
+	\begin{enumerate}
+		\item<1-> $(A \lor B) \land C \equiv (A \land C) \lor (B \land C)$
+
+			\only<2->{\color{red} Falsch (Distributivgesetz ist von links im Lemma)}
+		\item<3->
+			$A \land B \rightarrow C$
+
+			\only<4->{\color{red} Falsch (Klammerung)}
+		\item<5->
+			$B \land (\neg A \lor (\neg A \land B)) \equiv B \land \neg A$
+
+			\only<6->{\color{ForestGreen} Wahr (Absorption)}
+		\item<7->
+			$(A \lor B) \land (A \lor C) \equiv A \land (B \lor C)$
+
+			\only<8->{\color{red} Falsch. Richtig wäre $A \lor (B \land C)$  }
+		\item<9->
+			$(A \land B) \lor (C \land A) \equiv A \land (B \lor C)$
+
+			\only<10->{\color{red} Falsch. (Komm. + Distr. in einem Schritt) }
+	\end{enumerate}
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Logische Konsequenz - Wahr/Falsch Fragen (in Gruppen)}
+	Welche der folgenden logischen Konsequenzen gelten? Gebe eine (intuitive) Begründung oder ein Gegenbeispiel.
+	\begin{enumerate}
+		\item<1-> $A \land B  \stackrel{?}{\models} A$
+
+			\only<2->{\color{ForestGreen} Wahr.}
+		\item<3-> $A \rightarrow (B \land C) \stackrel{?}{\models} A \rightarrow C$
+
+			\only<4->{\color{ForestGreen} Wahr.}
+		\item<5-> $(A \land B) \rightarrow C \stackrel{?}{\models} B \rightarrow C$
+
+			\only<6->{\color{red} Falsch. Gegenbeispiel: $A=0$, $B=1$, $C=0$}
+		\item<7-> $A \land (\neg A \lor \neg(A \lor B)) \stackrel{?}{\models} A \land B \land C$
+
+			\only<8->{\color{ForestGreen} Wahr. Die Formel links ist unerfüllbar.}
+
+		\item<9-> $A \rightarrow (B \lor C) \stackrel{?}{\models} (A \land \neg B) \rightarrow C$
+
+			\only<10->{\color{ForestGreen} Wahr.}
+	\end{enumerate}
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Prädikatenlogik}
+	\only<1-3>{
+		Wir können nicht alles mit Aussagenlogik ausdrücken.
+		z.B.:  Die Aussage
+	}
+
+	\begin{center}
+		\color{blue}
+		``Für jede natürliche Zahl gilt $n \cdot n > n$ oder $n = 1$''
+	\end{center}
+
+	\only<1-3>{
+		können wir nicht mit Aussagenlogik aufschreiben.
+		\\~\
+	}
+
+	\only<2->{
+		Wie würde man obige Aussage mit Prädikatenlogik aufschreiben?
+		\\~\
+	}
+
+	\only<3>{\color{blue}
+		Lösung (intuitiv):
+
+		$U = \mathbb{N}$
+		\begin{equation*}
+			\forall n \, \big (n^2 > n \lor n = 1 \big )
+		\end{equation*}
+	}
+	\only<4->{\color{blue}
+		Lösung (formeller):
+		\begin{flalign*}
+			 & U = \mathbb{N}                &  & \\
+			 & \isless(x, y) = 1 \iff x < y  &  & \\
+			 & \isequal(x, y) = 1 \iff x = y &  & \\
+			 & f(n) = n^2
+		\end{flalign*}
+
+		\begin{equation*}
+			\forall n \, \big (\isless(n, f(n)) \lor \isequal(n, 1) \big )
+		\end{equation*}
+	}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Prädikatenlogik - Satz $\to$ Formel und Formel $\to$ Satz}
+	\begin{enumerate}
+		\item<1-> ``Für jede Primzahl $p$ gilt, dass $p$ ungerade ist oder $p = 2$'' \\
+			\only<2->{\color{blue}Lösung: Wir setzen $U = \mathbb{N}$, $\isprime(n) = 1 \iff n \mbox{ ist prim}$, $\isodd(n) = 1 \iff n \mbox{ ist ungerade}$.
+				Dann:
+				\begin{equation*}
+					\forall n\, \Big(\isprime(n) \rightarrow \big(\isodd(n) \lor n = 2 \big)\Big)
+				\end{equation*}}
+		\item<3-> Sei $U = \mathbb{N}$, das Prädikat ``$\isprime$'' wie oben. Was bedeutet folgende Formel in Worten?
+			\begin{equation*}
+				\forall x\, \exists y \big (x < y \land \isprime(y) \big )
+			\end{equation*}
+			\only<4->{\color{blue} Lösung: Es gibt unendlich viele Primzahlen.}
+		\item<5-> ``Jeder ETH Student kennt mindestens zwei andere ETH Studenten.''
+			\only<6->{\color{blue}Lösung: Wir setzen $U =$ Menge aller ETH Studenten, $\knows(s, t) = 1 \iff s \mbox{ kennt } t$.
+				Dann:
+				\begin{equation*}
+					\forall s\, \exists t \exists t' \Big( s \neq t \land s \neq t' \land \knows(s, t) \land t \neq t' \land \knows(s, t') \Big)
+				\end{equation*}}
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Prädikatenlogik - Alte Prüfungsfrage}
+	\begin{enumerate}
+		\item<1-> Finde eine Formel $F$, so dass in jeder Interpretation, die $F$ erfüllt, das Universum mindestens 2 Elemente hat. (Prüfung HS18)
+
+			Tipp: ``$=$'', ``$\neq$'' sind erlaubt.
+
+			\only<2->{\color{blue}
+				Lösung:
+				\begin{equation*}
+					\forall x \exists y \, (x \neq y)
+				\end{equation*}}
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Prädikatenlogik - Interpretation finden}
+	Finde für die folgenden Formeln Interpretation, die sie erfüllen:
+	\begin{enumerate}
+		\item<1->
+			\begin{equation*}
+				\forall x \forall y \, \Big (E \big (f(x, y), f(y, x) \big ) \Big )
+			\end{equation*}
+			\only<2->{\color{blue}
+				Lösung: $U = \mathbb{Z}$, $E = \isequal$, $f(x, y) = x \cdot y$
+			}
+		\item<3->
+			\begin{equation*}
+				\forall x \forall y \forall z \, \Big (P \big (f(x, f(y, z)), f((x, y), z) \big ) \Big )
+			\end{equation*}
+			\only<4->{\color{blue}
+				Lösung: $U = \mathbb{R}$, $P = \isequal$, $f(x, y) = x + y$
+			}
+		\item<5->
+			\begin{equation*}
+				\exists G \forall F \, \Big ( C(F, G) \Big )
+			\end{equation*}
+			\only<6->{\color{blue}
+				Lösung: $U =$ Menge aller Formeln, $C(F, G) = 1 \iff F \models G $
+			}
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Prädikatenlogik - Logische Konsequenzen und Äquivelenzen}
+	Sind die folgenden Aussagen wahr oder falsch? Wenn wahr, dann gebe eine (intuitive) Begründung. Wenn falsch, dann gebe ein Gegenbeispiel.
+	\begin{enumerate}
+		\item<1->
+			\begin{equation*}
+				\forall x \forall y \, P(x, y)  \stackrel{?}{\equiv} \forall y \forall x \, P(x, y)
+			\end{equation*}
+			\only<2->{\color{ForestGreen}
+				Wahr.
+			}
+		\item<3->
+			\begin{equation*}
+				\neg \exists x \, P(x)  \stackrel{?}{\equiv} \forall x \, \neg P(x)
+			\end{equation*}
+			\only<4->{\color{ForestGreen}
+				Wahr.
+			}
+		\item<5->
+			\begin{equation*}
+				\exists x \, P(x) \land \exists x \, Q(x) \stackrel{?}{\models} \exists x \, \big ( P(x) \land Q(x) \big )
+			\end{equation*}
+			\only<6->{\color{red}
+				Falsch. Gegenbeispiel: $U = \mathbb{Z}$, $P(x) = 1 \iff x > 0$, $Q(x) = 1 \iff y < 0$.
+			}
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Prädikatenlogik - Logische Konsequenzen und Äquivelenzen}
+	Sind die folgenden Aussagen wahr oder falsch? Wenn wahr, dann gebe eine (intuitive) Begründung. Wenn falsch, dann gebe ein Gegenbeispiel.
+	\begin{enumerate}
+		\item<1->
+			\begin{equation*}
+				\exists y \forall x \, P(x, y)  \stackrel{?}{\models} \forall x \exists y \, P(x, y)
+			\end{equation*}
+			\only<2->{\color{ForestGreen}
+				Wahr.
+			}
+		\item<3->
+			\begin{equation*}
+				\forall x \exists y \, P(x, y) \stackrel{?}{\models} \exists y \forall x \, P(x, y)
+			\end{equation*}
+			\only<4->{\color{red}
+				Falsch. Gegenbeispiel: $U =$ reelle Zahlen ohne 0, $P(x, y) = 1 \iff x \cdot y = 1$
+			}
+	\end{enumerate}
+\end{frame}
+
+\end{document}
