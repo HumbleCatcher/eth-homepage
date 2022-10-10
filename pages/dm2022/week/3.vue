@@ -5,12 +5,21 @@
       <li>Feedback zur letzten Serie</li>
       <li>Aufgaben über logische Konsequenzen von der letzten Stunde</li>
       <li>
-        Beweise: Vorgehen, einfacher Beweis aus dem Skript, Beispiele für
-        indirekten Beweise, Fallunterscheidung und Widerspruchsbeweise
+        Beweise:
+        <s
+          >Vorgehen, einfacher Beweis aus dem Skript, Beispiele für indirekten
+          Beweise,</s
+        >
+        Fallunterscheidung <s>und Widerspruchsbeweise</s>
       </li>
     </ul>
     <h3>Links</h3>
-    <li>Meine Notizen + Slides lade ich da später hoch</li>
+    <ul>
+      <li>
+        <a :href="$static('/dm2022/week3/notes.pdf')">Meine Notizen</a> und
+        <a :href="$static('/dm2022/week3/slides.pdf')">die Slides</a>
+      </li>
+    </ul>
   </default-layout>
 </template>
 
