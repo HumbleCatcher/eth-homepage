@@ -13,6 +13,8 @@
         Fallunterscheidung <s>und Widerspruchsbeweise</s>
       </li>
     </ul>
+    <h3>Priorität bei den Aufgaben</h3>
+    <span v-html="$katex('4, 5, 6 > 1 > 3')"></span>
     <h3>Links</h3>
     <ul>
       <li>
