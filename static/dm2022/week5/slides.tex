@@ -67,7 +67,7 @@
 			                       & \iff	\forall a \in A \quad (a, a) \in \rho
 		\end{align*}
 	\end{block}
-	Das heisst nicht anderes als $\idr \subseteq A$.
+	Das heisst nicht anderes als $\idr \subseteq \rho$.
 	\begin{itemize}[<+(1)->]
 		\item Wie sieht die Identitätsrelation in $\mathbb{R}^2$ aus?
 		\item Ist $\varnothing$ im Allgemeinen reflexiv?
@@ -232,52 +232,4 @@
 	equivalence relation.
 \end{frame}
 }
-
-\begin{frame}
-	\frametitle{Partielle Ordnungen}
-	Eine Eigenschaft von Relationen fehlt uns noch:
-	\begin{block}{Def. Antisymmetrie}
-		$\rho$ ist antisymmetrisch, wenn für alle $a, b \in A$ folgende Implikation gilt
-		$$
-			\isrel{a}{b}{\rho} \land \isrel{b}{a}{\rho} \implies  a = b.
-		$$
-	\end{block}
-	\only<+(1)->{
-		Dann haben wir alles für eine weiteres wichtiges Konzept. \hintIllustration
-		\begin{block}{Def. partielle Ordnung}
-			Wir nennen $\preceq$ eine partielle Ordnung, wenn $\preceq$ reflexiv, \textbf{anti}symmetrisch und transitiv ist.
-		\end{block}
-		Musterbeispiel: ``$\le$''.
-	}
-\end{frame}
-
-
-\begin{frame}
-	\frametitle{Hasse Diagramme}
-	(Endliche) partielle Ordnungen können wir bildlich darstellen.
-	\begin{Beispiel}
-		Zeichne das Hasse Diagramm der partiellen Ordnung $(\{2, 4, 6, 12, 18\}; |)$.
-	\end{Beispiel}
-	\only<+(1)->{
-		(Werdet ihr nicht viel benutzen und es kam in den letzten Jahren selten dran. Definitionen wie ``minimal element'', ``least element'' würde ich auch einfach schnell auf den Spick schreiben.)
-	}
-
-	\only<+(1)->{
-		Folgende Definition ist aber wichtig zu kennen:
-		\begin{block}{Def. totale Ordnung}
-			Wir nennen $(A; \preceq)$ eine totale Ordnung, falls jede zwei Elemente \textit{vergleichbar} (\textit{comparable}) sind.
-			Also für jedes $a, b \in A$ gilt entweder $a \preceq b$ oder $b \preceq a$.
-		\end{block}
-		\begin{itemize}[<+(1)->]
-			\item Wie sieht das Hasse Diagramm einer partiellen Ordnung aus?
-		\end{itemize}
-	}
-\end{frame}
-
-
-\begin{frame}
-	\frametitle{Hasse Diagramme}
-	\includegraphics[width=\textwidth]{total-order-java-1}
-	\includegraphics[width=\textwidth]{total-order-java-2}
-\end{frame}
 \end{document}
