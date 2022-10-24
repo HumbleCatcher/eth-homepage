@@ -22,9 +22,33 @@
     <ul>
       <li>
         <a :href="$static('/dm2022/week5/notes.pdf')">Meine Notizen</a> und
-        <a :href="$static('/dm2022/week5/notes.pdf')">die Slides</a>
+        <a :href="$static('/dm2022/week5/slides.pdf')">die Slides</a>
       </li>
     </ul>
+    <h3 id="challenge">Challenge!</h3>
+    Die erste Person (eingeschrieben in Diskrete Mathematik HS22), die mir einen
+    vollständigen und korrekten Beweis für untenstehende Aufgabe per
+    <a href="mailto:aellison@student.ethz.ch">Email</a>, bis spätestens am
+    <b>7.11.2022 16:00 Uhr</b>, schickt, bekommt von mir eine
+    <b> Tafel Schokolade 🍫</b> geschenkt. Die Email MUSS den Betreff "<i
+      >[DM22] Challenge Transitivität</i
+    >" enthalten. Sonst garantiere ich nicht, dass ich mir den Beweis anschaue.
+    Überprüfe auch vor dem Abschicken, ob unten immer noch steht, die Challenge
+    sei noch nicht gelöst worden.
+    <v-card class="my-5">
+      <v-card-text>
+        <v-alert class="mb-4" type="info" color="primary" border="left"
+          >Dieser Challenge wurde noch nicht gelöst.</v-alert
+        >
+        Sei <span v-html="$katex('\\rho')" /> eine Relation auf einer Menge
+        <span v-html="$katex('A')" />. Beweise:
+        <p class="text-center">
+          <span v-html="$katex('\\rho')" /> transitiv
+          <span v-html="$katex('\\implies \\rho^* = \\rho')" />
+        </p>
+        <p></p>
+      </v-card-text>
+    </v-card>
   </default-layout>
 </template>
 
