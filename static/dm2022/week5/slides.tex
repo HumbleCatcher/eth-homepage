@@ -1,0 +1,283 @@
+\documentclass[t,dvipsnames]{beamer}
+\usepackage{cancel}
+\graphicspath{{./assets/}}
+
+
+
+\title{Diskrete Mathematik - Woche 5}
+\author{Andreas Ellison}
+\usetheme{Madrid}
+\setbeamertemplate{navigation symbols}{}
+
+\DeclareMathOperator{\isless}{less}
+\DeclareMathOperator{\defn}{\stackrel{\text{def}}{\iff}}
+\DeclareMathOperator{\defneq}{\stackrel{\text{def}}{\quad = \quad}}
+\DeclareMathOperator{\idr}{id}
+\newcommand{\isrel}[3]{#1 \, #3 \, #2}
+
+\newcommand{\beamerblack}{
+\setbeamercolor{frametitle}{fg=white}
+\setbeamercolor{frametitle}{bg=black}
+\setbeamercolor{background canvas}{bg=black}
+\setbeamercolor{normal text}{fg=white}
+\usebeamercolor[fg]{normal text}
+\setbeamertemplate{footline}{}
+}
+
+\newcounter{excounter}
+\newcommand{\excount}{\stepcounter{excounter} \theexcounter{}}
+
+\newcommand{\hintIllustration}{\textcolor{Magenta}{(Bild)}}
+
+
+\begin{document}
+
+
+\begin{frame}
+	\frametitle{Relationen - Basics}
+	Im folgenden seien $\rho$ und $\sigma$ Relationen auf $A$. (Also $\rho \subseteq A \times A$)
+	\only<2->{
+		\begin{block}{Def. Inverse}
+			\begin{center}
+				$\hat{\rho} \defneq{} \{(b, a) \mid (a, b) \in \rho\}$
+			\end{center}
+			oder alternativ, für alle $a, b \in A$
+			\begin{align*}
+				\isrel{b}{a}{\hat{\rho}} \iff \isrel{a}{b}{\rho}
+			\end{align*}
+		\end{block}
+		Wir drehen also einfach alle Paare in $\rho$ um. \hintIllustration
+	}
+	\only<3->{
+	\begin{block}{Def. Verkettung}
+		\begin{align*}
+			\isrel{a}{c}{\, \rho \circ \sigma \,} \defn{} \isrel{a}{b}{\rho} \land \isrel{b}{c}{\sigma} \text{ für ein $b \in A$}.
+		\end{align*}
+	\end{block}
+	\hintIllustration.
+	Wir schreiben auch $\underbrace{\rho \circ \rho \circ \ldots \circ \rho}_{\text{n Mal}} = \rho^n$.
+	}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Relationen - Reflexivität}
+	\begin{block}{Def. reflexiv}
+		\begin{align*}
+			\rho \text{ reflexiv } & \defn{} \forall a \in A \quad \isrel{a}{a}{\rho} \\
+			                       & \iff	\forall a \in A \quad (a, a) \in \rho
+		\end{align*}
+	\end{block}
+	Das heisst nicht anderes als $\idr \subseteq A$.
+	\begin{itemize}[<+(1)->]
+		\item Wie sieht die Identitätsrelation in $\mathbb{R}^2$ aus?
+		\item Ist $\varnothing$ im Allgemeinen reflexiv?
+		\item Ist eine nicht irreflexive Relation relfexiv? \\
+		      ($\rho$ irreflexiv $\defn{} \forall a \in A \quad (a, a) \not \in \rho$)
+		\item Ist $\varnothing$ im Allgemeinen irreflexiv?
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Relationen - Symmetrie}
+	\begin{block}{Def. symmetrisch}
+		$\rho$ ist symmetrisch, wenn für alle $a, b \in A$
+		$$
+			\isrel{a}{b}{\rho} \iff  \isrel{b}{a}{\rho}.
+		$$
+	\end{block}
+	Man kann also $\rho$ immer umdrehen. In anderen Worten $\rho = \hat{\rho}$.
+	\only<2->{
+		\begin{itemize}[<+(1)->]
+			\item Wie sieht Symmetrie in einem Graphen aus?
+			\item Ist $\varnothing$ im Allgemeinen symmetrisch?
+		\end{itemize}
+	}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Relationen - Transitivität}
+	\begin{block}{Def. transitiv}
+		$\rho$ ist transitiv, wenn für alle $a, b, c \in A$ so dass
+		$\isrel{a}{b}{\rho}$ und $\isrel{b}{c}{\rho}$,
+		gilt auch $\isrel{a}{c}{\rho}$.
+
+		\only<+(1)->{
+			Anders gesagt soll
+			$$
+				\isrel{a}{b}{\rho} \land \isrel{b}{c}{\rho} \implies \isrel{a}{c}{\rho}.
+			$$
+			für alle $a, b, c \in A$ gelten.
+		}
+	\end{block}
+	\only<+(1)->{
+		Wenn man von $a$ nach $c$ kommen will, dann kann man die Brücke über $b$ nehmen.
+	}
+	\begin{itemize}[<+(1)->]
+		\item Wie sieht Transitivität in einem Graphen aus?
+	\end{itemize}
+\end{frame}
+
+{
+\beamerblack
+\begin{frame}
+	\frametitle{Aufgabe \excount{}}
+	Beweise:
+	\begin{equation*}
+		\rho \mbox{ ist transitiv} \iff \rho^2 \subseteq \rho
+	\end{equation*}
+\end{frame}
+}
+
+\begin{frame}
+	\frametitle{Relationen - Transitivität}
+	\begin{block}{Def. transitiv}
+		$\rho$ ist transitiv, wenn für alle $a, b, c \in A$ so dass
+		$\isrel{a}{b}{\rho}$ und $\isrel{b}{c}{\rho}$,
+		gilt auch $\isrel{a}{c}{\rho}$.
+	\end{block}
+	Wenn man von $a$ nach $c$ kommen will, dann kann man die Brücke über $b$ nehmen.
+	\begin{itemize}
+		\item Wie sieht Transitivität in einem Graphen aus?
+		\item<+(1)-> Ist $\varnothing$ im Allgemeinen transitiv?
+	\end{itemize}
+	\only<+(1)->{
+		\begin{block}{Def. transitive Hülle}
+			$$
+				\rho^* = \bigcup_{n = 1}^{\infty} \rho^{n}
+			$$
+		\end{block}
+		In Worten: nehme $\rho$ und mache ihn transitiv. Drückt in einem Graphen Erreichbarkeit aus. \hintIllustration
+	}
+\end{frame}
+
+{
+\beamerblack
+\begin{frame}
+	\frametitle{Challenge!}
+	Beweise:
+	\begin{equation*}
+		\rho \mbox{ transitiv } \implies \rho^* = \rho.
+	\end{equation*}
+\end{frame}
+}
+
+{
+\beamerblack
+\begin{frame}
+	\frametitle{Aufgabe \excount{} (Alte Prüfungsaufgabe FS21)}
+	Sei
+	$$\rho = \{(1, 2), (2, 3), (3, 4), (4, 2), (4, 4)\}$$
+	eine Relation auf $\{1, 2, 3, 4\}$. \\~
+
+	Bestimme $\rho^3$. (Lösung in Notizen)
+\end{frame}
+}
+
+\begin{frame}
+	\frametitle{Äquivalenzrelationen}
+	Nehmen wir all diese Eigenschaften zusammen, so kommen wir auf ein einfaches aber wichtiges Konzept:
+	\only<+(1)->{
+		\begin{block}{Def. Äquivalenzrelation}
+			Wir nennen $\rho$ eine Äquivalenzrelation, wenn $\rho$ reflexiv, symmetrisch und transitiv ist.
+		\end{block}
+
+	}
+
+	\only<+(1)->{
+		Nicht überraschenderweise geht es da darum, die Äquivalenz zwischen Objekten aufzufassen; also dass wir Objekte in einem gewissen Sinne als ``gleich" betrachten können. Jedes der drei Eigenschaften fasst Merkmale auf, die wir intuitiv von äquivalenten Objekten erwarten würden. Einfaches Beispiel ist Gleichheit (``$=$").
+	}
+
+	\only<+(1)->{
+		\begin{itemize}
+			\item Ist $\idr$ eine Äquivalenzrelation?
+		\end{itemize}
+	}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Äquivalenzklassen}
+	Elemente, die untereinander durch die Relation verknüpft sind, bilden Gruppen \hintIllustration.
+	\only<2->{
+		Im folgenden sei $\sim$ eine Äquivalenzrelation.
+		Diese Gruppen (Äquivalenzklassen) wollen wir irgendwie beschreiben können.
+		\begin{block}{Def. Äquivalenzklasse}
+			Sei $a \in A$. Die Menge aller Elemente, die unter $\sim$ zu $a$ äquivalent sind schreiben wir als
+			$$
+				[a]_\sim \defneq{} \{b \in A \mid \isrel{b}{a}{\sim}\}
+			$$.
+		\end{block}
+	}
+	\only<3->{
+		Reflexivität erfordert, dass jedes Element $a \in A$ irgendwie in der Relation ist. Daher ist intuitiv klar, dass
+		$\sim$ die ganze Menge $A$ in diese Gruppen aufteilt. Die Menge der Äquivalenzklassen $A / \sim$ ist also eine Partition von $A$. (Das muss man aber beweisen!)
+	}
+\end{frame}
+
+{
+\beamerblack
+\begin{frame}
+	\frametitle{Aufgabe \excount{}  (Aufgabe vom Skript)}
+	Prove that the intersection of two equivalence relations is an equivalence relation.
+\end{frame}
+}
+
+{
+\beamerblack
+\begin{frame}
+	\frametitle{Aufgabe \excount{}  (Alte Prüfungsaufgabe HS21)}
+	Let $\rho$ and $\sigma$ be two equivalence relations on a set $A$.
+	Prove that if
+	$$\rho \circ \sigma = \sigma \circ \rho$$
+	then $\rho \circ \sigma$ is an
+	equivalence relation.
+\end{frame}
+}
+
+\begin{frame}
+	\frametitle{Partielle Ordnungen}
+	Eine Eigenschaft von Relationen fehlt uns noch:
+	\begin{block}{Def. Antisymmetrie}
+		$\rho$ ist antisymmetrisch, wenn für alle $a, b \in A$ folgende Implikation gilt
+		$$
+			\isrel{a}{b}{\rho} \land \isrel{b}{a}{\rho} \implies  a = b.
+		$$
+	\end{block}
+	\only<+(1)->{
+		Dann haben wir alles für eine weiteres wichtiges Konzept. \hintIllustration
+		\begin{block}{Def. partielle Ordnung}
+			Wir nennen $\preceq$ eine partielle Ordnung, wenn $\preceq$ reflexiv, \textbf{anti}symmetrisch und transitiv ist.
+		\end{block}
+		Musterbeispiel: ``$\le$''.
+	}
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Hasse Diagramme}
+	(Endliche) partielle Ordnungen können wir bildlich darstellen.
+	\begin{Beispiel}
+		Zeichne das Hasse Diagramm der partiellen Ordnung $(\{2, 4, 6, 12, 18\}; |)$.
+	\end{Beispiel}
+	\only<+(1)->{
+		(Werdet ihr nicht viel benutzen und es kam in den letzten Jahren selten dran. Definitionen wie ``minimal element'', ``least element'' würde ich auch einfach schnell auf den Spick schreiben.)
+	}
+
+	\only<+(1)->{
+		Folgende Definition ist aber wichtig zu kennen:
+		\begin{block}{Def. totale Ordnung}
+			Wir nennen $(A; \preceq)$ eine totale Ordnung, falls jede zwei Elemente \textit{vergleichbar} (\textit{comparable}) sind.
+			Also für jedes $a, b \in A$ gilt entweder $a \preceq b$ oder $b \preceq a$.
+		\end{block}
+		\begin{itemize}[<+(1)->]
+			\item Wie sieht das Hasse Diagramm einer partiellen Ordnung aus?
+		\end{itemize}
+	}
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Hasse Diagramme}
+	\includegraphics[width=\textwidth]{total-order-java-1}
+	\includegraphics[width=\textwidth]{total-order-java-2}
+\end{frame}
+\end{document}
