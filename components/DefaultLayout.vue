@@ -15,7 +15,7 @@
             </v-btn>
           </v-fade-transition>
         </v-col>
-        <v-col offset-lg="2" offset-sm="1" cols="6" sm="8">
+        <v-col offset-lg="2" offset-sm="1" cols="5" sm="8">
           <h3 class="ml-lg-10 ma-0 | ellipsis-overflow">{{ title }}</h3>
         </v-col>
       </v-row>
