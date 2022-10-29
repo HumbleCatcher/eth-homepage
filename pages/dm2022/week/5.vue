@@ -37,13 +37,10 @@
     sei noch nicht gelöst worden.
     <v-card class="my-5">
       <v-card-text>
-        <!-- <v-alert class="mb-4" type="success" border="left"
+        <v-alert class="mb-4" type="success" border="left"
           >Dieser Challenge wurde erfolgreich von
           <pre class="d-inline">toffermann</pre>
           gelöst. Gratuliere!</v-alert
-        > -->
-        <v-alert class="mb-4" type="success" border="left"
-          >Dieser Challenge wurde schon gelöst!</v-alert
         >
         Sei <span v-html="$katex('\\rho')" /> eine Relation auf einer Menge
         <span v-html="$katex('A')" />. Beweise:
