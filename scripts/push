@@ -1,13 +1,11 @@
 #!/usr/bin/bash
-echo -e "\e[105m>>> Turning on VPN\e[0m"
-nmcli con up id ETH
 echo -e "\e[105m>>> Generating static content\e[0m"
 NUXT_APP_BASE_URL=/~aellison/ yarn generate
-echo -e "\e[105m>>> Connecting to ETH drive\e[0m"
-sudo mount -t cifs -o username=aellison,domain=D,vers=2.0,uid=humblecatcher,gid=humblecatcher //testnas13.ethz.ch/id_service_sth_a/aellison /mnt/aellison/
-echo -e "\e[105m>>> Copying over static content\e[0m"
-rm -rf /mnt/aellison/homepage/*
-cp -r .output/public/* /mnt/aellison/homepage/
-echo -e "\e[105m>>> Turning off VPN\e[0m"
-nmcli con down id ETH
-firefox https://n.ethz.ch/~aellison/
+echo -e "\e[105m>>> Syncing static content\e[0m"
+rsync -rltgoDzhO --delete -e ssh aellison@slab1.ethz.ch:/nas/aellison/homepage dist/
+
+read -p "Open in firefox? " yn
+case $yn in
+    [Yy]* ) firefox https://n.ethz.ch/~aellison/;
+    * ) exit;;
+esac
