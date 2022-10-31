@@ -1,0 +1,360 @@
+\documentclass[t,dvipsnames]{beamer}
+\usepackage{cancel}
+\graphicspath{{./assets/}}
+
+
+
+\title{Diskrete Mathematik - Woche 6}
+\author{Andreas Ellison}
+\usetheme{Madrid}
+\setbeamertemplate{navigation symbols}{}
+
+\DeclareMathOperator{\isless}{less}
+\DeclareMathOperator{\defn}{\stackrel{\text{def}}{\iff}}
+\DeclareMathOperator{\defneq}{\stackrel{\text{def}}{\quad = \quad}}
+\DeclareMathOperator{\idr}{id}
+\newcommand{\isrel}[3]{#1 \, #3 \, #2}
+
+\newcommand{\beamerblack}{
+\setbeamercolor{frametitle}{fg=white}
+\setbeamercolor{frametitle}{bg=black}
+\setbeamercolor{background canvas}{bg=black}
+\setbeamercolor{normal text}{fg=white}
+\usebeamercolor[fg]{normal text}
+\setbeamertemplate{footline}{}
+}
+
+\newcounter{excounter}
+\newcommand{\excount}{\stepcounter{excounter} \theexcounter{}}
+
+\newcommand{\hintIllustration}{\textcolor{Magenta}{(Bild)}}
+
+
+\begin{document}
+
+
+\begin{frame}
+	\frametitle{Partielle Ordnungen}
+	Eine Eigenschaft von Relationen fehlt uns noch:
+	\begin{block}{Def. Antisymmetrie}
+		$\rho$ ist \textit{antisymmetrisch}, wenn für alle $a, b \in A$ folgende Implikation gilt:
+		$$
+			\isrel{a}{b}{\rho} \land \isrel{b}{a}{\rho} \implies  a = b.
+		$$
+	\end{block}
+	\only<+(1)->{
+		Intuitiv: Wenn wir Elemente ordnen, wollen wir nicht haben, dass für zwei Elemente $a, b$, $a$ vor $b$ kommt und gleichzeitig auch $b$ vor $a$. Das ist irgendwie widersprüchlich, es sei denn, sie sind das gleiche Elemente. \\~
+	}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Partielle Ordnungen}
+	\framesubtitle{Antisymmetrie}
+
+	Dann haben wir alles für ein weiteres wichtiges Konzept.
+	\begin{block}{Def. partielle Ordnung}
+		Wir nennen $\preceq$ eine partielle Ordnung, wenn $\preceq$ reflexiv, \textbf{anti}symmetrisch und transitiv ist.
+	\end{block}
+	Musterbeispiel: ``$\le$''.
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Partielle Ordnungen}
+	\framesubtitle{Hasse Diagramme}
+	(Endliche) partielle Ordnungen können wir bildlich darstellen.
+	\begin{Beispiel}
+		Zeichne das Hasse Diagramm der partiellen Ordnung $(\{2, 4, 6, 12, 18\}; |)$.
+	\end{Beispiel}
+
+	\only<+(1)->{
+		Das werdet ihr aber praktisch nie benutzen. \\~
+
+		Folgende Definition ist aber wichtig zu kennen:
+		\begin{block}{Def. totale Ordnung}
+			Wir nennen $(A; \preceq)$ eine totale Ordnung, falls jede zwei Elemente \textit{vergleichbar} (\textit{comparable}) sind.
+			Also für jedes $a, b \in A$ gilt entweder $a \preceq b$ oder $b \preceq a$.
+		\end{block}
+		\begin{itemize}[<+(1)->]
+			\item Wie sieht das Hasse Diagramm einer totalen Ordnung aus?
+		\end{itemize}
+	}
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Partielle Ordnungen}
+	\framesubtitle{Totale Ordnungen in der Java Dokumentation}
+	\includegraphics[width=\textwidth]{total-order-java-1}
+	\includegraphics[width=\textwidth]{total-order-java-2}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Funktionen}
+	\begin{block}{Def. Funktion}
+		Wir nennen eine Relation $f \subseteq A \times B$ eine Funktion, wenn
+		\begin{enumerate}[<+(1)->]
+			\item $f$ für jedes Element im Definitionsbereich \textit{definiert} ist. Also für alle $a \in A$ gibt es ein $b \in B$, so dass $\isrel{a}{b}{f}$. \hintIllustration
+			\item \label{second} $f$ jedes Element in $A$ genau auf \textit{ein} anderes Element $b$ gemappt wird. Also für alle $a \in A$ und $b, b' \in B$: $\isrel{a}{b}{f}$ und $\isrel{a}{b'}{f}$ soll nur gelten, wenn auch $b = b'$. \hintIllustration
+		\end{enumerate}
+	\end{block}
+	\begin{itemize}[<+(1)->]
+		\item Eigenschaft \ref{second} rechtfertigt die Notation $f(a) = b$!
+		\item Diese Eigenschaften müsst ihr generell nicht beweisen.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Injektiv, surjektiv, bijektiv}
+	Im folgenden sei $f: A \rightarrow B$ eine Funktion.
+	\begin{block}{Def. injektiv}
+		Wir nennen $f$ \textit{injektiv}, wenn für alle $a, b \in A$
+		$$
+			a \neq b \implies f(a) \neq f(b) \quad \mbox{\hintIllustration}
+		$$
+		\only<+(1)->{
+			oder indirekt
+			$$
+				f(a) = f(b) \implies a = b.
+			$$
+		}
+	\end{block}
+	\only<+(1)->{
+		\begin{block}{Def. surjektiv}
+			Wir nennen $f$ \textit{surjektiv}, wenn es für jedes $b \in B$ ein $a \in A$ gibt, so dass $f(a) = b$. \hintIllustration
+		\end{block}
+	}
+	\begin{itemize}[<+(1)>]
+		\item Wie schreibe ich die Menge aller $a \in A$, die auf ein $b \in B$ gemappt werden?
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+	\begin{block}{Def. bijektiv}
+		Wir nennen $f$ \textit{bijektiv}, wenn $f$ injektiv und $f$ surjektiv.
+	\end{block}
+	Das heisst, wir können alle Elemente in den zwei Mengen perfekt miteinander aufpaaren. Irgendwie sind beide Mengen das gleiche, einfach in anderer Darstellung. \hintIllustration
+\end{frame}
+
+\begin{frame}
+	\frametitle{Abzählbarkeit}
+	\only<+(1)->{
+		\begin{block}{Def. abzählbar}
+			Wir nennen eine Menge $A$ \textit{abzählbar} (\textit{countable}), wenn $A \preceq \mathbb{N}$, also wenn es eine \textbf{injektive} Funktion $f: A \rightarrow \mathbb{N}$ gibt.
+
+			\only<+(1)->{
+				Ist $A$ irgendwie ``zu gross'' und es gibt keine solche Injektion $f$, dann nennen wir $A$ \textit{überabzählbar} (\textit{uncountable}).
+			}
+		\end{block}
+	}
+
+	\only<+(1)->{
+		\begin{block}{Def. gleichmächtig}
+			Wir nennen zwei Mengen $A, B$ \textit{gleichmächtig} (\textit{equinumerous}), wenn $A \sim B$, also wenn es eine \textit{bijektive} Funktion $f: A \rightarrow B$ gibt.
+		\end{block}
+	}
+
+	\only<+(1)->{
+		\begin{Beispiel}
+			Die Menge aller Primzahlen $P$ ist gleichmächtig zu $\mathbb{N}$. (Obwohl $P \subseteq \mathbb{N}$!)
+		\end{Beispiel}
+	}
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Abzählbarkeit}
+	\framesubtitle{Die wichtigsten Lemmas}
+	\only<+(1)->{
+		\begin{Lemma}
+			$A$ abzählbar $\iff$ $A$ endlich oder $A \sim \mathbb{N}$
+		\end{Lemma}
+	}
+	\only<+(1)->{
+		Um $A \sim \mathbb{N}$ zu zeigen brauchen wir also meistens nur eine Injektion zu finden.
+	}
+
+	\only<+(1)->{
+		Seien $A_1, A_2, \ldots, A_n$ abzählbar.
+		\begin{Lemma}[Kartesisches Produkt]
+			$A_1 \times A_2 \times \ldots \times A_n$ ist abzählbar.
+		\end{Lemma}
+	}
+
+	\only<+(1)->{
+		\begin{Lemma}[Vereinigung]
+			$\bigcup_{i = 1}^{\infty} A_i$ ist abzählbar.
+		\end{Lemma}
+	}
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Abzählbarkeit}
+	\framesubtitle{Abzählbare Mengen}
+	\begin{itemize}[<+(1)->]
+		\item $\mathbb{N}$, Menge der (un)geraden Zahlen, Menge der Primzahlen, usw.
+		\item $\{0, 1\}^*$ (alle endliche Binärstrings: $\{\epsilon, 0, 1, 00, 11, \ldots\}$)
+		\item $\mathbb{N} \times \mathbb{N}$, $\{0, 1\}^* \times \{0, 1\}^*$
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Abzählbarkeit}
+	\framesubtitle{Überabzählbare Mengen}
+	\begin{itemize}[<+(1)->]
+		\item $\{0, 1\}^\infty$
+		\item $(0, 1), \mathbb{R}$
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Abzählbarkeit}
+	\framesubtitle{Abzählbarkeit zeigen}
+	Wie überzeugen wir uns davon, dass eine Menge $S$ abzählbar ist?
+	\begin{enumerate}[a]
+		\item<+(1)-> Wir wenden direkt eines der Lemmas und die uns bereits bekannten abzählbare Mengen an.
+
+			\only<+(1)->{
+				Beispiele:
+				\begin{itemize}[<+(1)->]
+					\item Ist $\mathbb{Z}$ abzählbar? \only<+(1)->{\textcolor{Green}{Ja. $\mathbb{Z} \sim \mathbb{N} \times \{0, 1\}$}}
+					\item Ist $\mathbb{Q}$ abzählbar? \only<+(1)->{\textcolor{Green}{Ja. $\mathbb{Q} = \mathbb{Z} \times (\mathbb{Z} \setminus \{0\})$}}
+				\end{itemize}
+			}
+		\item<+(1)-> Nach Definition: Wir konstruieren eine Injektion $f: S \rightarrow \mathbb{N}$. (Und beweisen auch, dass $f$ injektiv ist!)
+	\end{enumerate}
+	\only<+(1)->{
+		Bei Aufgaben müsst ihr \textbf{immer} eine konkrete Injektion angeben.
+	}
+\end{frame}
+
+{
+\beamerblack
+
+\begin{frame}
+	\frametitle{Aufgabe \excount{} (Kartesisches Produkt abzählbar, Fall $n = 2$)}
+	Seien $A_1, A_2$ abzählbar. Beweise: $A_1 \times A_2$ ist abzählbar. \\~
+
+	Tipp: Verwende, dass jede natürliche Zahl eine eindeutige Primfaktorzerlegung hat.
+\end{frame}
+
+}
+
+{
+\beamerblack
+
+\begin{frame}
+	\frametitle{Übungsaufgabe (Lösung in den Notizen)}
+	Sei $A_i$ abzählbar für alle $i \in \mathbb{N}$.  Beweise:
+	$$\bigcup_{i = 1}^{\infty} A_i \mbox{ ist abzählbar}.$$ \\~
+
+	Tipp: Benutze wieder die Strategie mit den Primzahlen.
+\end{frame}
+
+}
+
+\begin{frame}
+	\frametitle{Überabzählbarkeit zeigen}
+	Wie zeigen wir, dass eine Menge $S$ \textbf{über}abzählbar ist?
+
+	\begin{Lemma}[nicht im Skript]
+		Sei $S$ eine Menge und $U$ überabzählbar. Wenn es eine Injektion $f: U \rightarrow S$ gibt, dann ist $S$ auch überabzählbar.
+	\end{Lemma}
+	(Beweis in Notizen.)
+
+	\only<+(1)-4>{
+		Wir suchen uns also eine überabzählbare Menge $U$ aus (meistens $\{0, 1\}^\infty$) und konstruieren eine Injektion $f: U \rightarrow S$. (Und beweisen auch, dass $f$ injektiv ist!)
+	}
+
+	\only<+(1)->{
+		Beispiel:
+		\begin{itemize}[<+(1)->]
+			\item Ist $\mathcal{P}(\mathbb{N})$ abzählbar? \only<+(1)->{\textcolor{Red}{Nein! Aus jeder Binärsequenz $b \in \{0, 1\}^\infty$ können wir eine eindeutige Teilmenge von $\mathbb{N}$ konstruieren: $\{i \in \mathbb{N} \mid b_i = 1\}$. Wir haben damit eine Injektion von einer überabzählbaren Menge ($\{0, 1\}^\infty$) nach $\mathcal{P}(\mathbb{N})$. }}
+			\item Ist $\{0, 1\}^\mathbb{N}$ (die Menge aller Funktionen $f: \mathbb{N} \rightarrow \{0, 1\}$) abzählbar? Tipp: gleiche Strategie. \only<+(1)->{\textcolor{Red}{Nein! Eine Binärsequenz können wir als eine Funktion $f: \mathbb{N} \rightarrow \{0, 1\}$ sehen.}}
+		\end{itemize}
+	}
+\end{frame}
+
+
+{
+
+\beamerblack
+
+\begin{frame}
+	\frametitle{Aufgabe \excount{} (Abzählbarkeit zeigen)}
+	Beweise, dass $\{0, 1\}^\infty$ überabzählbar ist.
+\end{frame}
+
+}
+
+{
+
+\beamerblack
+
+\begin{frame}
+	\frametitle{Aufgabe \excount{}}
+	Beweise oder widerlege: Die Menge aller Äquivalenzrelationen auf $\mathbb{N}$ ist abzählbar.
+\end{frame}
+
+}
+
+{
+
+\beamerblack
+
+\begin{frame}
+	\frametitle{Aufgabe \excount{} (Bonus von meinem Jahr)}
+	Consider the set
+	$$
+		S = \left \{f \in \mathbb{N}^\mathbb{N} \mid \forall x \forall y \; \Big (x \le y \rightarrow (f(x) \le f(y) \land f(y) - f(x) \le y - x) \Big ) \right \}.
+	$$
+	Prove or disprove that the set $S$ is countable.
+\end{frame}
+
+}
+
+\begin{frame}
+	\frametitle{Hilbert's Hotel}
+	David Hilbert is the manager of a hotel with an \textbf{infinite} number of rooms, numbered by
+	$1, 2, 3, \ldots$, all of which are occupied. His job is to move around the guests in the hotel to accommodate new guests. \\~
+\end{frame}
+
+{
+\beamerblack
+\begin{frame}
+	\frametitle{Hilbert's Hotel}
+	\framesubtitle{Subtask a)}
+	Roger Federer comes to the hotel and asks whether there is a free room for him.
+	Hilbert cannot turn away the distinguished guest and promises him a room. To make
+	it possible, he tells some of the other guests to change their rooms. How can he do
+	this, so that at the end every current guest still has a room?
+\end{frame}
+}
+
+{
+\beamerblack
+\begin{frame}
+	\frametitle{Hilbert's Hotel}
+	\framesubtitle{Subtask b)}
+	One day, at the door of the hotel arrives a bus with an infinite number of
+	passengers, numbered by $1, 2, 3, \ldots$, each of whom would like a single room. How
+	can Hilbert accommodate all newly arrived guests, so that all current guests still have
+	a place to stay?
+\end{frame}
+}
+
+{
+\beamerblack
+\begin{frame}
+	\frametitle{Hilbert's Hotel}
+	\framesubtitle{Subtask c)}
+	An infinite number of buses, numbered by $1, 2, 3, \ldots$, each carrying an in-
+	finite number of passengers, arrives at the hotel. How can Hilbert deal with this
+	situation?
+\end{frame}
+}
+
+\end{document}
