@@ -78,6 +78,7 @@
           >
           (Zusammenfassung aller Themen + Aufgaben)
         </li>
+        <li><a :href="$static('/dm2022/spick.pdf')">Mein Spick</a></li>
       </ul>
     </collapsible-header>
 
