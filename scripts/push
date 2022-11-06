@@ -1,4 +1,5 @@
 #!/usr/bin/bash
+
 echo -e "\e[105m>>> Generating static content\e[0m"
 NUXT_APP_BASE_URL=/~aellison/ yarn generate
 echo -e "\e[105m>>> Syncing static content\e[0m"
@@ -6,6 +7,6 @@ rsync -rltgoDzhO --delete -e ssh aellison@slab1.ethz.ch:/nas/aellison/homepage d
 
 read -p "Open in firefox? " yn
 case $yn in
-    [Yy]* ) firefox https://n.ethz.ch/~aellison/;
-    * ) exit;;
+    [Yy]* ) firefox https://n.ethz.ch/~aellison/;;
+    *) ;;
 esac
