@@ -6,7 +6,7 @@
         Montag / Mittwoch — 14-16 —
         <a
           target="_blank"
-          href="https://www.rauminfo.ethz.ch/Rauminfo/grundrissplan.gif?gebaeude=CAB&geschoss=G&raumNr=56&lang=de"
+          href="https://www.rauminfo.ethz.ch/Rauminfo/grundrissplan.gif?gebaeude=ETA&geschoss=F&raumNr=5&lang=de"
         >
           ETA F 5
         </a>

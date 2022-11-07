@@ -3,11 +3,16 @@
     <h3>Info</h3>
     <p>
       Diese Woche kann ich leider keine Übungsstunde geben.
-      <a href="https://crypto.ethz.ch/~mcmurtry/" target="_blank"
-        >Eleanor McMurtry</a
-      >
-      wird mich vertreten <u>auf Englisch</u>. Sie war mein TA letztes Jahr und
-      sie ist sehr sehr gut!
+      <s
+        >Eleanor McMurtry wird mich vertreten <u>auf Englisch</u>. Sie war mein
+        TA letztes Jahr und sie ist sehr sehr gut!
+      </s>
+      Die Stellvertretung ist leider krank.
+      <br />
+      <v-alert type="error">
+        Ihr müsst in die Übungsstunde von <b>Fabio Banfi</b> (G-06) in CHN E 42!
+        Sorry 😕
+      </v-alert>
     </p>
 
     <p>
