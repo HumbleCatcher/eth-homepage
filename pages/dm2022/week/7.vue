@@ -16,8 +16,24 @@
     </p>
 
     <h3>Priorität bei den Aufgaben</h3>
-    Dieses Mal sind alle Aufgaben relevant und eine gute Vorbereitung für die
-    Prüfung. Schaut, dass ihr so viele Aufgaben löst wie möglich!
+    <p>
+      Dieses Mal sind alle Aufgaben relevant und eine gute Vorbereitung für die
+      Prüfung. Schaut, dass ihr so viele Aufgaben löst wie möglich!
+    </p>
+    <p>
+      Wenn ihr bei Aufgabe 7.5 b) mit dem Hint nicht gerade viel anfangen könnt,
+      dann findet ihr im
+      <a
+        href="https://cdn.vis.ethz.ch/luk/pvw_diskretemathematik.pdf"
+        target="_blank"
+        >PVW Skript</a
+      >
+      eine ausführliche Erklärung dazu, wie man das berechnet (Abschnitt 2.3, S.
+      27). Auch die anderen Abschnitte in Kapitel 2 könnten für euch hilfreich
+      sein. In Abschnitt 2.10, S. 32 wird noch erklärt, wie man etwas mit dem
+      chinesischen Restsatz berechnet. Ihr findet auch zu allen Themen Aufgaben
+      mit Lösungen.
+    </p>
   </default-layout>
 </template>
 
