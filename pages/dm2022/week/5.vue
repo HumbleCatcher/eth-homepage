@@ -40,15 +40,18 @@
         <v-alert class="mb-4" type="success" border="left"
           >Dieser Challenge wurde erfolgreich von
           <pre class="d-inline">toffermann</pre>
-          gelöst. Gratuliere!</v-alert
-        >
+          gelöst. Gratuliere!
+        </v-alert>
+
         Sei <span v-html="$katex('\\rho')" /> eine Relation auf einer Menge
         <span v-html="$katex('A')" />. Beweise:
         <p class="text-center">
           <span v-html="$katex('\\rho')" /> transitiv
           <span v-html="$katex('\\implies \\rho^* = \\rho')" />
         </p>
-        <p></p>
+        <p>
+          <a :href="$static('/dm2022/week5/challenge_solution.pdf')">Lösung</a> (von <pre class="d-inline">toffermann</pre>)
+        </p>
       </v-card-text>
     </v-card>
   </default-layout>
