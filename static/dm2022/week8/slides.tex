@@ -1,0 +1,207 @@
+\documentclass[t,dvipsnames]{beamer}
+\usepackage{cancel}
+\usepackage{mathtools}
+\graphicspath{{./assets/}}
+
+
+
+\title{Diskrete Mathematik - Woche 8}
+\author{Andreas Ellison}
+\usetheme{Madrid}
+\setbeamertemplate{navigation symbols}{}
+\DeclareMathOperator{\isless}{less}
+
+\DeclareMathOperator{\defn}{\stackrel{\text{def}}{\iff}}
+\DeclareMathOperator{\defneq}{\stackrel{\text{def}}{\quad = \quad}}
+\DeclareMathOperator{\idr}{id}
+\newcommand{\isrel}[3]{#1 \, #3 \, #2}
+
+
+\DeclareMathOperator{\lcm}{lcm}
+\DeclareMathOperator{\ord}{ord}
+
+\newcommand{\beamerblack}{
+\setbeamercolor{frametitle}{fg=white}
+\setbeamercolor{frametitle}{bg=black}
+\setbeamercolor{background canvas}{bg=black}
+\setbeamercolor{normal text}{fg=white}
+\usebeamercolor[fg]{normal text}
+\setbeamertemplate{footline}{}
+\setbeamertemplate{itemize items}[circle]
+\setbeamercolor{itemize item}{fg=white,bg=white}
+\setbeamertemplate{enumerate items}[default]
+\setbeamercolor{enumerate items}{fg=white,bg=white}
+\setbeamercolor{itemize item}{fg=white,bg=white}
+}
+
+\newcounter{excounter}
+\newcommand{\excount}{\stepcounter{excounter} \theexcounter{}}
+
+\newcommand{\hintIllustration}{\textcolor{Magenta}{(Bild)}}
+
+
+\begin{document}
+{
+\beamerblack
+\begin{frame}
+	\frametitle{Challenge!}
+	Seien $a_1, a_2, \ldots, a_n \in \mathbb{Z}$.
+	Gebe einen $\mathcal{O}(n^2)$ Algorithmus
+	an, der eine zusammenhängende Teilfolge
+	$a_i, a_{i + 1}, \ldots, a_j$ findet mit
+	$1 \le i \le j \le n$, so dass
+	$n \; \vert \; (a_i + a_{i + 1} + \ldots + a_j)$.
+
+	Eine genaue Laufzeitanalyse vom angegebenem Algorithmus ist nicht
+	nötig. \\~
+
+	\textit{Tipp:} Betrachte die Summen
+	$S_i \coloneqq \sum_{k=1}^{i} a_k$ für $1 \le i \le n$.
+\end{frame}
+}
+
+{
+\beamerblack
+\begin{frame}
+	\frametitle{Monoid-/Gruppeneigenschaften überprüfen}
+	Für jede der folgenden Algebren, entscheide ob sie ein Monoid, eine Gruppe oder keines davon ist:
+	\begin{itemize}
+		\item
+		      $\langle \mathbb{Z}; - \rangle$
+		\item $\langle \mathcal{P}(\mathbb{N}); \cap \rangle$
+	\end{itemize}
+	\only<+(1)->{
+		Das heisst, überprüfe
+		\begin{enumerate}[1]
+			\item \label{one} Ist die Operation assoziativ?
+			\item \label{2} Gibt es ein neutrales Element?
+		\end{enumerate}
+		Falls 1 oder 2 scheitert, dann sind wir fertig. \\~
+
+		\only<+(1)->{
+			Sonst haben wir schon ein Monoid. Dann bleibt noch zu überprüfen
+			\begin{enumerate}[3]
+				\item Besitzt jedes Element ein Inverses?
+			\end{enumerate}
+		}
+	}
+\end{frame}
+}
+
+{
+\beamerblack
+\begin{frame}
+	\frametitle{Subgroups}
+	Let $\langle G; *, \hat{} \,, e \rangle$ be a group and define
+	$$
+		H = \{a \in G \mid \forall b \in G \; a * b = b * a\}
+	$$
+	(i.e. all commutative elements of $G$).
+	Prove that $H$ is a subgroup of $G$. \\~
+
+	\only<+(1)->{
+		Das heisst, wir müssen zeigen für alle $a, b \in H$
+		\begin{enumerate}[1]
+			\item $e \in H$
+			\item $a * b \in H$ (Operationen in $H$ bleiben auch in $H$, $H$ ist \textit{abgeschlossen} (\textit{closed}) bezüglich $*$)
+			\item $\hat{a} \in H$ ($H$ abgeschlossen bezüglich $\hat{} \,$)
+		\end{enumerate}
+	}
+
+\end{frame}
+}
+
+{
+\beamerblack
+\begin{frame}
+	\frametitle{Mehr Subgroups}
+	Let $H, H'$ subgroups of $G$. Prove
+	$$
+		H \cup H' \mbox{ is a subgroup of } G \implies H \subseteq H' \mbox{ or } H' \subseteq H.
+	$$
+
+	\only<+(1)->{
+		\textit{Trick}: Aussagen der Form ``$S$ oder $T$'' kann man beweisen, indem man ``nicht $S \implies T$'' beweist.
+	}
+\end{frame}
+}
+
+{
+\beamerblack
+\begin{frame}
+	\frametitle{Nützliche Tatsache}
+	Beweise:
+	$$
+		g \mbox{ ist ein ``generator'' von }  \langle \mathbb{Z}_n; \oplus \rangle \iff \gcd(n, g) = 1.
+	$$
+
+	Folgendes könnte dabei hilfreich sein
+	$$
+		\lcm(a, b) \cdot \gcd(a, b) = a \cdot b.
+	$$
+\end{frame}
+}
+
+
+\begin{frame}
+	\begin{Definition}[Ordnung]
+		Sei $G$ eine Gruppe und $a \in G$. Dann ist $\ord(a)$ das kleinte $m \ge 1$, so dass $a^m = e$.
+	\end{Definition}
+
+	\only<+(1)->{
+		\begin{Lemma}
+			$\langle a \rangle = \{e, a, a^2, \ldots, a^{\ord(a) - 1}\}$ ist die kleinste Subgroup mit $a$.
+		\end{Lemma}
+	}
+
+	\only<+(1)->{
+		\begin{theorem}[Lagrange]
+			Sei $H$ ein Subgroup von $G$. Dann gilt $|H| \mid |G|$.
+		\end{theorem}
+	}
+
+	\only<+(1)->{
+		\begin{Lemma}
+			Für alle $a \in G$ gilt: $\ord(a) \mid G$.
+		\end{Lemma}
+	}
+
+	\only<+(1)->{
+		\begin{Lemma}
+			Für alle $a \in G$ gilt: $a^{|G|} = e$.
+		\end{Lemma}
+	}
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Next Level nützliche Tatsache}
+	\begin{Lemma}
+		Sei $g_1$ ein Generator von $\mathbb{Z}_m$ und $g_2$ ein Generator von $\mathbb{Z}_n$. Dann gilt
+		$$
+			\gcd(m, n) = 1 \iff (g_1, g_2) \mbox{ ein Generator von } \langle \mathbb{Z}_m; \oplus \rangle \times \langle \mathbb{Z}_n; \oplus \rangle.
+		$$
+	\end{Lemma}
+\end{frame}
+
+{
+\beamerblack
+\begin{frame}
+	\frametitle{Beweisidee (eine Richtung)}
+	Wir beweisen eine abgeschwächte Form davon:
+	$$
+		\gcd(m, n) = 1 \implies \langle (1, 1) \rangle = \langle \mathbb{Z}_m; \oplus \rangle \times \langle \mathbb{Z}_n; \oplus \rangle
+	$$
+
+\end{frame}
+}
+
+{
+\beamerblack
+\begin{frame}
+	\frametitle{Wieder Subgroups}
+	Liste alle Subgroups von $\langle \mathbb{Z}_3; \oplus \rangle \times \langle \mathbb{Z}_4; \oplus \rangle$ auf.
+
+\end{frame}
+}
+\end{document}
