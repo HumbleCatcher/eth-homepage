@@ -57,7 +57,7 @@
             v-html="
               $katex('n \\; \\vert \\; (a_i + a_{i + 1} + \\ldots + a_j)')
             "
-          />. Eine genaue Laufzeitanalyse vom angegebenem Algorithmus ist nicht
+          />. Eine genaue Laufzeitanalyse vom angegebenen Algorithmus ist nicht
           nötig.
         </p>
         <p>
