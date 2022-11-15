@@ -26,7 +26,7 @@
     </ul>
     <h3 id="challenge">Challenge!</h3>
     Die ersten <i>drei</i> Personen (eingeschrieben in Diskrete Mathematik
-    HS22), die mir einen <b> vollständigen</b> und <b> korrekten</b> Beweis für
+    HS22), die mir eine <b> vollständige</b> und <b> korrekte</b> Lösung für
     untenstehende Aufgabe per
     <a href="mailto:aellison@student.ethz.ch">Email</a>, bis spätestens am
     <b>28.11.2022 16:00 Uhr</b>, schicken, bekommen von mir
@@ -37,7 +37,7 @@
     </p>
     geschenkt. Die Email MUSS den Betreff "<i
       >[DM22] Challenge Divisible Subsequence</i
-    >" enthalten. Sonst garantiere ich nicht, dass ich mir den Beweis anschaue.
+    >" enthalten. Sonst garantiere ich nicht, dass ich mir die Abgabe anschaue.
     Bitte schau dir deine Abgabe gut an, bevor du ihn abschickst und überprüfe
     ob unten immer noch steht, die Challenge sei noch nicht vorbei.
     <v-card class="my-5">
