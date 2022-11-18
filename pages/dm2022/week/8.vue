@@ -49,8 +49,8 @@
         <p>
           Seien
           <span v-html="$katex('a_1, a_2, \\ldots, a_n \\in \\mathbb{Z}')" />.
-          Gebe einen <span v-html="$katex('\\mathcal{O}(n^2)')" /> Algorithmus
-          an, der eine zusammenhängende Teilfolge
+          Gebe einen <span v-html="$katex('\\mathcal{O}(n)')" /> Algorithmus an,
+          der eine zusammenhängende Teilfolge
           <span v-html="$katex('a_i, a_{i + 1}, \\ldots, a_j')" /> findet mit
           <span v-html="$katex('1 \\le i \\le j \\le n')" />, so dass
           <span
