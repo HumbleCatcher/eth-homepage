@@ -1,0 +1,210 @@
+\documentclass[t,dvipsnames]{beamer}
+\usepackage{cancel}
+\usepackage{mathtools}
+\graphicspath{{./assets/}}
+
+
+
+\title{Diskrete Mathematik - Woche 8}
+\author{Andreas Ellison}
+\usetheme{Madrid}
+\setbeamertemplate{navigation symbols}{}
+\DeclareMathOperator{\isless}{less}
+
+\DeclareMathOperator{\defn}{\stackrel{\text{def}}{\iff}}
+\DeclareMathOperator{\defneq}{\stackrel{\text{def}}{\quad = \quad}}
+\DeclareMathOperator{\idr}{id}
+\newcommand{\isrel}[3]{#1 \, #3 \, #2}
+
+
+\DeclareMathOperator{\lcm}{lcm}
+\DeclareMathOperator{\ord}{ord}
+
+\newcommand{\beamerblack}{
+\setbeamercolor{frametitle}{fg=white}
+\setbeamercolor{frametitle}{bg=black}
+\setbeamercolor{background canvas}{bg=black}
+\setbeamercolor{normal text}{fg=white}
+\usebeamercolor[fg]{normal text}
+\setbeamertemplate{footline}{}
+\setbeamertemplate{itemize items}[circle]
+\setbeamercolor{itemize item}{fg=white,bg=white}
+\setbeamertemplate{enumerate items}[default]
+\setbeamercolor{enumerate items}{fg=white,bg=white}
+\setbeamercolor{itemize item}{fg=white,bg=white}
+}
+
+\newcounter{excounter}
+\newcommand{\excount}{\stepcounter{excounter} \theexcounter{}}
+
+\newcommand{\hintIllustration}{\textcolor{Magenta}{(Bild)}}
+
+
+\begin{document}
+{
+\beamerblack
+\begin{frame}
+	\frametitle{Challenge!}
+	Seien $a_1, a_2, \ldots, a_n \in \mathbb{Z}$.
+	Gebe einen $\mathcal{O}(n)$ Algorithmus
+	an, der eine zusammenhängende Teilfolge
+	$a_i, a_{i + 1}, \ldots, a_j$ findet mit
+	$1 \le i \le j \le n$, so dass
+	$n \; \vert \; (a_i + a_{i + 1} + \ldots + a_j)$.
+
+	Eine genaue Laufzeitanalyse vom angegebenem Algorithmus ist nicht
+	nötig. \\~
+
+	\textit{Tipp:} Betrachte die Summen
+	$S_i \coloneqq \sum_{k=1}^{i} a_k$ für $1 \le i \le n$.
+\end{frame}
+}
+
+\begin{frame}
+	\frametitle{Die Eulerfunktion}
+	\framesubtitle{Recap}
+	Die Eulerfunktion $\varphi$ gibt uns die Anzahl Elemente in $\mathbb{Z}_n$, die teilerfremd sind zu $n$.
+	\only<+(1)->{
+		\begin{Lemma}
+			Sei $n = \prod_{i=1}^r p_i^{e_i}$ die Primfaktorzerlegung einer Zahl $n$. Dann ist
+			$$
+				|\mathbb{Z}_n^*| = \varphi(n) = \prod_{i=1}^{r} (p_i - 1) p_i^{e_i - 1}.
+			$$
+		\end{Lemma}
+		In anderen Worten gibt uns $\varphi(n)$ die Ordnung der multiplikativen Gruppe $\mathbb{Z}_n^*$.
+	}
+	\only<+(1)-> {
+
+		\begin{Beispiel}
+			Sei $n = 18 = 2 \cdot 3^2$. Dann ist $\varphi(n) =$ \only<+(1)>{$(2 - 1)2^0 \cdot (3 - 1)3^{1} = 6$.}
+		\end{Beispiel}
+	}
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Die Eulerfunktion}
+	\framesubtitle{Recap}
+	Wir erinnern uns an folgendes wichtige Lemma:
+	\only<+(1)->{
+		\begin{Lemma}
+			Sei $G$ eine endliche Gruppe mit Neutralelement $e$. Dann gilt
+			für alle $a \in G$:
+			$$a^{|G|} = e$$
+		\end{Lemma}
+	}
+
+	\only<+(1)->{
+		Daraus folgt ganz einfach:
+		\begin{Lemma}
+			Für alle $a \in \mathbb{Z}_n^*$:
+			$$
+				a^{\varphi(n)} \equiv_n 1
+			$$
+			\only<+(1)>{
+				und für eine Primzahl $p$, für alle $1 \le a < p$:
+				$$
+					a^{p - 1} \equiv_p 1
+				$$
+			}
+		\end{Lemma}
+	}
+\end{frame}
+
+
+
+{
+\beamerblack
+\begin{frame}
+	\frametitle{Aufgabe \excount}
+	Let $c = 7$ be a message encrypted with the public key pair $(n, e)$. Find both the secret key $d$ and the original message $m$.
+\end{frame}
+}
+
+\begin{frame}
+	\frametitle{Modulare Arithmetik Tricks}
+	Innerhalb von $R_n(\ldots)$ dürfen wir alles machen, was wir wollen, solange wir die Kongruenz Modulo $n$ der Terme nicht verändern, \textbf{ausser in den Exponenten.}
+	\begin{itemize}[<+(1)->]
+		\item $R_3(5^3) = R_3(R_3(5)^3) = R_3(2^3) = R_3(8) = 2$
+		\item $R_3(5^3) \neq R_3(5^{R_3(3)}) = R_3(5^0) = 1$
+	\end{itemize}
+\end{frame}
+
+{
+\beamerblack
+\begin{frame}
+	\frametitle{Modulare Arithmetik Tricks}
+	\framesubtitle{Kongruenz zu 1}
+	Berechne
+	$$
+		R_{18}(37^{42}) = \only<+(1)->{1}
+	$$
+
+\end{frame}
+}
+
+{
+\beamerblack
+\begin{frame}
+	\frametitle{Modulare Arithmetik Tricks}
+	\framesubtitle{Der ``-'' Trick}
+	Berechne
+	$$
+		R_3(5^{2022}) = \only<+(1)->{1}
+	$$
+
+\end{frame}
+}
+
+
+
+{
+\beamerblack
+\begin{frame}
+	\frametitle{Modulare Arithmetik Tricks}
+	\framesubtitle{Fermat's Little Theorem}
+	Berechne
+	$$
+		R_7(1984^6) = \only<+(1)->{1}
+	$$
+
+\end{frame}
+}
+
+{
+\beamerblack
+\begin{frame}
+	\frametitle{Modulare Arithmetik Tricks}
+	\framesubtitle{Fermat's Little Theorem}
+	Berechne
+	$$
+		R_{11}(2^{1408}) = \only<+(1)->{3}
+	$$
+
+\end{frame}
+}
+
+
+{
+\beamerblack
+\begin{frame}
+	\frametitle{Modulare Arithmetik Tricks}
+	\framesubtitle{Fermat's Little Theorem}
+	Berechne
+	$$
+		R_{11}(2^{3^{40}}) = \only<+(1)->{2}
+	$$
+
+\end{frame}
+}
+
+{
+\beamerblack
+\begin{frame}[c]
+	\begin{center}
+		\Huge Kahoot!
+	\end{center}
+\end{frame}
+}
+
+\end{document}
