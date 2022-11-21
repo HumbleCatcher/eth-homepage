@@ -49,8 +49,12 @@
     <h3>Links</h3>
     <ul>
       <li>
-        <a :href="$static('/dm2022/week9/notes.pdf')">Meine Notizen</a> und
-        <a :href="$static('/dm2022/week9/slides.pdf')">die Slides</a>
+        <a :href="$static('/dm2022/week9/notes.pdf')">Meine Notizen</a>,
+        <a :href="$static('/dm2022/week9/slides.pdf')">die Slides</a> und
+        <a
+          href="https://create.kahoot.it/share/woche-9/18f15ba3-3ded-4dc2-b340-93e109418375"
+          >das Kahoot</a
+        >
       </li>
     </ul>
   </default-layout>
