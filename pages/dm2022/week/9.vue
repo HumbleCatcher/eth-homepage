@@ -56,6 +56,9 @@
           >das Kahoot</a
         >
       </li>
+      <li>
+        <a href="https://forms.gle/dVSDnP4JywHXzY2c8"> Feedback Formular </a>
+      </li>
     </ul>
   </default-layout>
 </template>
