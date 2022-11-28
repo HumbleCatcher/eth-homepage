@@ -1,0 +1,245 @@
+\documentclass[t,dvipsnames]{beamer}
+\usepackage{cancel}
+\usepackage{mathtools}
+\graphicspath{{./assets/}}
+
+
+
+\title{Diskrete Mathematik - Woche 10}
+\author{Andreas Ellison}
+\usetheme{Madrid}
+\setbeamertemplate{navigation symbols}{}
+\DeclareMathOperator{\isless}{less}
+
+\DeclareMathOperator{\defn}{\stackrel{\text{def}}{\iff}}
+\DeclareMathOperator{\defneq}{\stackrel{\text{def}}{\quad = \quad}}
+\DeclareMathOperator{\idr}{id}
+\newcommand{\isrel}[3]{#1 \, #3 \, #2}
+
+
+\DeclareMathOperator{\lcm}{lcm}
+\DeclareMathOperator{\ord}{ord}
+
+\newcommand{\beamerblack}{
+\setbeamercolor{frametitle}{fg=white}
+\setbeamercolor{frametitle}{bg=black}
+\setbeamercolor{background canvas}{bg=black}
+\setbeamercolor{normal text}{fg=white}
+\usebeamercolor[fg]{normal text}
+\setbeamertemplate{footline}{}
+\setbeamertemplate{itemize items}[circle]
+\setbeamercolor{itemize item}{fg=white,bg=white}
+\setbeamertemplate{enumerate items}[default]
+\setbeamercolor{enumerate items}{fg=white,bg=white}
+\setbeamercolor{itemize item}{fg=white,bg=white}
+}
+
+\newcounter{excounter}
+\newcommand{\excount}{\stepcounter{excounter} \theexcounter{}}
+
+\newcommand{\hintIllustration}{\textcolor{Magenta}{(Bild)}}
+\newcommand{\domZ}{\mathbb{Z}}
+\newcommand{\domQ}{\mathbb{Q}}
+\newcommand{\domR}{\mathbb{R}}
+
+
+\begin{document}
+
+\begin{frame}
+	\frametitle{Wieso Körper?}
+	Mit Ringen haben wir etwas analoges zu $\mathbb{Z}$ oder $\mathbb{Z}_n$ gefunden. Wir können addieren, subtrahieren, multiplizieren und bekommen Eigenschaften wie
+	\begin{itemize}[<+(1)->]
+		\item $0a = 0$
+		\item $(-1)b = -b$
+		\item $(-a)(-b) = ab$
+		\item $a + b = b \implies a = 0$
+	\end{itemize}
+
+	\only<+(1)->{Aber viele wichtige Eigenschaften und Operationen wie in $\mathbb{R}$ oder $\mathbb{Q}$ haben wir nicht:
+		\begin{itemize}[<+(1)->]
+			\item Wir können nicht dividieren (angenommen $a \neq 0$):
+			      $$
+				      ax = b \implies x = \frac{b}{a}
+			      $$
+			\item $a \cdot b = 0 \implies a = 0 $ oder $b = 0$ (gilt nur in einem ``integral domain'')
+			\item $\deg(p(x) \cdot q(x)) = \deg(p(x)) + \deg(q(x))$
+		\end{itemize}
+	}
+\end{frame}
+
+\begin{frame}
+	Daher:
+	\begin{Definition}[5.26.]
+		Ein Körper $F$ ist ein nichttrivialer kommutativer Ring mit $F^* = F \setminus \{0\}$. (Das heisst, jedes Element ausser 0 hat ein Inverses bezüglich Multiplikation.) \\~
+
+		\only<+(1)->{
+			Anders gesagt ist $\langle F \setminus \{0\}; \cdot, ^{-1}, 1 \rangle$ eine Gruppe.
+		}
+	\end{Definition}
+	\only<+(1)->{
+		Invertierbarkeit von $0$ verlangen wir nicht, aus dem gleichen Grund, wieso $\frac{1}{0}$ nicht definiert ist.
+	}
+
+\end{frame}
+
+\begin{frame}
+	\frametitle{Polynome über einem Körper}
+	Die Polynome $F[x]$ haben viele Eigenschaften, die uns an $\mathbb{Z}$ erinnern.
+
+	\only<+(1)->{
+		In $\mathbb{Z}$ können wir für jedes $a, m \in \domZ$, $a$ als
+		\begin{align*}
+			 & a = m \cdot q + r, \quad r = R_m(a)
+			\\ & \textcolor{Orange}{17 = 3 \cdot 5 + 2}
+		\end{align*}
+		schreiben.
+	}
+
+	\only<+(1)->{
+		Genauso wie wir in $\mathbb{Z}$ über Reste sprechen können, können wir dies auch in $F[x]$ tun!
+		\begin{Satz}[5.25.]
+			Für jedes $a(x), m(x) \in F[x]$ gibt es $q(x), r(x)$, so dass
+			$$
+				a(x) = m(x) \cdot q(x) + r(x), \quad r(x) = R_{m(x)}(a(x))
+			$$
+			und
+			$$
+				\deg(r(x)) < \deg(m(x)) \quad \text{(analog zu $r < |m|$ in $\mathbb{Z}$)}
+			$$
+		\end{Satz}
+	}
+\end{frame}
+
+{
+\beamerblack
+\begin{frame}
+	\frametitle{Polynomdivision in $\domZ_p$}
+	Teile $x^4 + 3x^2 + 4$ durch $4x^2 + 2x + 1$ in $\domZ_{5}$ mit Rest.
+\end{frame}
+}
+
+\begin{frame}
+	Mithile vom letzten Satz sehen wir, dass wir mit einem beliebigen Polynom $m(x)$ den Rest Modulo $m(x)$ betrachten können.
+	\only<+(1)->{
+
+		Analog also wie $\domZ_m$ können wir folgenden Ring definieren
+		\begin{Definition}[5.35.]
+			$$
+				F[x]_{m(x)} = \{a(x) \in F[x] \mid \deg(a(x)) < \deg(m(x)) \}
+			$$
+			Das sind alle möglichen Reste Modulo $m(x)$.
+		\end{Definition}
+	}
+\end{frame}
+
+{
+
+\beamerblack
+\begin{frame}
+	\frametitle{Modulo Arithmetik mit Polynomen}
+	Berechne
+	$$
+		(x + 3)(x + 2)
+	$$
+	in $\domZ_5[x]_{x^2 + 4}$
+\end{frame}
+
+}
+
+\begin{frame}
+	\frametitle{Irreduzible Polynome}
+	Genauso wie wir in $\domZ$ Primzahlen haben, haben wir in $F[x]$ \textit{irreduzible} Polynome.
+	\only<+(1)->{
+		\begin{Definition}[5.28.]
+			Ein Polynom $a(x) \in F[x]$ heisst \textit{irreduzibel}, wenn es keinen Teiler $m(x)$ hat mit $0 < \deg(m(x)) < \deg(a(x))$ (analog dazu, dass eine Primzahl keine Teiler zwischen $1$ und $p$ hat).
+		\end{Definition}
+	}
+	\only<+(1)->{
+		Und analog wie in $\domZ$ kann auch jedes Polynom $a(x) \in F[x]$ in irreduzible Polynome faktorisiert werden.
+	}
+\end{frame}
+
+\begin{frame}
+	Folgende Tatsache, der uns von Polynomen über $\mathbb{R}$ bekannt ist, hilft uns, Irreduzibilität zu überprüfen.
+	\only<+(1)->{
+		\begin{lemma}[5.29.]
+			$\alpha \in F$ ist eine Nullstelle von $a(x) \iff (x - \alpha) \mid a(x)$.
+		\end{lemma}
+	}
+\end{frame}
+
+{
+\beamerblack
+\begin{frame}
+	\frametitle{Irreduzibilität überprüfen}
+	Strategie um Teiler von $a(x)$ zu finden:
+	\begin{enumerate}
+		\item Überprüfe, ob $a(x)$ Nullstellen hat.
+		\item Überprüfe für alle \textbf{irreduziblen} Polynome mit Grad $1 < d \le \deg(a(x))/2$, ob sie $a(x)$ teilen.
+	\end{enumerate}
+
+	\only<+(1)->{
+		Sind die folgenden Polynome irreduzibel? Wenn nicht, dann faktorisiere sie
+		\begin{itemize}[<+(1)->]
+			\item $x^2 + 4$ in $\domZ_5$
+			\item $x^3 + 2x^2 + 1$ in $\domZ_3$
+			\item $x^4 + x^2 + 1$ in $\domZ_2$
+
+			      \textit{Hinweis}: $x^2 + x + 1$ ist das einzige irreduzible Polynom in $\domZ_2$ von Grad 2.
+		\end{itemize}
+	}
+\end{frame}
+}
+
+\begin{frame}
+	\frametitle{Modulo und Teilbarkeit kombiniert}
+	In $\domZ$ haben wir gesehen:
+	\begin{lemma}[4.18.]
+		$$
+			ax \equiv_m 1
+		$$
+		ist lösbar für $x \in \domZ_m$ genau dann, wenn $\gcd(a, m) = 1$.
+	\end{lemma}
+	\only<+(1)->{
+		Auch dazu haben wir auch ein Analogon:
+		\begin{lemma}[5.36.]
+			$$
+				a(x)b(x) \equiv_{m(x)} 1
+			$$
+			hat eine Lösung $b(x) \in F[x]$ genau dann, wenn $\gcd(a(x), m(x)) = 1$.
+		\end{lemma}
+	}
+\end{frame}
+
+\begin{frame}
+	Und wir können genauso von der multiplikativen Gruppe modulo $m(x)$ sprechen (vergleiche $\domZ^*_m$)
+	\begin{Lemma}[5.36.]
+		$$
+			F[x]^*_{m(x)} = \left \{a(x) \in F[x]_{m(x)} \mid \gcd(a(x), m(x)) = 1 \right \}
+		$$
+	\end{Lemma}
+\end{frame}
+
+{
+\beamerblack
+\begin{frame}
+	\frametitle{Der Ring $\domZ_p[x]_{m(x)}$}
+	Betrachte den Ring $\domZ_3[x]_{x^2 + 2}$.
+	\begin{enumerate}[<+(1)->]
+		\item Bestimme alle Nullteiler von $\domZ_3[x]_{x^2 + 2}$.
+		\item Liste alle Elemente der Gruppe $\domZ_3[x]^*_{x^2 + 2}$ auf.
+		\item Bestimme das Inverse von $2x$ in der Gruppe $\domZ_3[x]^*_{x^2 + 2}$.
+	\end{enumerate}
+
+\end{frame}
+}
+
+{
+\beamerblack
+\begin{frame}
+	\frametitle{``Verschachtelte'' Polynome}
+	Ist das Polynom $xy^3 + xy^2 + (x + 1)y + x \in \domZ_2[x]_{x^2 + x + 1}[y]$ irreduzibel?
+\end{frame}
+}
+
+\end{document}

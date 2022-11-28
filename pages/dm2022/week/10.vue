@@ -17,19 +17,15 @@
     </ul>
     <h3>Priorität bei den Aufgaben</h3>
     Diese Woche sind wieder mal alle Aufgaben wichtig.
-    <!-- <h3>Links</h3>
+    <h3>Links</h3>
     <ul>
       <li>
-        <a :href="$static('/dm2022/week9/notes.pdf')">Meine Notizen</a>,
-        <a :href="$static('/dm2022/week9/slides.pdf')">die Slides</a> und
-        <a
-          href="https://create.kahoot.it/share/woche-9/18f15ba3-3ded-4dc2-b340-93e109418375"
-          >das Kahoot</a
-        >
+        <a :href="$static('/dm2022/week10/notes.pdf')">Meine Notizen</a>,
+        <a :href="$static('/dm2022/week10/slides.pdf')">die Slides</a> und
       </li>
       <li>
         <a href="https://forms.gle/dVSDnP4JywHXzY2c8"> Feedback Formular </a>
       </li>
-    </ul> -->
+    </ul>
   </default-layout>
 </template>
