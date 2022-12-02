@@ -42,8 +42,8 @@
     ob unten immer noch steht, die Challenge sei noch nicht vorbei.
     <v-card class="my-5">
       <v-card-text>
-        <v-alert class="mb-4" type="info" color="primary" border="left">
-          Dieser Challenge wurde noch nicht gelöst.
+        <v-alert class="mb-4" type="error" border="left">
+          Die Challenge ist vorbei.
         </v-alert>
 
         <p>
