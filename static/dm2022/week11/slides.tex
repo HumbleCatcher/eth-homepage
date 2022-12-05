@@ -1,0 +1,80 @@
+\documentclass[t,dvipsnames]{beamer}
+\usepackage{cancel}
+\usepackage{mathtools}
+\graphicspath{{./assets/}}
+
+
+
+\title{Diskrete Mathematik - Woche 11}
+\author{Andreas Ellison}
+\usetheme{Madrid}
+\setbeamertemplate{navigation symbols}{}
+\DeclareMathOperator{\isless}{less}
+
+\DeclareMathOperator{\defn}{\stackrel{\text{def}}{\iff}}
+\DeclareMathOperator{\defneq}{\stackrel{\text{def}}{\quad = \quad}}
+\DeclareMathOperator{\idr}{id}
+\newcommand{\isrel}[3]{#1 \, #3 \, #2}
+
+
+\DeclareMathOperator{\lcm}{lcm}
+\DeclareMathOperator{\ord}{ord}
+
+\newcommand{\beamerblack}{
+\setbeamercolor{frametitle}{fg=white}
+\setbeamercolor{frametitle}{bg=black}
+\setbeamercolor{background canvas}{bg=black}
+\setbeamercolor{normal text}{fg=white}
+\usebeamercolor[fg]{normal text}
+\setbeamertemplate{footline}{}
+\setbeamertemplate{itemize items}[circle]
+\setbeamercolor{itemize item}{fg=white,bg=white}
+\setbeamertemplate{enumerate items}[default]
+\setbeamercolor{enumerate items}{fg=white,bg=white}
+\setbeamercolor{itemize item}{fg=white,bg=white}
+}
+
+\newcounter{excounter}
+\newcommand{\excount}{\stepcounter{excounter} \theexcounter{}}
+
+\newcommand{\hintIllustration}{\textcolor{Magenta}{(Bild)}}
+\newcommand{\deriv}[1]{\vdash_{#1}}
+
+
+\begin{document}
+{
+\beamerblack
+\begin{frame}
+	\frametitle{Beweisaufgabe mit Polynomen}
+	Let $F$ be a finite field. Show that there exists an irreducible polynomial $p(x) \in F[x]$ with $\deg(p(x)) > 1$.
+\end{frame}
+}
+
+{
+\beamerblack
+\begin{frame}
+	\frametitle{Proof systems (HS21)}
+	\includegraphics[width=\textwidth]{proof_systems.png}
+	\begin{enumerate}[(a)]
+		\item<+(1)-> Prove or disprove: If $\Pi$ complete, then $\Pi_1$ complete or $\Pi_2$ complete.
+		\item<+(1)-> Prove or disprove: If $\Pi_1$ sound or $\Pi_2$ sound, then $\Pi$ sound.
+	\end{enumerate}
+\end{frame}
+}
+
+{
+\beamerblack
+\begin{frame}
+	\frametitle{Kalküle (FS22)}
+	Consider the calculus consisting of the following four derivation rules:
+	\begin{align*}
+		\varnothing                                   & \deriv{R_1} F \rightarrow F                    \\
+		\{F\}                                         & \deriv{R_2} F \lor F                           \\
+		\{\neg F \lor \neg F\}                        & \deriv{R_3} F \rightarrow (\neg F \lor \neg F) \\
+		\{F \rightarrow (G \lor H), G \rightarrow H\} & \deriv{R_4} F \rightarrow H                    \\
+	\end{align*}
+	Formally derive $A \rightarrow \neg A$ from $\{\neg A \}$.
+\end{frame}
+}
+
+\end{document}
