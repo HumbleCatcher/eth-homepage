@@ -13,6 +13,15 @@
         <a :href="$static('/dm2022/week11/notes.pdf')">Meine Notizen</a> und
         <a :href="$static('/dm2022/week11/slides.pdf')">die Slides</a>
       </li>
+      <li>
+        Beispiel
+        <a :href="$static('/dm2022/week11/calculation.py')">Script</a> um mit
+        Polynomen in Python zu rechnen
+      </li>
+      <li>
+        <a href="https://forms.gle/AYJmwPzzcWRLeBye7">Formular</a> wegen dem
+        Inhalt der allerletzten Übungsstunde (am 19. Dezember)
+      </li>
     </ul>
   </default-layout>
 </template>
