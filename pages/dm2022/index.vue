@@ -117,6 +117,9 @@
       <li>
         <NuxtLink to="/dm2022/week/11"> Woche 11 </NuxtLink>
       </li>
+      <li>
+        <NuxtLink to="/dm2022/week/13"> Woche 13 </NuxtLink>
+      </li>
     </ul>
   </default-layout>
 </template>
