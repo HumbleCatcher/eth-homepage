@@ -3,7 +3,7 @@
 echo -e "\e[105m>>> Generating static content\e[0m"
 NUXT_APP_BASE_URL=/~aellison/ yarn generate
 echo -e "\e[105m>>> Syncing static content\e[0m"
-rsync -rltgoDzhO --delete -e ssh aellison@slab1.ethz.ch:/nas/aellison/homepage dist/
+rsync -vr --delete -e ssh dist/ aellison@slab1.ethz.ch:/nas/aellison/homepage/
 
 read -p "Open in firefox? " yn
 case $yn in
