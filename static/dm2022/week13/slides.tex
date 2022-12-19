@@ -1,0 +1,108 @@
+\documentclass[t,dvipsnames]{beamer}
+\usepackage{cancel}
+\usepackage{mathtools}
+\graphicspath{{./assets/}}
+
+
+
+\title{Diskrete Mathematik - Woche 13}
+\author{Andreas Ellison}
+\usetheme{Madrid}
+\setbeamertemplate{navigation symbols}{}
+
+\newcommand{\beamerblack}{
+\setbeamercolor{frametitle}{fg=white}
+\setbeamercolor{frametitle}{bg=black}
+\setbeamercolor{background canvas}{bg=black}
+\setbeamercolor{normal text}{fg=white}
+\usebeamercolor[fg]{normal text}
+\setbeamertemplate{footline}{}
+\setbeamertemplate{itemize items}[circle]
+\setbeamercolor{itemize item}{fg=white,bg=white}
+\setbeamertemplate{enumerate items}[default]
+\setbeamercolor{enumerate items}{fg=white,bg=white}
+\setbeamercolor{itemize item}{fg=white,bg=white}
+}
+
+\newcounter{excounter}
+\newcommand{\excount}{\stepcounter{excounter} \theexcounter{}}
+
+\newcommand{\hintIllustration}{\textcolor{Magenta}{(Bild)}}
+\newcommand{\deriv}[1]{\vdash_{#1}}
+
+
+\begin{document}
+
+\begin{frame}
+	\frametitle{Prenex normal form}
+	\begin{Lemma}[6.8.]
+		Seien $F, H$ Formeln, so dass $x$ nicht frei in $H$ vorkommt. Dann gilt
+		\includegraphics[width=0.7\textwidth]{lemma6-8.png}
+	\end{Lemma}
+\end{frame}
+
+{
+\beamerblack
+\begin{frame}
+	\frametitle{Prenex normal form (FS19)}
+	For the formula
+	$$
+		P(x, x) \land \forall x \, ((\exists y \, P(x, y)) \rightarrow Q(z)),
+	$$
+	give an equivalent formula in the prenex normal form. \\~
+
+
+	\only<+(1)->{
+		Vorgehen:
+		\begin{enumerate}[<+(1)->]
+			\item Bounded Variablen umbenennen.
+			\item Quantoren rausziehen (mithilfe von Lemma 6.8.).
+		\end{enumerate}
+	}
+\end{frame}
+}
+
+\begin{frame}
+	\frametitle{Die zwei wichtigsten Facts zum Resolutionskalkül}
+	\only<+(1)->{
+		\begin{lemma}[6.6.]
+			Die Regel $\deriv{\mathrm{Res}}$ ist korrekt.
+		\end{lemma}
+	}
+
+	\only<+(1)->{
+		\begin{theorem}[6.7.]
+			$F$ ist unerfüllbar $\iff F \deriv{\mathrm{Res}} \varnothing$
+
+			(Angenommen $F$ in KNF.)
+		\end{theorem}
+	}
+\end{frame}
+
+{
+\beamerblack
+\begin{frame}
+	\frametitle{Resolution calculus (FS22)}
+	Use the resolution calculus to prove that $A \land C$ is a logical consequence of
+	$$
+		M = \{\neg B \lor A, \neg A \rightarrow B, A \rightarrow C\}.
+	$$
+	\only<+(1)->{
+		Vorgehen:
+		\begin{enumerate}[<+(1)->]
+			\item Formel $F'$ in KNF finden, so dass $F'$ unerfüllbar $\iff$ Aussage erfüllt.
+			\item Resolutionskalkül auf $F'$ anwenden.
+		\end{enumerate}
+	}
+\end{frame}
+}
+
+{
+\beamerblack
+\begin{frame}
+	\frametitle{Resolution calculus (FS20)}
+	Sei $F = ((A \lor B) \land (A \rightarrow C) \land (B \rightarrow C)) \rightarrow C$. Wir wollen mit dem Resolutionskalkül beweisen, dass $F$ eine Tautologie ist. Welche Formel $F'$ in KNF können wir dafür wählen?
+\end{frame}
+}
+
+\end{document}
