@@ -65,6 +65,9 @@
           <span v-html="$katex('S_i \\coloneqq \\sum_{k=1}^{i} a_k')" /> für
           <span v-html="$katex('1 \\le i \\le n')" />.
         </p>
+        <p>
+          <a :href="$static('/dm2022/week8/challenge_solution.pdf')">Lösung</a>
+        </p>
       </v-card-text>
     </v-card>
   </default-layout>
