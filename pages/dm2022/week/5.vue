@@ -35,25 +35,18 @@
     >" enthalten. Sonst garantiere ich nicht, dass ich mir den Beweis anschaue.
     Überprüfe auch vor dem Abschicken, ob unten immer noch steht, die Challenge
     sei noch nicht gelöst worden.
-    <v-card class="my-5">
-      <v-card-text>
-        <v-alert class="mb-4" type="success" border="left"
-          >Dieser Challenge wurde erfolgreich von
-          <pre class="d-inline">toffermann</pre>
-          gelöst. Gratuliere!
-        </v-alert>
-
-        Sei <span v-html="$katex('\\rho')" /> eine Relation auf einer Menge
-        <span v-html="$katex('A')" />. Beweise:
-        <p class="text-center">
-          <span v-html="$katex('\\rho')" /> transitiv
-          <span v-html="$katex('\\implies \\rho^* = \\rho')" />
-        </p>
-        <p>
-          <a :href="$static('/dm2022/week5/challenge_solution.pdf')">Lösung</a> (von <pre class="d-inline">toffermann</pre>)
-        </p>
-      </v-card-text>
-    </v-card>
+    <challenge-box
+      state="solved"
+      winner="toffermann"
+      :solutionURL="$static('/dm2022/week5/challenge_solution.pdf')"
+    >
+      Sei <katex t="\rho" /> eine Relation auf einer Menge <katex t="A" />.
+      Beweise:
+      <p class="text-center">
+        <katex t="\rho \," /> transitiv
+        <katex t="\implies \rho^* = \rho" />
+      </p>
+    </challenge-box>
   </default-layout>
 </template>
 
