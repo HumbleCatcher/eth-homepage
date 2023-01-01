@@ -333,60 +333,41 @@ table
     background-color: var(--v-success-base)
     border-color: var(--v-success-base)
 
-@keyframes success-to-primary
-  0%
-    background-color: var(--v-success-base)
-    border-color: var(--v-success-base)
-  100%
-    background-color: var(--v-primary-base)
-    border-color: var(--v-primary-base)
+@mixin animate-colors($primary-text-color, $error-text-color, $success-text-color)
 
-@keyframes success-to-error
-  0%
-    background-color: var(--v-success-base)
-    border-color: var(--v-success-base)
-  100%
-    background-color: var(--v-error-base)
-    border-color: var(--v-error-base)
+  $color-map: ("primary": $primary-text-color, "error": $error-text-color, "success": $success-text-color)
 
-@keyframes error-to-error
-  0%
-    background-color: var(--v-error-base)
-    border-color: var(--v-error-base)
-  100%
-    background-color: var(--v-error-base)
-    border-color: var(--v-error-base)
+  $from: "primary", "success", "error"
+  $to: "primary", "success", "error"
 
-@keyframes error-to-primary
-  0%
-    background-color: var(--v-error-base)
-    border-color: var(--v-error-base)
-  100%
-    background-color: var(--v-primary-base)
-    border-color: var(--v-primary-base)
+  @each $f in $from
 
-@keyframes error-to-success
-  0%
-    background-color: var(--v-error-base)
-    border-color: var(--v-error-base)
-  100%
-    background-color: var(--v-success-base)
-    border-color: var(--v-success-base)
+    @each $t in $to
+      &--#{$f}-to-#{$t}
+        @keyframes #{$f}-to-#{$t}
+          0%
+            background-color: var(--v-#{$f}-base)
+            border-color: var(--v-#{$f}-base)
+            color: map-get($color-map, $f)
+          100%
+            background-color: var(--v-#{$t}-base)
+            border-color: var(--v-#{$t}-base)
+            color: map-get($color-map, $t)
 
-$from: primary, success, error
-$to: primary, success, error
+  .v-btn.v-btn--has-bg
+    &.animated
+      animation-duration: 0.75s
+      animation-timing-function: ease-out
+      animation-fill-mode: forwards
+      animation-play-state: running
+      background: var(--v-primary-base)
+      border-color: var(--v-primary-base)
 
-.v-application .v-btn.v-btn--has-bg
-  &.animated
-    animation-duration: 0.75s
-    animation-timing-function: ease-out
-    animation-fill-mode: forwards
-    animation-play-state: running
-    background: var(--v-primary-base)
-    border-color: var(--v-primary-base)
+      @each $f in $from
+        @each $t in $to
+          &--#{$f}-to-#{$t}
+            animation-name: #{$f}-to-#{$t}
 
-    @each $f in $from
-      @each $t in $to
-        &--#{$f}-to-#{$t}
-          animation-name: #{$f}-to-#{$t}
+.theme--dark
+  @include animate-colors(white, black, black)
 </style>
