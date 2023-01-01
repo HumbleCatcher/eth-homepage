@@ -1,7 +1,12 @@
 <template>
   <v-card class="my-5">
     <v-card-text>
-      <v-alert class="mb-4" :type="alertColor" border="left" outlined>
+      <v-alert
+        class="mb-4"
+        :type="alertColor"
+        border="left"
+        :outlined="$vuetify.theme.dark"
+      >
         <template v-if="state === 'solved'">
           "Dieser Challenge wurde erfolgreich von
           <pre class="d-inline">{{ winner }}</pre>

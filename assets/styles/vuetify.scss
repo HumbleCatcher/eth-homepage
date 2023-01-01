@@ -30,4 +30,24 @@ $font-size-root: 18px;
 $btn-text-transform: none;
 $btn-font-weight: 700;
 
+$material-dark: (
+  "text": (
+    "primary": #cdd6f4,
+    "secondary": #bac2de,
+  ),
+  "app-bar": #181825,
+  "background": #11111b,
+  "cards": #1e1e2e,
+);
+
+$material-light: (
+  "text": (
+    "primary": #4c4f69,
+    "secondary": #4c4f69,
+  ),
+  "app-bar": #dce0e8,
+  "background": #eff1f5,
+  "cards": #dce0e8,
+);
+
 @import "~vuetify/src/styles/styles.sass";

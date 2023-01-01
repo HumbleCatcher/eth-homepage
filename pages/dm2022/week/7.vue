@@ -9,7 +9,7 @@
       </s>
       Die Stellvertretung ist leider krank.
       <br />
-      <v-alert type="error">
+      <v-alert type="error" :outlined="$vuetify.theme.dark">
         Ihr müsst in die Übungsstunde von <b>Fabio Banfi</b> (G-06) in CHN E 42!
         Sorry 😕
       </v-alert>

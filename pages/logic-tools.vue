@@ -1,10 +1,10 @@
 <template>
   <default-layout title="Logic tools" back="/">
-    <v-alert type="error">
+    <v-alert type="error" :outlined="$vuetify.theme.dark" light>
       <strong>Warning:</strong> I do not guarentee that these tools are correct.
       They were not tested extensively.
     </v-alert>
-    <v-alert type="info">
+    <v-alert type="info" :outlined="$vuetify.theme.dark">
       <strong>Usage:</strong>
       <ol>
         <li>
@@ -283,22 +283,15 @@ export default Vue.extend({
 </script>
 
 <style lang="sass" scoped>
-table, td, th
-  border: 1px solid black
+@import '~vuetify/src/styles/styles.sass'
+
 table
   display: table
   border-collapse: collapse
   overflow: auto
   width: 100%
 
-  tr:nth-child(2n)
-    background-color: #212121
-
-  tr:nth-child(2n + 1)
-    background-color: #2b2b2b
-
   th
-    background-color: #212121
     font-weight: 700
 
   td, th
@@ -307,31 +300,37 @@ table
 
   .result
     font-weight: bold
-    border-left: 5px solid black
 
-@keyframes primary-to-error
-  0%
-    background-color: var(--v-primary-base)
-    border-color: var(--v-primary-base)
-  100%
-    background-color: var(--v-error-base)
-    border-color: var(--v-error-base)
+.theme--dark
+  table, td, th
+    border: 1px solid map-get($material-dark, "background")
+  table
+    tr:nth-child(2n)
+      background-color: #313244
 
-@keyframes primary-to-success
-  0%
-    background-color: var(--v-primary-base)
-    border-color: var(--v-primary-base)
-  100%
-    background-color: var(--v-success-base)
-    border-color: var(--v-success-base)
+    tr:nth-child(2n + 1)
+      background-color: #585b70
 
-@keyframes success-to-success
-  0%
-    background-color: var(--v-success-base)
-    border-color: var(--v-success-base)
-  100%
-    background-color: var(--v-success-base)
-    border-color: var(--v-success-base)
+    th
+      background-color: #313244
+
+    .result
+      border-left: 5px solid map-get($material-dark, "background")
+
+
+.theme--light
+  table
+    tr:nth-child(2n)
+      background-color: #dce0e8
+
+    tr:nth-child(2n + 1)
+      background-color: #e6e9ef
+
+    th
+      background-color: #dce0e8
+
+    .result
+      border-left: 5px solid var(--v-secondary-base)
 
 @mixin animate-colors($primary-text-color, $error-text-color, $success-text-color)
 
@@ -370,4 +369,6 @@ table
 
 .theme--dark
   @include animate-colors(white, black, black)
+.theme--light
+  @include animate-colors(white, white, white)
 </style>
