@@ -21,7 +21,7 @@
           <svg
             v-if="$vuetify.theme.dark"
             @click="toggleTheme"
-            class="theme my-auto"
+            class="theme mt-2"
             viewBox="0 0 24 24"
             fill="none"
             height="20"
@@ -37,7 +37,7 @@
           <svg
             v-else
             @click="toggleTheme"
-            class="theme my-auto"
+            class="theme mt-2"
             viewBox="0 0 24 24"
             fill="none"
             height="20"
