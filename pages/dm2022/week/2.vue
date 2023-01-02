@@ -1,5 +1,5 @@
 <template>
-  <default-layout title="Diskrete Mathematik HS22 - Woche 2" back="/dm2022">
+  <default-layout title="Diskrete Mathematik HS22 — Woche 2" back="/dm2022">
     <h3>Übersicht</h3>
     <ul>
       <li>Feedback zur letzten Serie</li>

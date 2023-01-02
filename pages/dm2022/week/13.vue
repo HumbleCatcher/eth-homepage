@@ -1,5 +1,5 @@
 <template>
-  <default-layout title="Diskrete Mathematik HS22 - Woche 13" back="/dm2022">
+  <default-layout title="Diskrete Mathematik HS22 — Woche 13" back="/dm2022">
     <p>
       <b>Viel Erfolg für die Prüfung!!!</b> Zögert nicht, mir in der Lernphase
       fragen zu stellen. 🙂

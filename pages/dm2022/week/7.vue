@@ -1,5 +1,5 @@
 <template>
-  <default-layout title="Diskrete Mathematik HS22 - Woche 7" back="/dm2022">
+  <default-layout title="Diskrete Mathematik HS22 — Woche 7" back="/dm2022">
     <h3>Info</h3>
     <p>
       Diese Woche kann ich leider keine Übungsstunde geben.
