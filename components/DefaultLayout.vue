@@ -19,7 +19,7 @@
         <v-spacer />
         <v-col>
           <svg
-            v-if="$vuetify.theme.dark"
+            v-if="!$vuetify.theme.dark"
             @click="toggleTheme"
             class="theme mt-2"
             viewBox="0 0 24 24"
