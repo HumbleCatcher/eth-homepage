@@ -1,8 +1,13 @@
 <template>
   <default-layout title="Welcome, stranger">
-    For now, head over to
-    <NuxtLink to="/dm2022">Diskrete Mathematik HS22</NuxtLink> or
-    <NuxtLink to="/logic-tools">Logic tools</NuxtLink>
+    <ul>
+      <li>
+        <NuxtLink to="/dm2022">Discrete Mathematics HS22</NuxtLink>
+      </li>
+      <li>
+        <NuxtLink to="/pprog2023">Parallel Programming FS23</NuxtLink>
+      </li>
+    </ul>
   </default-layout>
 </template>
 
