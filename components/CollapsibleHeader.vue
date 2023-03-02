@@ -9,7 +9,7 @@
       <div class="mt-1 d-flex" :class="{ active }">
         <v-icon>mdi-menu-right</v-icon>
       </div>
-      <component :is="`h${size}`" style="display: inline" class="ma-0">
+      <component :is="`h${size}`" style="display: inline" class="ma-0" :id="text.replace(/\W+/g, '-').toLowerCase()">
         {{ text }}
       </component>
     </div>
