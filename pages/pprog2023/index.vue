@@ -93,6 +93,9 @@
           <a :href="$static('/pprog2023/week2/demo.zip')">Demo</a> (Eclipse
           project) of summing up the values in an array with Java threads
         </li>
+        <li>
+          <a :href="$static('/pprog2023/week2/quiz.pdf')">Quiz</a>
+        </li>
       </ul>
     </collapsible-header>
   </default-layout>
