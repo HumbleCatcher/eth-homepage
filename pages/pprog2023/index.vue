@@ -48,6 +48,20 @@
         </li>
         <li>
           <a
+            href="https://docs.oracle.com/javase/specs/jls/se19/html/jls-17.html"
+            >Section on Threads and Locks</a
+          >
+          from the
+          <a
+            href="https://docs.oracle.com/javase/specs/jls/se19/html/index.html"
+            >Java
+            Language Specification</a
+          >. The Java Language Specification defines the semantics of the
+          language, i.e. what behavior the programmer can expect when writing a
+          program in Java. Any implementation of the JVM must adhere to this specification.
+        </li>
+        <li>
+          <a
             href="https://cdn.vis.ethz.ch/luk/pvw_paralleleprogrammierung.pdf"
             target="_blank"
             rel="noopener noreferrer"
@@ -66,6 +80,25 @@
               rel="noopener noreferrer"
               >Terminology</a
             >
+          </li>
+          <li>
+            Official
+            <a
+              href="https://docs.oracle.com/javase/tutorial/essential/concurrency/index.html"
+              >Java tutorials</a
+            >
+            on concurrency
+          </li>
+          <li>
+            Java 
+            <a
+              href="https://docs.oracle.com/javase/specs/jvms/se19/html/jvms-6.html"
+              >bytecode instruction set</a
+            >. 
+            This is only interesting if you want to inspect the bytecode of a compiled Java
+            program. This can be done with
+            <code>javap -c path/to/MyClass.class</code> on the command line or
+            online at <a href="https://godbolt.org/">https://godbolt.org/</a>.
           </li>
         </ul>
       </collapsible-header>
@@ -95,6 +128,19 @@
         </li>
         <li>
           <a :href="$static('/pprog2023/week2/quiz.pdf')">Quiz</a>
+        </li>
+      </ul>
+    </collapsible-header>
+    <collapsible-header size="4" text="Week 3">
+      <ul>
+        <li>
+          Official (well written!)
+          <a
+            href="https://docs.oracle.com/javase/tutorial/essential/concurrency/sync.html"
+            >Java tutorial</a
+          >
+          on synchronization (introduces the need for
+          <code>synchronized</code> similar to the lecture)
         </li>
       </ul>
     </collapsible-header>
