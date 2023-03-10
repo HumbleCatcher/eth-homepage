@@ -40,10 +40,10 @@
     <collapsible-header size="3" text="Resources">
       <ul>
         <li>
-          <a
+          Documentation for  <a
             target="_blank"
             href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/util/concurrent/package-summary.html"
-            >Documentation for <code>java.util.concurrent</code></a
+            ><code>java.util.concurrent</code></a
           >
         </li>
         <li>
@@ -100,6 +100,7 @@
             <code>javap -c path/to/MyClass.class</code> on the command line or
             online at <a href="https://godbolt.org/">https://godbolt.org/</a>.
           </li>
+          <li> <a href="https://docs.oracle.com/javase/7/docs/api/java/lang/Thread.State.html">List</a> of Java Thread states and their meaning</li>
         </ul>
       </collapsible-header>
     </collapsible-header>
@@ -133,6 +134,9 @@
     </collapsible-header>
     <collapsible-header size="4" text="Week 3">
       <ul>
+      <li> <a :href="$static('/pprog2023/week3/demo.zip')">Demo</a> from class </li>
+      <li> <a :href="$static('/pprog2023/week3/quiz.pdf')">Quiz</a> </li>
+        <li> <a href="https://forms.gle/f4hNy55WVXsLjYaX7">Short feedback form</a> </li>
         <li>
           Official (well written!)
           <a
@@ -142,6 +146,12 @@
           on synchronization (introduces the need for
           <code>synchronized</code> similar to the lecture)
         </li>
+        <li>
+        Documentation for <a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/concurrent/atomic/package-summary.html">
+        <code>java.util.concurrent.atomic</code>
+        </a>
+        </li>
+        <li>Java <a href="https://docs.oracle.com/javase/specs/jls/se11/html/jls-17.html#jls-17.2">specification of wait and notify</a> . It turns out that the internal list of waiting threads is called the <i>wait set</i> and not the <i>wait list</i>. </li>
       </ul>
     </collapsible-header>
   </default-layout>
