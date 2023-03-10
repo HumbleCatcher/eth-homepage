@@ -40,7 +40,8 @@
     <collapsible-header size="3" text="Resources">
       <ul>
         <li>
-          Documentation for  <a
+          Documentation for
+          <a
             target="_blank"
             href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/util/concurrent/package-summary.html"
             ><code>java.util.concurrent</code></a
@@ -54,11 +55,11 @@
           from the
           <a
             href="https://docs.oracle.com/javase/specs/jls/se19/html/index.html"
-            >Java
-            Language Specification</a
+            >Java Language Specification</a
           >. The Java Language Specification defines the semantics of the
           language, i.e. what behavior the programmer can expect when writing a
-          program in Java. Any implementation of the JVM must adhere to this specification.
+          program in Java. Any implementation of the JVM must adhere to this
+          specification.
         </li>
         <li>
           <a
@@ -90,17 +91,22 @@
             on concurrency
           </li>
           <li>
-            Java 
+            Java
             <a
               href="https://docs.oracle.com/javase/specs/jvms/se19/html/jvms-6.html"
               >bytecode instruction set</a
-            >. 
-            This is only interesting if you want to inspect the bytecode of a compiled Java
-            program. This can be done with
+            >. This is only interesting if you want to inspect the bytecode of a
+            compiled Java program. This can be done with
             <code>javap -c path/to/MyClass.class</code> on the command line or
             online at <a href="https://godbolt.org/">https://godbolt.org/</a>.
           </li>
-          <li> <a href="https://docs.oracle.com/javase/7/docs/api/java/lang/Thread.State.html">List</a> of Java Thread states and their meaning</li>
+          <li>
+            <a
+              href="https://docs.oracle.com/javase/7/docs/api/java/lang/Thread.State.html"
+              >List</a
+            >
+            of Java Thread states and their meaning
+          </li>
         </ul>
       </collapsible-header>
     </collapsible-header>
@@ -134,9 +140,13 @@
     </collapsible-header>
     <collapsible-header size="4" text="Week 3">
       <ul>
-      <li> <a :href="$static('/pprog2023/week3/demo.zip')">Demo</a> from class </li>
-      <li> <a :href="$static('/pprog2023/week3/quiz.pdf')">Quiz</a> </li>
-        <li> <a href="https://forms.gle/f4hNy55WVXsLjYaX7">Short feedback form</a> </li>
+        <li>
+          <a :href="$static('/pprog2023/week3/demo.zip')">Demo</a> from class
+        </li>
+        <li><a :href="$static('/pprog2023/week3/quiz.pdf')">Quiz</a></li>
+        <li>
+          <a href="https://forms.gle/f4hNy55WVXsLjYaX7">Short feedback form</a>
+        </li>
         <li>
           Official (well written!)
           <a
@@ -147,11 +157,22 @@
           <code>synchronized</code> similar to the lecture)
         </li>
         <li>
-        Documentation for <a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/concurrent/atomic/package-summary.html">
-        <code>java.util.concurrent.atomic</code>
-        </a>
+          Documentation for
+          <a
+            href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/concurrent/atomic/package-summary.html"
+          >
+            <code>java.util.concurrent.atomic</code>
+          </a>
         </li>
-        <li>Java <a href="https://docs.oracle.com/javase/specs/jls/se11/html/jls-17.html#jls-17.2">specification of wait and notify</a> . It turns out that the internal list of waiting threads is called the <i>wait set</i> and not the <i>wait list</i>. </li>
+        <li>
+          Java
+          <a
+            href="https://docs.oracle.com/javase/specs/jls/se11/html/jls-17.html#jls-17.2"
+            >specification of wait and notify</a
+          >
+          . It turns out that the internal list of waiting threads is called the
+          <i>wait set</i> and not the <i>wait list</i>.
+        </li>
       </ul>
     </collapsible-header>
   </default-layout>
