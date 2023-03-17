@@ -145,9 +145,6 @@
         </li>
         <li><a :href="$static('/pprog2023/week3/quiz.pdf')">Quiz</a></li>
         <li>
-          <a href="https://forms.gle/f4hNy55WVXsLjYaX7">Short feedback form</a>
-        </li>
-        <li>
           Official (well written!)
           <a
             href="https://docs.oracle.com/javase/tutorial/essential/concurrency/sync.html"
@@ -216,7 +213,7 @@
           >
             This challenge has not been solved yet.
           </v-alert>
-          Show that for an arbitrary pipeline with exactly one "execution unit" per stage (e. g. if one stage were to use the washing machine, then there would only be one washing machine available) the following holds:
+          Prove that for an arbitrary pipeline with exactly one "execution unit" per stage (e. g. if one stage were to use the washing machine, then there would only be one washing machine available) the following holds:
           <p class="text-center">
             the pipeline is <i>balanced</i> <katex t="\iff" /> no stage is longer than the first
           </p>
