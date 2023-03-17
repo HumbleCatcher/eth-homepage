@@ -175,6 +175,19 @@
         </li>
       </ul>
     </collapsible-header>
+    <collapsible-header size="4" text="Week 4">
+      <ul>
+        <li>
+          HS20 wait and notify task:
+          <a :href="$static('/pprog2023/week4/hs20.zip')">code template</a> and
+          <a
+            href="https://exams.vis.ethz.ch/exams/fchg2dbb.pdf#ty77o721azvumecq"
+            >link to exam</a
+          >
+        </li>
+        <li></li>
+      </ul>
+    </collapsible-header>
   </default-layout>
 </template>
 
