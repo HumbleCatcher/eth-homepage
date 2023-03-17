@@ -176,7 +176,12 @@
       </ul>
     </collapsible-header>
     <collapsible-header size="4" text="Week 4">
+    <div>
+      
       <ul>
+        <li>
+          My <a :href="$static('/pprog2023/week4/notes.pdf')">notes</a> on parallelism vs. concurrency and pipelining
+        </li>
         <li>
           HS20 wait and notify task:
           <a :href="$static('/pprog2023/week4/hs20.zip')">code template</a> and
@@ -185,8 +190,42 @@
             >link to exam</a
           >
         </li>
-        <li></li>
+        <li>
+          <a :href="$static('/pprog2023/week4/plots.zip')">Plots</a> shown in class and the <a :href="$static('/pprog2023/week4/demo_performance.zip')">code</a>  used to generate them (first run the Java program, then run the script <code>plot.py</code>). Please let me know if you find any mistakes in the code to generate the data!
+        </li>
       </ul>
+      <p>
+        The first person (maybe even the first few 😉) to email me a solution to the following challenge before 
+        <ul>
+          <li>
+            22.03.2023 4 PM for the Wednesday group
+          </li>
+          <li>
+            24.03.2023 10 AM for the Friday group
+          </li>
+        </ul>
+        gets bar of chocolate 🍫.
+      </p>
+      <v-card class="my-5">
+        <v-card-text>
+          <v-alert
+            class="mb-4"
+            type="secondary"
+            border="left"
+            :outlined="$vuetify.theme.dark"
+          >
+            This challenge has not been solved yet.
+          </v-alert>
+          Show that for an arbitrary pipeline with exactly one "execution unit" per stage (e. g. if one stage were to use the washing machine, then there would only be one washing machine available) the following holds:
+          <p class="text-center">
+            the pipeline is <i>balanced</i> <katex t="\iff" /> no stage is longer than the first
+          </p>
+
+          <b>Note:</b> A pipeline is <i>balanced</i> if all iterations have the same latency.
+        </v-card-text>
+        
+      </v-card>
+      </div>
     </collapsible-header>
   </default-layout>
 </template>
