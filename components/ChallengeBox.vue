@@ -24,7 +24,7 @@
         <a :href="solutionURL">Lösung</a>
         <span v-if="winner"
           >(von
-          <pre class="d-inline">{{ winner }}</pre>
+          <code>{{ winner }}</code>
           )</span
         >
       </p>
