@@ -198,14 +198,14 @@
           </li>
         </ul>
         <p>
-          The first person (maybe even the first few 😉) to email me a solution
-          to the following challenge before
+          The first few people to email me a solution to the following challenge
+          before
         </p>
         <ul>
           <li>22.03.2023 4 PM for the Wednesday group</li>
           <li>24.03.2023 10 AM for the Friday group</li>
         </ul>
-        <p>gets bar of chocolate 🍫.</p>
+        <p>gets bar of chocolate. 🍫</p>
         <v-card class="my-5">
           <v-card-text>
             <v-alert
@@ -214,7 +214,9 @@
               border="left"
               :outlined="$vuetify.theme.dark"
             >
-              This challenge has not been solved yet.
+              This challenge has been successfully solved by
+              <code>jusdai</code>
+              , but it's still open!
             </v-alert>
             Prove that for an arbitrary pipeline with exactly one "execution
             unit" per stage (e. g. if one stage were to use the washing machine,
