@@ -233,6 +233,27 @@
         </v-card>
       </div>
     </collapsible-header>
+    <collapsible-header size="4" text="Week 5">
+      <div>
+        The following are interesting if you're curious about the history behind
+        Amdahl's and Gustafson's "laws" and why they exist
+        <ul>
+          <li>
+            The
+            <a href="https://dl.acm.org/doi/pdf/10.1145/42411.42415">paper</a>
+            that introduced Gustafson's law
+          </li>
+          <li>
+            <a
+              href="https://link.springer.com/referenceworkentry/10.1007/978-0-387-09766-4_77#Sec5_77 "
+              >History</a
+            >
+            behind Amdahl's law (you will need to use your ETH login to access
+            the article)
+          </li>
+        </ul>
+      </div>
+    </collapsible-header>
   </default-layout>
 </template>
 
