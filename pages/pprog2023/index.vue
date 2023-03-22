@@ -215,7 +215,7 @@
               :outlined="$vuetify.theme.dark"
             >
               This challenge has been successfully solved by
-              <code>jusdai</code>
+              <code>jusdai</code> and <code>jpotempa</code>
               , but it's still open!
             </v-alert>
             Prove that for an arbitrary pipeline with exactly one "execution
