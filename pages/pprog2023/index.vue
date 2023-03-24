@@ -210,13 +210,12 @@
           <v-card-text>
             <v-alert
               class="mb-4"
-              color="secondary"
+              type="success"
               border="left"
               :outlined="$vuetify.theme.dark"
             >
-              This challenge has been successfully solved by
-              <code>jusdai</code> and <code>jpotempa</code>
-              , but it's still open!
+              This challenge was successfully solved by
+              <code>jusdai</code> and <code>jpotempa</code>. Congrats!
             </v-alert>
             Prove that for an arbitrary pipeline with exactly one "execution
             unit" per stage (e. g. if one stage were to use the washing machine,
@@ -235,8 +234,25 @@
     </collapsible-header>
     <collapsible-header size="4" text="Week 5">
       <div>
-        The following are interesting if you're curious about the history behind
-        Amdahl's and Gustafson's "laws" and why they exist
+        <ul>
+          <li>
+            My <a :href="$static('/pprog2023/week5/notes.pdf')">proofs</a> on
+            pipelining
+          </li>
+          <li>
+            The
+            <a
+              href="https://cdn.vis.ethz.ch/luk/pvw_paralleleprogrammierung.pdf#subsubsection.2.1.2"
+              >chapters</a
+            >
+            in the PVW script on Amdahl's and Gustafson's laws might be helpful
+            for the exercises
+          </li>
+        </ul>
+        <p>
+          The following resources are interesting if you're curious about the
+          history behind Amdahl's and Gustafson's "laws" and why they exist
+        </p>
         <ul>
           <li>
             The
