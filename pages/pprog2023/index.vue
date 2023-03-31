@@ -249,15 +249,37 @@
             for the exercises
           </li>
         </ul>
+      </div>
+    </collapsible-header>
+    <collapsible-header size="4" text="Week 6">
+      <div>
+        <ul>
+          <li>
+            My <a :href="$static('/pprog2023/week6/notes.pdf')">notes</a> on
+            Amdahl's and Gustafson's laws. The explanation in the exercise
+            session slides (on Moodle) is also good.
+          </li>
+          <li>
+            <a
+              href="https://create.kahoot.it/share/week-6/51f4f1d4-dad1-401a-bb69-694a64d4cfd3"
+              >Kahoot</a
+            >
+            and
+            <a href="$static('/pprog2023/week6/quiz.pdf')"
+              >short explanations</a
+            >
+            for some of the pipelining questions.
+          </li>
+        </ul>
         <p>
           The following resources are interesting if you're curious about the
-          history behind Amdahl's and Gustafson's "laws" and why they exist
+          history behind Amdahl's and Gustafson's "laws" and why they exist.
         </p>
         <ul>
           <li>
             The
             <a href="https://dl.acm.org/doi/pdf/10.1145/42411.42415">paper</a>
-            that introduced Gustafson's law
+            that introduced Gustafson's law (relatively easy to read)
           </li>
           <li>
             <a
