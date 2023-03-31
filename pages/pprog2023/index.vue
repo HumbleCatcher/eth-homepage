@@ -265,7 +265,7 @@
               >Kahoot</a
             >
             and
-            <a href="$static('/pprog2023/week6/quiz.pdf')"
+            <a :href="$static('/pprog2023/week6/quiz.pdf')"
               >short explanations</a
             >
             for some of the pipelining questions.
