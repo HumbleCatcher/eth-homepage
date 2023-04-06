@@ -292,6 +292,64 @@
         </ul>
       </div>
     </collapsible-header>
+    <collapsible-header size="4" text="Week 7">
+      <div>
+        Please fill out the
+        <a href="https://moodle-app2.let.ethz.ch/mod/forum/discuss.php?d=124335"
+          >feedback form</a
+        >!
+        <ul>
+          <li>
+            Exercises we solved in class:
+            <ul>
+              <li>
+                <a
+                  href="https://moodle-app2.let.ethz.ch/pluginfile.php/1537688/mod_resource/content/1/2021 Summer Questions.pdf"
+                  >Task graphs</a
+                >
+                (FS21, Moodle link)
+              </li>
+              <li>
+                <a
+                  href="https://exams.vis.ethz.ch/exams/9hikmoi9.pdf#43reev20w7od3ymy"
+                  >Fork/Join</a
+                >
+                (FS19)
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a
+              href="https://create.kahoot.it/share/week-7/6ede586b-7ca4-4951-b353-8818d18c4be3"
+              >Kahoot</a
+            >
+          </li>
+        </ul>
+        <p>Some advanced resources, beyond the scope of the course:</p>
+        <ul>
+          <li>
+            <a href="https://gee.cs.oswego.edu/dl/papers/fj.pdf">Paper</a> on
+            how the Fork/Join framework is implemented in Java on a high level
+          </li>
+          <li>
+            Chapter 16 of
+            <a href="https://dl.acm.org/doi/pdf/10.5555/2385452">this</a> book
+            is a much more advanced resource on task parallelism, if you want to
+            have a peek at what more there is to the topic (e.g. it discusses
+            the most relevant theoretical results and gives an implementation of
+            a work-stealing scheduler in Java).
+          </li>
+          <li>
+            A
+            <a href="http://supertech.csail.mit.edu/papers/steal.pdf"
+              >theoretical paper</a
+            >
+            on an algorithm for work-stealing scheduling which was referenced in
+            the lecture slides
+          </li>
+        </ul>
+      </div>
+    </collapsible-header>
   </default-layout>
 </template>
 
