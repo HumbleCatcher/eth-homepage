@@ -49,20 +49,6 @@
         </li>
         <li>
           <a
-            href="https://docs.oracle.com/javase/specs/jls/se19/html/jls-17.html"
-            >Section on Threads and Locks</a
-          >
-          from the
-          <a
-            href="https://docs.oracle.com/javase/specs/jls/se19/html/index.html"
-            >Java Language Specification</a
-          >. The Java Language Specification defines the semantics of the
-          language, i.e. what behavior the programmer can expect when writing a
-          program in Java. Any implementation of the JVM must adhere to this
-          specification.
-        </li>
-        <li>
-          <a
             href="https://cdn.vis.ethz.ch/luk/pvw_paralleleprogrammierung.pdf"
             target="_blank"
             rel="noopener noreferrer"
@@ -106,6 +92,69 @@
               >List</a
             >
             of Java Thread states and their meaning
+          </li>
+        </ul>
+      </collapsible-header>
+      <collapsible-header size="4" text="Part 2">
+        <ul>
+          <li>
+            Overall,
+            <a href="https://dl.acm.org/doi/pdf/10.5555/2385452"
+              >"The Art of Multiprocessor Programming"</a
+            >
+            is a very very good resource for this part of the course. It is very
+            well written and covers almost all topics of the lecture in depth.
+
+            <ul>
+              <li>
+                Chapter 2 (p. 21): Covers the mutual exclusion algorithms from
+                the lecture, with proofs.
+              </li>
+              <li>
+                Chapter 7, 7.1-7.4 (p. 141): Covers TAS, TATAS and exponential
+                backoff locks.
+              </li>
+              <li>
+                Chapter 8 (p. 177): Covers monitors, semaphores and the
+                readers-writers lock, but a bit differently to the lecture.
+              </li>
+            </ul>
+          </li>
+          <li>
+            Resources on the Java memory model:
+            <ul>
+              <li>
+                <a
+                  href="#https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/util/concurrent/package-summary.html#MemoryVisibility"
+                  >Short</a
+                >
+                summary of happens-before from the Java documentation.
+              </li>
+              <li>
+                <a
+                  href="https://docs.oracle.com/javase/specs/jls/se11/html/jls-17.html#jls-17.4"
+                  >Specification</a
+                >
+                of the memory model. I can recommend reading up to and including
+                section 17.4.5.
+              </li>
+              <li>
+                Chapter 16.1 (p. 337) of the book
+                <a
+                  href="https://leon-wtf.github.io/doc/java-concurrency-in-practice.pdf"
+                  >"Java Concurrency in Practice"</a
+                >
+                has an explanation of the Java memory model.
+              </li>
+              <li>
+                An introductory
+                <a
+                  href="https://www.cs.utexas.edu/~bornholt/post/memory-models.html"
+                  >blog article</a
+                >
+                on memory models in general.
+              </li>
+            </ul>
           </li>
         </ul>
       </collapsible-header>
@@ -349,6 +398,51 @@
           </li>
         </ul>
       </div>
+    </collapsible-header>
+    <collapsible-header size="4" text="Week 8">
+      <div>
+        <ul>
+          <li>
+            The
+            <a href="https://www.baeldung.com/java-deadlock-livelock#livelock"
+              >livelock example</a
+            >
+            from class.
+          </li>
+          <li>
+            <a :href="$static('/pprog2023/week8/demo.zip')">Demo code</a> of a
+            CAS lock and the
+            <a :href="$static('/pprog2023/week8/plots.zip')">plots</a> I showed
+            in class. The
+          </li>
+          <li>
+            The
+            <a :href="$static('/pprog2023/week8/Visibility.java')"
+              >Java program</a
+            >
+            with unexpected behavior that I showed at the end.
+          </li>
+          <li>
+            There are links to some useful resources on the current topics at
+            the top of the page (under "Part 2").
+          </li>
+        </ul>
+      </div>
+    </collapsible-header>
+    <collapsible-header size="4" text="Week 9">
+      <ul>
+        <li>
+          There are links to some useful resources on the current topics at the
+          top of the page (under "Part 2").
+        </li>
+        <li>
+          Proofs showing that the Filter lock satisfies mutual exclusion and
+          starvation freedom can be found on page 30 of
+          <a href="https://dl.acm.org/doi/pdf/10.5555/2385452"
+            >"The Art of Multiprocessor Programming"</a
+          >. The same can be found for the bakery lock later on.
+        </li>
+      </ul>
     </collapsible-header>
   </default-layout>
 </template>
