@@ -131,12 +131,21 @@
                 summary of happens-before from the Java documentation.
               </li>
               <li>
+                Official
+                <a href="https://rsim.cs.uiuc.edu/Pubs/popl05.pdf">paper</a>
+                explaining the memory model. It should be understandable.
+                Alternatively, you can read the official
                 <a
                   href="https://docs.oracle.com/javase/specs/jls/se11/html/jls-17.html#jls-17.4"
-                  >Specification</a
-                >
-                of the memory model. I can recommend reading up to and including
-                section 17.4.5.
+                  >specification</a
+                >, which is more compact but has less explanations. If you
+                choose the specification, I can recommend reading up to and
+                including section 17.4.5.
+              </li>
+              <li>
+                A nice
+                <a href="https://www.youtube.com/watch?v=WTVooKLLVT8">talk</a>
+                on the Java memory model.
               </li>
               <li>
                 Chapter 16.1 (p. 337) of the book
