@@ -453,6 +453,97 @@
         </li>
       </ul>
     </collapsible-header>
+    <collapsible-header size="4" text="Week 10">
+      <collapsible-header
+        size="5"
+        text="Types of exercises that might come up in the exam"
+      >
+        <i
+          >Disclaimer: This list is not guaranteed to be complete and is only
+          meant to give you an idea of what has been asked on previous exams.</i
+        >
+        <h6>Locks</h6>
+        Usually there are not too many question on this topic.
+        <ul>
+          <li>
+            true/false questions of which lock has which properties (fairness,
+            starvation free)
+          </li>
+          <li>
+            find bug in lock code (violation of mutual exclusion or deadlock
+            freedom)
+          </li>
+          <li>
+            draw state space diagram and/or read off correctness properties
+          </li>
+          <li>reproduce Peterson/Filter/Bakery lock</li>
+          <li>
+            prove correctness of Peterson lock or similar (but not Filter or
+            Bakery)
+          </li>
+        </ul>
+        <h6>Monitors, semaphores, barriers</h6>
+        <ul>
+          <li>semaphore implementation (mostly with monitors)</li>
+          <li>(never seen rendezvous with semaphores in an exam)</li>
+          <li>barrier implementation (mostly with monitors)</li>
+          <li>
+            (only seen a task on implementing a barrier with semaphores
+            <i>once</i> in
+            <a href="https://exams.vis.ethz.ch/exams/i0svp1fh.pdf">FS21</a>, 8b)
+          </li>
+          <li>
+            fill out some program using monitors (similar to wait/notify
+            exercises, maybe with lock conditions)
+          </li>
+        </ul>
+      </collapsible-header>
+      <h5>What we did in class</h5>
+      <ul>
+        <li>
+          Barriers:
+          <ul>
+            <li>
+              <a :href="$static('/pprog2023/week10/NonReentrantBarrier.java')"
+                >Code</a
+              >
+              for a non-reusable barrier using <code>wait/notify</code>.
+            </li>
+            <li>
+              Exercises on correctness of barrier implementations:
+              <a
+                href="https://exams.vis.ethz.ch/exams/9hikmoi9.pdf#1bndn3yepyvb83ve"
+                >FS19, 11a</a
+              >,
+              <a
+                href="https://exams.vis.ethz.ch/exams/a3cnbqqz.pdf#khd4g25ed4mqut1u"
+                >HS14 3c</a
+              >
+              (there was no time for this during the session)
+            </li>
+            <li>
+              Code for
+              <a :href="$static('/pprog2023/week10/ReentrantBarrierA.java')"
+                >first</a
+              >
+              (more recommended for exam) and
+              <a :href="$static('/pprog2023/week10/ReentrantBarrierB.java')"
+                >second</a
+              >
+              (more elegant, but less convenient for the exam because of the use
+              of <code>ThreadLocal</code>) implementation of a reentrant barrier
+              using <code>wait/nofity</code>.
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a
+            href="https://create.kahoot.it/details/83af624d-e523-4dfa-b729-9166effed589"
+            >Kahoot</a
+          >
+        </li>
+      </ul>
+    </collapsible-header>
   </default-layout>
 </template>
 
