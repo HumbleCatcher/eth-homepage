@@ -118,6 +118,12 @@
                 Chapter 8 (p. 177): Covers monitors, semaphores and the
                 readers-writers lock, but a bit differently to the lecture.
               </li>
+              <li>
+                Chapter 9 (p. 195): The content on lock granularity from the
+                lecture is based on this chapter in the book and follows it very
+                closely. The book is a nice reference here especially for
+                implementations of the algorithms.
+              </li>
             </ul>
           </li>
           <li>
