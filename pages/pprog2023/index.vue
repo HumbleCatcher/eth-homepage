@@ -561,6 +561,7 @@
         <li>
           Up to date <a :href="$static('/pprog2023/week11/solution.pdf')">solution</a>  for why the Peterson lock works in Java.
         </li>
+        <li>I can very much recommend the book chapter on "lock granularity" from "The Art of Multiprocessor Programming" (see resources above) for further reference on the topic. It has code for most of the operations, so it's especially useful if you're stuck with this week's assignment.</li>
       </ul>
     </collapsible-header>
   </default-layout>
