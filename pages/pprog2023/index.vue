@@ -550,6 +550,19 @@
         </li>
       </ul>
     </collapsible-header>
+    <collapsible-header size="4" text="Week 11">
+      <ul>
+        <li>
+          <a
+            href="https://create.kahoot.it/details/4d0a743a-7fd3-4361-bd49-b09c0e83ec7a"
+            >Kahoot</a
+          >
+        </li>
+        <li>
+          Up to date <a :href="$static('/pprog2023/week11/solution.pdf')">solution</a>  for why the Peterson lock works in Java.
+        </li>
+      </ul>
+    </collapsible-header>
   </default-layout>
 </template>
 
