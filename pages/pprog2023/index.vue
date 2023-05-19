@@ -124,6 +124,11 @@
                 closely. The book is a nice reference here especially for
                 implementations of the algorithms.
               </li>
+              <li>
+                Chapter 10, 10.5-10.6 (p. 230): Covers the implementation of a
+                lock-free unbounded queue and the ABA problem, using the queue
+                as an example.
+              </li>
             </ul>
           </li>
           <li>
