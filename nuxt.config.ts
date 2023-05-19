@@ -20,9 +20,20 @@ const config: NuxtConfig = {
         content: "#000",
       },
     ],
-    script: [],
+    // link: [
+    //   {
+    //     rel: "stylesheet",
+    //     href: "//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github-dark.min.css",
+    //   },
+    // ],
+    // script: [
+    //   {
+    //     src: "//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js",
+    //   },
+    // ],
   },
   buildModules: ["@nuxt/typescript-build", "@nuxtjs/vuetify"],
+  modules: [["nuxt-highlightjs", { style: "github-dark" }]],
   target: "static",
   vuetify: {
     customVariables: ["~/assets/styles/vuetify.scss"],

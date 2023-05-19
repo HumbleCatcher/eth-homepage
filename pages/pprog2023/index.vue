@@ -175,6 +175,18 @@
       </collapsible-header>
     </collapsible-header>
 
+    <collapsible-header size="4" text="FAQ">
+      <collapsible-header size="3" text="Race condition vs. bad interleaving vs. data race">
+<pre><code v-highlight class="java">public class Counter {
+    volatile int count = 0;
+
+    public void increment() {
+        c = c + 1;
+    }
+}</code></pre>
+      </collapsible-header>
+    </collapsible-header>
+
     <h3>Exercise sessions</h3>
     <collapsible-header size="4" text="Week 2">
       <ul>
