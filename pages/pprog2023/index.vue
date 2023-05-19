@@ -559,9 +559,45 @@
           >
         </li>
         <li>
-          Up to date <a :href="$static('/pprog2023/week11/solution.pdf')">solution</a>  for why the Peterson lock works in Java.
+          Up to date
+          <a :href="$static('/pprog2023/week11/solution.pdf')">solution</a> for
+          why the Peterson lock works in Java.
         </li>
-        <li>I can very much recommend the book chapter on "lock granularity" from "The Art of Multiprocessor Programming" (see resources above) for further reference on the topic. It has code for most of the operations, so it's especially useful if you're stuck with this week's assignment.</li>
+        <li>
+          I can very much recommend the book chapter on "lock granularity" from
+          "The Art of Multiprocessor Programming" (see resources above) for
+          further reference on the topic. It has code for most of the
+          operations, so it's especially useful if you're stuck with this week's
+          assignment.
+        </li>
+      </ul>
+    </collapsible-header>
+    <collapsible-header size="4" text="Week 12">
+      <ul>
+        <li>
+          The explanation for race condition vs. bad interleaving vs. data race
+          can be found in the new "FAQ" section above.
+        </li>
+        <li>
+          <a
+            href="https://quizizz.com/admin/presentation/646469871c941d001e37abbd/w-12?qcPublish=true&created=true"
+            >Quiz</a
+          >
+          with slides. Credit to
+          <a
+            href="https://quizizz.com/profile/6458fe87cffab3001ff3ea6d?section=library"
+            >Hansjörg Schraubenzieher</a
+          >
+          for the questions.
+        </li>
+        <li>
+          Little
+          <a :href="$static('/pprog2023/week12/lock-free-queue.pdf')"
+            >derivation</a
+          >
+          of <code>enq</code> from the lock-free unbounded queue implementation
+          of the lecture.
+        </li>
       </ul>
     </collapsible-header>
   </default-layout>
