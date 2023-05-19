@@ -303,53 +303,52 @@ bad interleaving     data race
 </code>
 </pre>
       </collapsible-header>
-    </collapsible-header>
-    <collapsible-header
-      size="4"
-      text="Is caching a valid reason for why a thread reading a non-volatile variable might not see a write to it by another thread?"
-    >
-      <p>
-        No. Modern architectures have a <i>cache coherency protocol</i>, which
-        ensures that all processors have a coherent view of a
-        <i>fixed</i> memory location (all writes eventually become visible and
-        are seen in the same order; the view of the single memory location will
-        be sequentially consistent). The protocol is implemented in hardware and
-        the simplest example to get an idea of it is
-        <a href="https://en.wikipedia.org/wiki/MSI_protocol">MSI</a>. (You will
-        learn more about these protocols in SPCA.)
-      </p>
-      <p>
-        One way that visibility problems may occur is through compiler
-        optimizations. This is what breaks the Java program I showed in week 9:
-        the JIT compiler optimizes away a read to a variable, which makes it
-        look like thread 1 does not see the write by thread 2 (an optimization
-        allowed by the Java Memory Model since the accesses are non-volatile).
-        Disabling the JIT compiler (so that the read is really executed) fixes
-        the problem.
-      </p>
-    </collapsible-header>
+      <collapsible-header
+        size="4"
+        text="Is caching a valid reason for why a thread reading a non-volatile variable might not see a write to it by another thread?"
+      >
+        <p>
+          No. Modern architectures have a <i>cache coherency protocol</i>, which
+          ensures that all processors have a coherent view of a
+          <i>fixed</i> memory location (all writes eventually become visible and
+          are seen in the same order; the view of the single memory location
+          will be sequentially consistent). The protocol is implemented in
+          hardware and the simplest example to get an idea of it is
+          <a href="https://en.wikipedia.org/wiki/MSI_protocol">MSI</a>. (You
+          will learn more about these protocols in SPCA.)
+        </p>
+        <p>
+          One way that visibility problems may occur is through compiler
+          optimizations. This is what breaks the Java program I showed in week
+          9: the JIT compiler optimizes away a read to a variable, which makes
+          it look like thread 1 does not see the write by thread 2 (an
+          optimization allowed by the Java Memory Model since the accesses are
+          non-volatile). Disabling the JIT compiler (so that the read is really
+          executed) fixes the problem.
+        </p>
+      </collapsible-header>
 
-    <collapsible-header
-      size="4"
-      text="In lock proofs, what progress assumptions do we make?"
-    >
-      We assume that threads always make progress when executing
-      <code>lock</code>, the CS or <code>unlock</code>, but make no assumptions
-      outside these parts of our code. This means that it is not possible for a
-      thread to "die" or never get scheduled in these parts of the algorithm, or
-      to get stuck in an endless loop in the CS. Because we need these
-      assumptions for the locks (and algorithms using locks) to work, we call
-      them <i>blocking</i> algorithms. See the quiz in week 12 for more details
-      on blocking vs. nonblocking.
-    </collapsible-header>
-    <collapsible-header
-      size="4"
-      text='What exactly is the "non-critical section" when we talk about lock algorithms?'
-    >
-      The mental picture to have in mind of what is going on when we talk about
-      lock algorithms is some program like this:
+      <collapsible-header
+        size="4"
+        text="In lock proofs, what progress assumptions do we make?"
+      >
+        We assume that threads always make progress when executing
+        <code>lock</code>, the CS or <code>unlock</code>, but make no
+        assumptions outside these parts of our code. This means that it is not
+        possible for a thread to "die" or never get scheduled in these parts of
+        the algorithm, or to get stuck in an endless loop in the CS. Because we
+        need these assumptions for the locks (and algorithms using locks) to
+        work, we call them <i>blocking</i> algorithms. See the quiz in week 12
+        for more details on blocking vs. nonblocking.
+      </collapsible-header>
+      <collapsible-header
+        size="4"
+        text='What exactly is the "non-critical section" when we talk about lock algorithms?'
+      >
+        The mental picture to have in mind of what is going on when we talk
+        about lock algorithms is some program like this:
 
-      <pre><code v-highlight class="plaintext my-4">// non-CS code (part of some program)
+        <pre><code v-highlight class="plaintext my-4">// non-CS code (part of some program)
 // ...
 // ...
 // now we would like to use the lock
@@ -366,20 +365,21 @@ unlock()
 // etc.
 </code></pre>
 
-      Since we are only interested in our lock, we simplify it do this, as in
-      the lecture:
+        Since we are only interested in our lock, we simplify it do this, as in
+        the lecture:
 
-      <pre><code v-highlight class="plaintext my-4">// non-CS code
+        <pre><code v-highlight class="plaintext my-4">// non-CS code
 lock()
 // CS
 unlock()
 </code></pre>
 
-      A thread may run these steps infinitely many times. In the non-CS part, we
-      don't make any assumptions: a thread may die, not get scheduled, protest
-      for more scheduling rights, etc., but the most intuitive situation to
-      imagine is that a thread may simply no longer be interested in using the
-      lock anymore, and so will stay in the non-CS section.
+        A thread may run these steps infinitely many times. In the non-CS part,
+        we don't make any assumptions: a thread may die, not get scheduled,
+        protest for more scheduling rights, etc., but the most intuitive
+        situation to imagine is that a thread may simply no longer be interested
+        in using the lock anymore, and so will stay in the non-CS section.
+      </collapsible-header>
     </collapsible-header>
 
     <h3>Exercise sessions</h3>
