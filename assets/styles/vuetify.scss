@@ -38,6 +38,9 @@ $material-dark: (
   "app-bar": #181825,
   "background": #11111b,
   "cards": #1e1e2e,
+  "code": (
+    "background": #1e1e2e,
+  ),
 );
 
 $material-light: (
@@ -48,6 +51,12 @@ $material-light: (
   "app-bar": #dce0e8,
   "background": #eff1f5,
   "cards": #dce0e8,
+  // uses dark theme colors
+  "code":
+    (
+      "background": #1e1e2e,
+      "color": #cdd6f4,
+    ),
 );
 
 @import "~vuetify/src/styles/styles.sass";

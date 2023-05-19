@@ -175,6 +175,213 @@
       </collapsible-header>
     </collapsible-header>
 
+    <collapsible-header size="3" text="FAQ">
+      <collapsible-header
+        size="4"
+        text="Race condition vs. bad interleaving vs. data race"
+      >
+        <h5>Bad interleaving</h5>
+        Bad interleavings are bugs which, as the name nicely suggests, can occur
+        in a program due to an unexpected interleaving of the instructions in
+        different threads <i>in program order</i> (we also assume that memory
+        operations behave as expected, i.e. the execution is sequentially
+        consistent). The easiest example is a (volatile) counter:
+        <pre class="my-4"><code v-highlight class="java">public class Counter {
+    volatile int count = 0;
+
+    public void increment() {
+        c = c + 1;
+    }
+}</code></pre>
+
+        If threads A and B both execute <code>increment</code> at the same time,
+        we can get an interleaving where <code>c</code> only gets incremented
+        once. In this case the bad interleaving can be spotted immediately, but
+        this kind of bug can be much much more subtle (think of why we need to
+        lock both the predecessor and the node itself when removing a node in a
+        sorted linked list with fine-grained locking). It is also the most
+        common bug we run into when writing concurrent algorithms, since it is
+        direct consequence of a mistake, often an edge-case, in the logic of our
+        program. What makes it difficult to spot is the large number of possible
+        interleavings of the instructions of different threads.
+        <h5>Data race</h5>
+
+        Data races are a much more unnatural type of bug. They occur due to
+        inadequate synchronization and result in behavior allowed by the memory
+        model (to execute code more efficiently), but unexpected for the
+        programmer.
+
+        <h6>Simple example</h6>
+        Consider the following (pseudo) Java code run by two threads, where
+        initially <code>A = B = 0</code>:
+
+        <v-row class="my-4">
+          <v-col>
+            <pre><code v-highlight class="java">// thread A
+B = 42
+A = 1
+
+</code></pre>
+          </v-col>
+          <v-col>
+            <pre><code v-highlight class="java">// thread B
+if (A == 1) {
+  print(B)
+}</code></pre>
+          </v-col>
+        </v-row>
+
+        Despite what one would naively expect, in Java it is possible for thread
+        B to print <code>0</code> here. This doesn't make sense if we assume
+        sequential consistency; under sequential consistency, if thread B sees
+        thread A's write to <code>A</code>, it should also see its write to
+        <code>B</code>. But the Java Memory Model does not guarantee sequential
+        consistency. The actual reason for this behavior might be that the core
+        thread A was running on decided to write to <code>B</code> only after
+        writing to <code>A</code> (a reordering), so that thread B sees
+        <code>A = 1</code>, but when it reads <code>B</code>, thread A has not
+        yet written to it.
+
+        <collapsible-header size="6" text="More practical example">
+          A more involved and practical example is the Peterson lock, where
+          <code>flag</code> and <code>victim</code> are not volatile:
+
+          <pre class="my-5"><code v-highlight class="java">flag[id] = true;
+victim = id;
+while (victim == id && flag[1 - id]);
+// CS
+flag[id] = false;
+</code></pre>
+
+          There are multiple ways the algorithm can go wrong, but for instance
+          an execution is possible where:
+          <ul>
+            <li>Thread A sets its flag and writes to victim.</li>
+            <li>
+              At the same time, thread B sets its flag, writes to victim after
+              A, sees that it is the victim but does not see thread A's flag as
+              set, so it enters the CS.
+            </li>
+            <li>
+              Thread A sees that B has set itself as victim and enters the CS.
+            </li>
+          </ul>
+          <v-divider class="my-3" />
+        </collapsible-header>
+
+        This type of bug is <i>not</i> the result of a bad interleaving and is a
+        different kind of error, which is why we give it its own name.
+        Informally, a program has a data race when
+        <ul>
+          <li>multiple threads access a shared variable</li>
+          <li>at least one of the accesses is a write</li>
+          <li>the accesses are not "properly synchronized"</li>
+        </ul>
+        The reason why this is imprecise is that what is means for a program to
+        be "properly synchronized" depends on the rules of the underlying memory
+        model and the available synchronization tools. In Java, these tools
+        would be <code>volatile</code>, using locks, etc. as described by the
+        specification. It is important to note that the problem is usually not
+        directly the fact that multiple threads write and read the same
+        variable, but that we make assumptions about what operations other
+        threads have completed based on a value we read from them.
+        <h5>Race condition</h5>
+        Defining race conditions is now easy, but still confusing since there
+        are two different definitions you might come across. Even parts 1 and 2
+        of the lecture don't seem to agree on this definition.
+
+        <h6>Definition A</h6>
+        Race conditions is synonymous with bad interleaving. This implies that a
+        data race is not a race condition.
+
+        <h6>Definition B</h6>
+        Race condition is an umbrella term for the two types of bugs we have:
+        bad interleavings and data races.
+        <pre v-highlight class="plaintext my-4"><code>        race condition
+        /            \
+bad interleaving     data race
+</code>
+</pre>
+      </collapsible-header>
+    </collapsible-header>
+    <collapsible-header
+      size="4"
+      text="Is caching a valid reason for why a thread reading a non-volatile variable might not see a write to it by another thread?"
+    >
+      <p>
+        No. Modern architectures have a <i>cache coherency protocol</i>, which
+        ensures that all processors have a coherent view of a
+        <i>fixed</i> memory location (all writes eventually become visible and
+        are seen in the same order; the view of the single memory location will
+        be sequentially consistent). The protocol is implemented in hardware and
+        the simplest example to get an idea of it is
+        <a href="https://en.wikipedia.org/wiki/MSI_protocol">MSI</a>. (You will
+        learn more about these protocols in SPCA.)
+      </p>
+      <p>
+        One way that visibility problems may occur is through compiler
+        optimizations. This is what breaks the Java program I showed in week 9:
+        the JIT compiler optimizes away a read to a variable, which makes it
+        look like thread 1 does not see the write by thread 2 (an optimization
+        allowed by the Java Memory Model since the accesses are non-volatile).
+        Disabling the JIT compiler (so that the read is really executed) fixes
+        the problem.
+      </p>
+    </collapsible-header>
+
+    <collapsible-header
+      size="4"
+      text="In lock proofs, what progress assumptions do we make?"
+    >
+      We assume that threads always make progress when executing
+      <code>lock</code>, the CS or <code>unlock</code>, but make no assumptions
+      outside these parts of our code. This means that it is not possible for a
+      thread to "die" or never get scheduled in these parts of the algorithm, or
+      to get stuck in an endless loop in the CS. Because we need these
+      assumptions for the locks (and algorithms using locks) to work, we call
+      them <i>blocking</i> algorithms. See the quiz in week 12 for more details
+      on blocking vs. nonblocking.
+    </collapsible-header>
+    <collapsible-header
+      size="4"
+      text='What exactly is the "non-critical section" when we talk about lock algorithms?'
+    >
+      The mental picture to have in mind of what is going on when we talk about
+      lock algorithms is some program like this:
+
+      <pre><code v-highlight class="plaintext my-4">// non-CS code (part of some program)
+// ...
+// ...
+// now we would like to use the lock
+lock()
+// CS
+unlock()
+// more non-CS code
+// ...
+// ...
+// use the lock again
+lock()
+// CS
+unlock()
+// etc.
+</code></pre>
+
+      Since we are only interested in our lock, we simplify it do this, as in
+      the lecture:
+
+      <pre><code v-highlight class="plaintext my-4">// non-CS code
+lock()
+// CS
+unlock()
+</code></pre>
+
+      A thread may run these steps infinitely many times. In the non-CS part, we
+      don't make any assumptions: a thread may die, not get scheduled, protest
+      for more scheduling rights, etc., but the most intuitive situation to
+      imagine is that a thread may simply no longer be interested in using the
+      lock anymore, and so will stay in the non-CS section.
+    </collapsible-header>
+
     <h3>Exercise sessions</h3>
     <collapsible-header size="4" text="Week 2">
       <ul>
@@ -596,7 +803,7 @@
             >derivation</a
           >
           of <code>enq</code> from the lock-free unbounded queue implementation
-          of the lecture.
+          of the lecture. (I didn't show this on Wednesday.)
         </li>
       </ul>
     </collapsible-header>
