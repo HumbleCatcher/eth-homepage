@@ -129,6 +129,9 @@
                 lock-free unbounded queue and the ABA problem, using the queue
                 as an example.
               </li>
+              <li>
+                Chapter 3, 3.1-3.6 (p. 45): Covers sequential consistency and linearizability (and quiescent consistency, but this is not exam relevant). The proofs starting from 3.6.2 were not covered in the lecture (and hence of course not exam relevant).
+              </li>
             </ul>
           </li>
           <li>
@@ -829,6 +832,18 @@ unlock()
           >
           of <code>enq</code> from the lock-free unbounded queue implementation
           of the lecture. (I didn't show this on Wednesday.)
+        </li>
+      </ul>
+    </collapsible-header>
+    <collapsible-header size="4" text="Week 13">
+      <ul>
+        <li>
+          For an example of how the ABA problem can happen with the lock-free
+          unbounded queue, see chapter 10.6 of the book
+        </li>
+        <li>
+          My <a :href="$static('/pprog2023/week13/notes.pdf')">notes</a> on
+          sequential consistency and linearizability. Also the book covers the topic way back in chapter 3 (3.1 - 3.6) and if you want to read deeper into the topic, <a href="https://cs.brown.edu/~mph/HerlihyW90/p463-herlihy.pdf">this</a> is the paper that initially introduced the concept. (You may recognize one of the authors.)
         </li>
       </ul>
     </collapsible-header>
