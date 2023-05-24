@@ -843,7 +843,7 @@ unlock()
         </li>
         <li>
           My <a :href="$static('/pprog2023/week13/notes.pdf')">notes</a> on
-          sequential consistency and linearizability. Also the book covers the topic way back in chapter 3 (3.1 - 3.6) and if you want to read deeper into the topic, <a href="https://cs.brown.edu/~mph/HerlihyW90/p463-herlihy.pdf">this</a> is the paper that initially introduced the concept. (You may recognize one of the authors.)
+          sequential consistency and linearizability. I am more than happy to answer questions about my explanations, e.g. if it is unclear how everything connects to the way it is presented in the lecture/book. Also the book covers the topic way back in chapter 3 (3.1 - 3.6) and if you want to read deeper into the topic, <a href="https://cs.brown.edu/~mph/HerlihyW90/p463-herlihy.pdf">this</a> is the paper that initially introduced the concept. (You may recognize one of the authors.)
         </li>
       </ul>
     </collapsible-header>
