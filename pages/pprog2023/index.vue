@@ -130,7 +130,10 @@
                 as an example.
               </li>
               <li>
-                Chapter 3, 3.1-3.6 (p. 45): Covers sequential consistency and linearizability (and quiescent consistency, but this is not exam relevant). The proofs starting from 3.6.2 were not covered in the lecture (and hence of course not exam relevant).
+                Chapter 3, 3.1-3.6 (p. 45): Covers sequential consistency and
+                linearizability (and quiescent consistency, but this is not exam
+                relevant). The proofs starting from 3.6.2 were not covered in
+                the lecture (and are hence of course not exam relevant).
               </li>
             </ul>
           </li>
@@ -209,15 +212,26 @@
 
             If threads A and B both execute <code>increment</code> at the same
             time, we can get an interleaving where <code>c</code> only gets
-            incremented once. In this case the bad interleaving can be spotted
-            immediately, but this kind of bug can be much much more subtle
-            (think of why we need to lock both the predecessor and the node
-            itself when removing a node in a sorted linked list with
-            fine-grained locking). It is also the most common bug we run into
-            when writing concurrent algorithms, since it is direct consequence
-            of a mistake, often an edge-case, in the logic of our program. What
-            makes it difficult to spot is the large number of possible
-            interleavings of the instructions of different threads.
+            incremented once:
+
+            <pre class="my-4"><code v-highlight>// initially, c = 0
+A: read c -> 0
+A: compute 0 + 1 = 1
+B: read c -> 0
+B: compute 0 + 1 = 1
+A: write c = 1
+B: write c = 1
+// oh no, c was only incremented once :(</code></pre>
+
+            In this case the bad interleaving can be spotted immediately, but
+            this kind of bug can be much much more subtle (think of why we need
+            to lock both the predecessor and the node itself when removing a
+            node in a sorted linked list with fine-grained locking). It is also
+            the most common bug we run into when writing concurrent algorithms,
+            since it is direct consequence of a mistake, often an edge-case, in
+            the logic of our program. What makes it difficult to spot is the
+            large number of possible interleavings of the instructions of
+            different threads.
             <h5>Data race</h5>
 
             Data races are a much more unnatural type of bug. They occur due to
@@ -295,22 +309,101 @@ flag[id] = false;
             The reason why this is imprecise is that what is means for a program
             to be "properly synchronized" depends on the rules of the underlying
             memory model and the available synchronization tools. In Java, these
-            tools would be <code>volatile</code>, using locks, etc. as described
-            by the specification. It is important to note that the problem is
-            usually not directly the fact that multiple threads write and read
-            the same variable, but that we make assumptions about what
-            operations other threads have completed based on a value we read
-            from them.
+            tools would be <code>volatile</code>, using locks, etc. The
+            specification precisely defines when a program has a data race in
+            section
+            <a
+              href="https://docs.oracle.com/javase/specs/jls/se11/html/jls-17.html#jls-17.4.5"
+              >17.4.5</a
+            >:
+
+            <q
+              >When a program contains two conflicting accesses (
+              <a
+                href="https://docs.oracle.com/javase/specs/jls/se11/html/jls-17.html#jls-17.4.1"
+                >§17.4.1</a
+              >) that are not ordered by a happens-before relationship, it is
+              said to contain a <i>data race</i></q
+            >. (Note that there is a very subtle detail or even mistake in
+            Java's definition of "conflicting accesses": conflicting accesses
+            refer to reads or writes of <i>non-volatile</i> variables.
+            <a
+              href="https://www.kovalenko.link/blog/race-condition-vs-data-race#data-race"
+              >Source(s)</a
+            >. ) The C++ memory model has a very similar
+            <a
+              href="https://en.cppreference.com/w/cpp/language/memory_model#Threads_and_data_races"
+            >
+              definition</a
+            >.
+
+            <p>
+              It is important to note that the problem is usually not directly
+              the fact that multiple threads write and read the same variable.
+              The problem is that when we read a value written by another
+              thread, we intuitively assume that other memory operations by that
+              thread before the write have already occurred and are visible, but
+              this may not be the case.
+            </p>
             <h5>Race condition</h5>
-            Defining race conditions is now easy, but still confusing since
-            there are two different definitions you might come across. Even
-            parts 1 and 2 of the lecture don't seem to agree on this definition.
+            <p>
+              Unfortunately, you will not find one consistent definition of a
+              race condition. Even parts 1 and 2 of the lecture don't seem to
+              agree on this definition. Below I provide two different ways the
+              terms are used in this lecture and which I have also found other
+              sources for, but note that you may find or hear conflicting
+              definitions or uses of the terms elsewhere. For example, I have
+              heard a lecturer at ETH call the first bad interleaving example
+              from above a data race and it seems that sometimes in more
+              high-level contexts, less of a distinction, or no distinction at
+              all, is made between the terms race condition, data race and bad
+              interleaving.
+            </p>
+
+            <p>
+              In the end, what is most important is that you have a clear
+              picture of the two concepts above, remember them by the names you
+              find most intuitive and keep in mind that someone else might use
+              different names for the same concepts.
+            </p>
 
             <h6>Definition A</h6>
-            Race conditions is synonymous with bad interleaving. This implies
-            that a data race is not a race condition.
+            Race condition is synonymous with bad interleaving. This implies
+            that a data race is not a race condition. I believe this is the most
+            common and you won't find the term "bad interleaving" being used.
 
+            <p>
+              <small
+                >Example sources using this definition:
+                <ul>
+                  <li>
+                    Slides for
+                    <a
+                      href="https://moodle-app2.let.ethz.ch/mod/folder/view.php?id=901988"
+                      >lecture 19</a
+                    >
+                    (slide number 39) from part 2 of the course
+                  </li>
+                  <li>
+                    <a
+                      href="https://leon-wtf.github.io/doc/java-concurrency-in-practice.pdf"
+                      >"Java Concurrency in Practice"</a
+                    >
+                    (p. 7)
+                  </li>
+                  <li>
+                    <a
+                      class="https://moodle.dallastown.k12.pa.us/pluginfile.php/379743/mod_resource/content/1/Java%20Text%20-%20Liang.pdf"
+                      href="#"
+                      >"Introduction to Java programming"</a
+                    >
+                    (p. 1111)
+                  </li>
+                </ul>
+              </small>
+            </p>
             <h6>Definition B</h6>
+
             Race condition is an umbrella term for the two types of bugs we
             have: bad interleavings and data races.
             <pre v-highlight class="plaintext my-4"><code>        race condition
@@ -318,6 +411,33 @@ flag[id] = false;
 bad interleaving     data race
 </code>
 </pre>
+
+            <p>
+              <small
+                >Example sources using this definition:
+                <ul>
+                  <li>
+                    <a
+                      href="https://moodle-app2.let.ethz.ch/mod/folder/view.php?id=893523"
+                      >Lecture 13-14</a
+                    >
+                    (slide number 34) from part 1 of the course
+                  </li>
+                  <li>
+                    <a
+                      href="https://homes.cs.washington.edu/~djg/teachingMaterials/spac/sophomoricParallelismAndConcurrency.pdf"
+                      >Script</a
+                    >
+                    (p. 53) or
+                    <a
+                      href="https://courses.cs.washington.edu/courses/cse332/14wi/slides/lecture21/14-concurrency.pdf"
+                      >lecture slides</a
+                    >
+                    (slide number 5) from the University of Washington
+                  </li>
+                </ul>
+              </small>
+            </p>
           </v-expansion-panel-content>
         </v-expansion-panel>
         <v-expansion-panel>
@@ -843,7 +963,16 @@ unlock()
         </li>
         <li>
           My <a :href="$static('/pprog2023/week13/notes.pdf')">notes</a> on
-          sequential consistency and linearizability. I am more than happy to answer questions about my explanations, e.g. if it is unclear how everything connects to the way it is presented in the lecture/book. Also the book covers the topic way back in chapter 3 (3.1 - 3.6) and if you want to read deeper into the topic, <a href="https://cs.brown.edu/~mph/HerlihyW90/p463-herlihy.pdf">this</a> is the paper that initially introduced the concept. (You may recognize one of the authors.)
+          sequential consistency and linearizability. I am more than happy to
+          answer questions about my explanations, e.g. if it is unclear how
+          everything connects to the way it is presented in the lecture/book.
+          Also the book covers the topic way back in chapter 3 (3.1 - 3.6) and
+          if you want to read deeper into the topic,
+          <a href="https://cs.brown.edu/~mph/HerlihyW90/p463-herlihy.pdf"
+            >this</a
+          >
+          is the paper that initially introduced the concept. (You may recognize
+          one of the authors.)
         </li>
       </ul>
     </collapsible-header>
