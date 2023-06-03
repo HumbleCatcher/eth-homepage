@@ -891,8 +891,8 @@ unlock()
               longer than the first
             </p>
 
-            <b>Note:</b> A pipeline is <i>balanced</i> if all iterations have
-            the same latency.
+            <b>Note:</b> A pipeline is <i>balanced</i> if all iterations have the same latency. <br>
+            <b>Solution:</b> See <a :href="$static('/pprog2023/week5/notes.pdf')">notes</a> for week 5. 
           </v-card-text>
         </v-card>
       </div>
