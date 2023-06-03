@@ -134,6 +134,17 @@
                 linearizability (and quiescent consistency, but this is not exam
                 relevant). The proofs starting from 3.6.2 were not covered in
                 the lecture (and are hence of course not exam relevant).
+                <b>Good to know:</b> the book always lists the linearization
+                points of code given later chapters.
+              </li>
+              <li>
+                Chapter 5, excluding 5.1.1 and 5.5-7 (p. 99): Covers consensus.
+                Proofs like for theorem 5.2.1 or 5.4.1 are not exam relevant.
+              </li>
+              <li>
+                Chapter 18 (p. 417): Covers transactional memory. Parts of the
+                chapter go a bit more in depth into implementation details that
+                were not covered in the lecture.
               </li>
             </ul>
           </li>
@@ -182,12 +193,247 @@
               </li>
             </ul>
           </li>
+          <li>
+            Resources on MPI:
+            <ul>
+              <li>
+                The MPI
+                <a
+                  href="https://www.mpi-forum.org/docs/mpi-4.0/mpi40-report.pdf"
+                  >standard</a
+                >.
+              </li>
+              <li>
+                If you want to understand the difference between
+                synchronous/asynchron or blocking/non-blocking better, I can
+                recommend sections 3.4 and 3.7 of the
+                <a
+                  href="https://www.mpi-forum.org/docs/mpi-4.0/mpi40-report.pdf#section.3.4"
+                  >standard</a
+                >
+                (there the "standard" communication mode for
+                <code>send</code> is what we call asynchronous).
+              </li>
+              <li>
+                <a href="https://www.open-mpi.org/doc/current/"
+                  >Documentation</a
+                >
+                of the different MPI operations. The descriptions should be
+                helpful, e.g. here is the one for
+                <a
+                  href="https://www.open-mpi.org/doc/current/man3/MPI_Allgather.3.php#sect7"
+                  >MPI_Allgather</a
+                >.
+              </li>
+              <li>
+                Blog articles on
+                <a
+                  href="https://mpitutorial.com/tutorials/mpi-broadcast-and-collective-communication/"
+                  >collective communication</a
+                >
+                and
+                <a
+                  href="https://mpitutorial.com/tutorials/mpi-scatter-gather-and-allgather/"
+                  >scatter, gather and allgather.</a
+                >
+              </li>
+            </ul>
+          </li>
         </ul>
       </collapsible-header>
     </collapsible-header>
 
     <collapsible-header size="3" text="FAQ">
       <v-expansion-panels>
+        <v-expansion-panel>
+          <v-expansion-panel-header>
+            What exactly is a linearization point?
+          </v-expansion-panel-header>
+          <v-expansion-panel-content>
+            <p>
+              Linearization points are a tool for showing that an implementation
+              of a concurrent data structure is linearizable. You most likely
+              won't find a precise definition of what a correct linearization
+              point is. Whether a given linearization point is correct depends
+              on what your data structure is supposed to do and how you have
+              implemented interacting parts of your data structure. But
+              understanding the proof idea behind linearization points should
+              hopefully make it clear enough how they should be chosen.
+            </p>
+            <h5>Proof idea</h5>
+            <p>
+              If we want to show that a concurrent data structure
+              <katex t="q" /> is linearizable, we have to prove the following
+              statement:
+            </p>
+
+            <v-card flat>
+              <v-card-text>
+                Any history <katex t="H_o" /> where <katex t="o" /> is the only
+                object in the history (that is possible with our implementation
+                of <katex t="o" />) is linearizable.
+              </v-card-text>
+            </v-card>
+
+            <p>
+              For each operation on <katex t="o" /> and execution path of the
+              code for the operation (e.g. <code>dequeue</code> might either
+              dequeue an element <i>or</i> tell us that the queue is empty) we
+              identify a single atomic point <i>during</i> the execution of the
+              operation (usually an atomic operation like <code>CAS</code> or
+              volatile/atomic reads and writes), which determines when the
+              operation (e.g. enqueue element <katex t="x" /> or dequeue element
+              <katex t="y" />) "happened" in time, relative to the operations
+              being performed by other threads. We call such an atomic point a
+              <i>linearization point</i>. The operation of course also needs to
+              be performed "correctly" at this point, based on what other
+              operations have already "happened", i.e. what other operations
+              have already executed their linearization points. E.g. in a stack,
+              if the linearization point of <code>push(5)</code> has occurred
+              and the next operation to have its linearization point is a call
+              to <code>pop()</code>, then the call to <code>pop()</code> should
+              return <code>5</code>.
+            </p>
+
+            <p>
+              Now, let <katex t="H_o" /> an arbitrary history (using only object
+              <katex t="o" />). To prove linearizability, we must find an
+              equivalent and legal sequential history <katex t="S" />, such that
+              <katex t="(*)" /> that if operation
+              <katex t="\sigma_1" /> precedes <katex t="\sigma_2" /> in
+              <katex t="H_o" />, <katex t="\sigma_1" /> precedes
+              <katex t="\sigma_2" /> in <katex t="S" />. <br />
+              From above we know that each operation in the history has a
+              <i>single</i> linearization point. Since the linearization points
+              are atomic, we can totally order the operations by their
+              linearization points in time and we choose this ordering of the
+              operations as our equivalent sequential history <katex t="S" />.
+              Since above we assumed that each operation is performed correctly
+              at its linearization point, based on the operations which have
+              already had their linearization points, <katex t="S" /> is legal.
+              <br />
+              We know show <katex t="(*)" />. Let
+              <katex t="\sigma_1, \sigma_2" /> such that
+              <katex t="\sigma_1" /> precedes <katex t="\sigma_2" /> in
+              <katex t="H_o" />. Since a linearization point is chosen to be
+              <i>during</i> the execution of an operation (between invocation
+              and response), the linearization point of
+              <katex t="\sigma_1" /> precedes the linearization point of
+              <katex t="\sigma_2" />, so <katex t="\sigma_1" /> precedes<katex
+                t="\sigma_2"
+              />
+              in <katex t="S" />.
+            </p>
+            <p>
+              <b>In short</b>, when choosing linearization points we need to
+              make sure that ordering a history of operations by their
+              linearization points always yields a legal sequential history
+              (i.e. the return values we would get by executing the operations
+              in this order on a single thread are the same as the return values
+              in the history).
+            </p>
+            <h5>Example of an incorrect linearization point</h5>
+            <p>
+              We can find a great example of an incorrect linearization point
+              (LP) in the
+              <a
+                href="https://moodle-app2.let.ethz.ch/mod/folder/view.php?id=908792"
+                >lecture slides</a
+              >
+              (slide 42) of the course. 🙂 The source for this error is probably
+              the book, which has the same mistake (the linearization point is
+              described on p. 233), but this was fixed in the
+              <a
+                href="https://www.sciencedirect.com/book/9780124159501/the-art-of-multiprocessor-programming#book-description"
+                >second edition</a
+              >
+              (free with ETH VPN).
+            </p>
+            Consider the <code>dequeue</code> method of a lock-free unbounded
+            queue:
+            <pre
+              class="my-4"
+            ><code v-highlight class="java">public T dequeue() {
+  while (true) {
+    Node first = head.get();
+    Node last = tail.get();
+    Node next = first.next.get();
+    if (first == last) {
+      if (next == null) {         // <- proposed LP if queue is empty
+        return null;
+      } else {
+        tail.compareAndSet(last, next);
+      }
+    } else {
+      T value = next.item;
+      if (head.compareAndSet(first, next))  {
+        return value;
+      }
+    }
+  }
+}</code></pre>
+            <p>
+              Here, the proposed LP is when the check
+              <code v-highlight class="java">next == null</code> succeeds. First
+              of all, this is ambiguous, since there are two operations
+              happening: <code>next</code> is read and the comparison is
+              performed. But both are incorrect so it doesn't matter. We can
+              intuitively see that this should not work as a LP, since the read
+              of <code>next</code> is a read of a local variable stored further
+              above. The atomic operation where we read the
+              <code>next</code> pointer of the first element in the queue is
+              <code>first.next.get()</code>. The moment in time when we read
+              this value and get <code>null</code>, we <i>know</i> that the
+              queue is empty; it makes most sense to pick this as the point in
+              time when the <code>dequeue</code> "happened" relative to other
+              concurrent operations. (At this moment <code>first</code> must
+              still be the head of the queue, because if it had been dequeued
+              its <code>next</code> field could not be <code>null</code>.) So we
+              instead choose the LP of an unsuccessful call to
+              <code>dequeue</code> as the atomic read
+              <code>first.next.get()</code>. (However it is not a LP if an
+              element is successfully dequeued.)
+            </p>
+            <p>
+              We cannot easily prove that the new LP is correct, without more
+              advanced and formal tools (AFAIK). But we <i>can</i> provide a
+              concrete counterexample why the previous LP was incorrect. Assume
+              our LP for <code>dequeue</code> is as in the lecture and consider
+              the history
+            </p>
+            <pre class="my-4"><code v-highlight class="dts">A: q.enqueue(x)
+B: q.dequeue()
+A: void
+B: null // queue empty</code></pre>
+            where <code>q</code> is initially empty and the execution was
+            interleaved as follows:
+            <ol>
+              <li>
+                <code>dequeue</code> reads <code>first</code>,
+                <code>last</code> and finally <code>next</code>, where it gets
+                <code>null</code> (this is where the correct LP would be)
+              </li>
+              <li>
+                <code>enqueue</code> fully enqueues <code>x</code> and thus
+                executes its LP first
+              </li>
+              <li>
+                <code>dequeue</code> proceeds and returns <code>null</code>,
+                executing its LP (<code v-highlight class="java"
+                  >next == null</code
+                >) on the way
+              </li>
+            </ol>
+            Ordering the operations by their LPs gives us the sequential history
+            <pre class="my-4"><code v-highlight class="dts">A: q.enqueue(x)
+A: void
+B: q.dequeue()
+B: null</code></pre>
+            which is clearly not legal! (If we executed these operations in this
+            order on a single processor, <code>dequeue</code> should of course
+            give us <code>x</code>, not <code>null</code>.)
+          </v-expansion-panel-content>
+        </v-expansion-panel>
         <v-expansion-panel>
           <v-expansion-panel-header>
             Race condition vs. bad interleaving vs. data race
@@ -382,7 +628,7 @@ flag[id] = false;
                       href="https://moodle-app2.let.ethz.ch/mod/folder/view.php?id=901988"
                       >lecture 19</a
                     >
-                    (slide number 39) from part 2 of the course
+                    (slide 39) from part 2 of the course
                   </li>
                   <li>
                     <a
@@ -421,7 +667,7 @@ bad interleaving     data race
                       href="https://moodle-app2.let.ethz.ch/mod/folder/view.php?id=893523"
                       >Lecture 13-14</a
                     >
-                    (slide number 34) from part 1 of the course
+                    (slide 34) from part 1 of the course
                   </li>
                   <li>
                     <a
@@ -433,7 +679,7 @@ bad interleaving     data race
                       href="https://courses.cs.washington.edu/courses/cse332/14wi/slides/lecture21/14-concurrency.pdf"
                       >lecture slides</a
                     >
-                    (slide number 5) from the University of Washington
+                    (slide 5) from the University of Washington
                   </li>
                 </ul>
               </small>
@@ -975,6 +1221,83 @@ unlock()
           one of the authors.)
         </li>
       </ul>
+    </collapsible-header>
+    <collapsible-header size="4" text="Week 14">
+      <ul>
+        <li>
+          I added an explanation of linearization points to the "FAQ" section
+          above.
+        </li>
+        <li>
+          Check the resources at the top for where to read more about consensus
+          and transactional memory in the book and for some resources on MPI.
+        </li>
+        <li>
+          <a
+            href="https://quizizz.com/admin/quiz/6476fe9dbbcb41001dfbb527/week-14"
+            >Quiz</a
+          >
+          (with explanations for the consensus questions)
+        </li>
+      </ul>
+      <collapsible-header text="Exam tips for consensus and MPI" size="5">
+        <b>Disclaimer:</b> The following tips are only my thoughts as a student.
+        The lecture makes no such promises and according to them everything that
+        was covered in the lecture is exam relevant (unless stated otherwise).
+        <ul>
+          <li>
+            Consensus:
+            <ul>
+              <li>
+                I have a strong feeling that the head TA wants to ask this in
+                the exam. ;)
+              </li>
+              <li>
+                I can think of three types of questions on this topic: short
+                questions on the definitions, identifying whether given code is
+                a correct consensus protocol or making a statement about the
+                consensus number of an object. For the latter, I only see two
+                options:
+                <ol type="a">
+                  <li>
+                    Proving that an object <code>x</code> has consensus number
+                    <katex t="\ge y" /> (or <katex t="\infty" />). Then you must
+                    provide an algorithm solving <katex t="y" />-thread
+                    consensus using any number of instances of
+                    <code>x</code> (or for the <katex t="\infty" /> case,
+                    provide an algorithm solving <katex t="n" />-thread
+                    consensus for arbitrary <katex t="n" />).
+                  </li>
+                  <li>
+                    Proving that an object <code>x</code> has consensus number
+                    at most <katex t="z" />. This would involve proving that it
+                    is impossible to implement <katex t="(z + 1)" />-thread
+                    consensus with <code>x</code>. With the content of the
+                    lecture, the only option I see is to use the theorems that
+                    were shown. For example, if we know that <code>x</code> was
+                    implemented using atomic registers, then it cannot solve
+                    consensus for more than one thread. Proofs that do not rely
+                    on such results require some concepts that were not covered
+                    in the lecture. (An example is the proof for why atomic
+                    registers cannot solve 2-thread consensus in "The Art of
+                    Multiprocessor Programming" (p. 103).)
+                  </li>
+                </ol>
+                So I would recommend to practice writing consensus protocols and
+                revising the results from the lecture.
+              </li>
+            </ul>
+          </li>
+          <li>
+            MPI: Since the topic was only covered in short time in the lecture
+            and no exercises were provided on the topic, I would not expect
+            coding exercises with MPI in the exam (again, cannot promise). But
+            that does not exclude reading and understanding MPI code. I would
+            make sure to remember what the collective operations do, as this has
+            been asked before.
+          </li>
+        </ul>
+      </collapsible-header>
     </collapsible-header>
   </default-layout>
 </template>
