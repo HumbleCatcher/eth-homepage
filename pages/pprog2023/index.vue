@@ -870,7 +870,7 @@ unlock()
           <li>22.03.2023 4 PM for the Wednesday group</li>
           <li>24.03.2023 10 AM for the Friday group</li>
         </ul>
-        <p>gets bar of chocolate. 🍫</p>
+        <p>get a bar of chocolate. 🍫</p>
         <v-card class="my-5">
           <v-card-text>
             <v-alert
