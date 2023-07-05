@@ -153,7 +153,7 @@
             <ul>
               <li>
                 <a
-                  href="#https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/util/concurrent/package-summary.html#MemoryVisibility"
+                  href="https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/util/concurrent/package-summary.html#MemoryVisibility"
                   >Short</a
                 >
                 summary of happens-before from the Java documentation.
